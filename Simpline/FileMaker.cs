@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing.Imaging;
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
@@ -11,13 +12,12 @@ namespace Nyomtatas
 {
     class FileMaker
     {
-        Bitmap bmp = new Bitmap(595, 842);
-        public FileMaker(Graphics gr)
+        public FileMaker(Bitmap bmp)
         {
             // Displays a SaveFileDialog so the user can save the Image  
-            // assigned to Button2.  
+            // assigned to Button2.
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif";
+            saveFileDialog1.Filter = "Text file|*.txt|PNG Image|*.png";
             saveFileDialog1.Title = "Save an Image File";
             saveFileDialog1.ShowDialog();
 
@@ -29,23 +29,17 @@ namespace Nyomtatas
                 // Saves the Image in the appropriate ImageFormat based upon the  
                 // File type selected in the dialog box.  
                 // NOTE that the FilterIndex property is one-based.  
-                Graphics g = Graphics.FromImage(bmp);
-                g = gr;
                 switch (saveFileDialog1.FilterIndex)
+
                 {
                     case 1:
-                        bmp.Save(fs,
-                           System.Drawing.Imaging.ImageFormat.Jpeg);
+                        /*
+                         
+                         */
                         break;
 
                     case 2:
-                        bmp.Save(fs,
-                           System.Drawing.Imaging.ImageFormat.Bmp);
-                        break;
-
-                    case 3:
-                        bmp.Save(fs,
-                           System.Drawing.Imaging.ImageFormat.Gif);
+                        bmp.Save(fs, ImageFormat.Png);
                         break;
                 }
                 fs.Close();

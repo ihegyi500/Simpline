@@ -10,6 +10,7 @@ namespace Nyomtatas
         Graphics g;
         List<BarcodeLabel> bclL = new List<BarcodeLabel>();
         ComboBox PrintersList;
+        Bitmap bmp = new Bitmap(595, 842);
 
         public GraphicMaker(List<BarcodeLabel> bclList, ComboBox box)
         {
@@ -33,7 +34,9 @@ namespace Nyomtatas
 
         private void PrintPageMethod(object sender, PrintPageEventArgs e)
         {
-            int ps = 4;
+            g = e.Graphics;
+            GraphicSetter();
+            /*int ps = 4;
             g = e.Graphics;
             Pen pen;
             Font font = new Font("Arial", 12);
@@ -48,14 +51,39 @@ namespace Nyomtatas
                 g.DrawRectangle(pen, rec);
                 font = new Font(l.getBarcodeType(), l.getBarcodeSize()*ps);
                 g.DrawString(l.getBarcodeString(), font, brush, l.getLabX()*ps, l.getLabY()*ps);
-            }
+            }*/
         }
 
-        public Graphics getGraphic()
+        /*public Graphics getGraphic()
         {
             PrintDocument PrintDoc = new PrintDocument();
             PrintDoc.PrintPage += new PrintPageEventHandler(PrintPageMethod);
             return g;
+        }*/
+
+        private void GraphicSetter()
+        {
+            int ps = 4;
+            Pen pen;
+            Font font = new Font("Arial", 12);
+            SolidBrush brush = new SolidBrush(Color.Black);
+            foreach (BarcodeLabel l in bclL)
+            {
+                if (l.BorderStyle == BorderStyle.FixedSingle)
+                    pen = new Pen(Color.Black);
+                else
+                    pen = new Pen(Color.Transparent);
+                Rectangle rec = new Rectangle(l.getX() * ps, l.getY() * ps, l.Width * ps, l.Height * ps);
+                g.DrawRectangle(pen, rec);
+                font = new Font(l.getBarcodeType(), l.getBarcodeSize() * ps);
+                g.DrawString(l.getBarcodeString(), font, brush, l.getLabX() * ps, l.getLabY() * ps);
+            }
+        }
+        public Bitmap GetBitmap()
+        {
+            g = Graphics.FromImage(bmp);
+            GraphicSetter();
+            return bmp;
         }
     }
 }

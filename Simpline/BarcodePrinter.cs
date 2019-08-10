@@ -6,6 +6,7 @@ using System.Drawing.Printing;
 using Nyomtatas;
 using System.Drawing.Text;
 using System.IO;
+using System.Drawing.Imaging;
 
 namespace BCPS
 {
@@ -15,7 +16,6 @@ namespace BCPS
         List<BarcodeLabel> bclList = new List<BarcodeLabel>();
         bool resizeOn = false;
         int bclcounter = 0;
-        Bitmap bmp;
 
         public BarcodePrinter()
         {
@@ -162,7 +162,7 @@ namespace BCPS
         private void SavePictureButton_Click(object sender, EventArgs e)
         {
             GraphicMaker gm = new GraphicMaker(bclList, PrintersList);
-            FileMaker fmk = new FileMaker(gm.getGraphic());
+            FileMaker fmk = new FileMaker(gm.GetBitmap());
         }
 
         private void SetTextButton_Click(object sender, EventArgs e)
