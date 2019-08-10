@@ -275,6 +275,7 @@
             this.TextFontCbx.Name = "TextFontCbx";
             this.TextFontCbx.Size = new System.Drawing.Size(121, 21);
             this.TextFontCbx.TabIndex = 10;
+            this.TextFontCbx.Text = "Calibri";
             // 
             // TextTbx
             // 
@@ -293,6 +294,7 @@
             this.LoadPictureButton.TabIndex = 39;
             this.LoadPictureButton.Text = "Load Picture";
             this.LoadPictureButton.UseVisualStyleBackColor = false;
+            this.LoadPictureButton.Click += new System.EventHandler(this.LoadPictureButton_Click);
             // 
             // RectChbx
             // 
@@ -316,7 +318,7 @@
             this.ExportButton.UseVisualStyleBackColor = false;
             this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
             // 
-            // BarcodePrinter
+            // Simpline
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -350,7 +352,7 @@
             this.Controls.Add(this.PrintButton);
             this.Controls.Add(this.BarcodeTextTbx);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "BarcodePrinter";
+            this.Name = "Simpline";
             this.Text = "Simpline";
             this.Load += new System.EventHandler(this.BarcodePrinter_Load);
             this.ResumeLayout(false);

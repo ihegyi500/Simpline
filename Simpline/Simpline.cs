@@ -216,5 +216,11 @@ namespace Simpline
             FileMaker fmk = new FileMaker();
             fmk.ExportPng(gm.GetBitmap());
         }
+
+        private void LoadPictureButton_Click(object sender, EventArgs e)
+        {
+            FileMaker fmk = new FileMaker();
+            fmk.LoadTxt(panel1, bclList);
+        }
     }
 }

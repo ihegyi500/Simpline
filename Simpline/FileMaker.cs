@@ -53,7 +53,8 @@ namespace SimplinePrinter
 
         public void LoadTxt(Panel p, List<BarcodeLabel> bcl)
         {
-
+            p.Controls.Clear();
+            bcl.Clear();
         }
     }
 }
