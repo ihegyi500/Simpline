@@ -10,14 +10,14 @@ using System.Drawing.Imaging;
 
 namespace Simpline
 {
-    public partial class BarcodePrinter : Form
+    public partial class Simpline : Form
     {
         private Point MouseDownLocation;
         List<BarcodeLabel> bclList = new List<BarcodeLabel>();
         bool resizeOn = false;
         int bclcounter = 0;
 
-        public BarcodePrinter()
+        public Simpline()
         {
             InitializeComponent();
         }

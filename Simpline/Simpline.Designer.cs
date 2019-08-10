@@ -1,6 +1,6 @@
 ﻿namespace Simpline
 {
-    partial class BarcodePrinter
+    partial class Simpline
     {
         /// <summary>
         /// Required designer variable.

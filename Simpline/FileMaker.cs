@@ -14,9 +14,6 @@ namespace SimplinePrinter
     {
         SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
-        public FileMaker()
-        {
-        }
         public void ExportPng(Bitmap bmp)
         {
             saveFileDialog1.Filter = "PNG Image|*.png";
