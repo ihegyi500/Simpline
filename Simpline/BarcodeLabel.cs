@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Nyomtatas
+namespace SimplinePrinter
 {
     public partial class BarcodeLabel : UserControl
     {

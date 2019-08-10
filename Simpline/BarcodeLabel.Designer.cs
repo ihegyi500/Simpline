@@ -1,4 +1,4 @@
-﻿namespace Nyomtatas
+﻿namespace SimplinePrinter
 {
     partial class BarcodeLabel
     {

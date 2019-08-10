@@ -8,43 +8,55 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
 
-namespace Nyomtatas
+namespace SimplinePrinter
 {
     class FileMaker
     {
-        public FileMaker(Bitmap bmp)
+        SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+        public FileMaker()
         {
-            // Displays a SaveFileDialog so the user can save the Image  
-            // assigned to Button2.
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "Text file|*.txt|PNG Image|*.png";
+        }
+        public void ExportPng(Bitmap bmp)
+        {
+            saveFileDialog1.Filter = "PNG Image|*.png";
             saveFileDialog1.Title = "Save an Image File";
             saveFileDialog1.ShowDialog();
-
-            // If the file name is not an empty string open it for saving.  
-            if (saveFileDialog1.FileName != "")
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK && saveFileDialog1.FileName != "")
             {
-                // Saves the Image via a FileStream created by the OpenFile method.  
                 FileStream fs = (FileStream)saveFileDialog1.OpenFile();
-                // Saves the Image in the appropriate ImageFormat based upon the  
-                // File type selected in the dialog box.  
-                // NOTE that the FilterIndex property is one-based.  
-                switch (saveFileDialog1.FilterIndex)
-
-                {
-                    case 1:
-                        /*
-                         
-                         */
-                        break;
-
-                    case 2:
-                        bmp.Save(fs, ImageFormat.Png);
-                        break;
-                }
+                bmp.Save(fs, ImageFormat.Png);
                 fs.Close();
             }
+            saveFileDialog1.Dispose();
+
         }
 
+        public void SaveTxt(List<BarcodeLabel> bcl)
+        {
+            saveFileDialog1.Filter = "Txt file|*.txt";
+            saveFileDialog1.Title = "Save a Txt file";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK && saveFileDialog1.FileName != "")
+            {
+                using (StreamWriter file = File.CreateText(saveFileDialog1.FileName))
+                {
+                    foreach(BarcodeLabel b in bcl)
+                    {
+                        file.Write(b.getX() + ", " + b.getY() + Environment.NewLine
+                                    + b.getLabX() + ", " + b.getLabY() + Environment.NewLine
+                                    + b.getBarcodeString() + Environment.NewLine
+                                    + b.getBarcodeSize() + Environment.NewLine
+                                    + b.getBarcodeType()
+                                    + Environment.NewLine + Environment.NewLine);
+                    }
+                }
+            }
+            saveFileDialog1.Dispose();
+        }
+
+        public void LoadTxt(Panel p, List<BarcodeLabel> bcl)
+        {
+
+        }
     }
 }

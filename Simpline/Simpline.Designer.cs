@@ -1,4 +1,4 @@
-﻿namespace BCPS
+﻿namespace Simpline
 {
     partial class BarcodePrinter
     {
@@ -54,6 +54,7 @@
             this.TextTbx = new System.Windows.Forms.TextBox();
             this.LoadPictureButton = new System.Windows.Forms.Button();
             this.RectChbx = new System.Windows.Forms.CheckBox();
+            this.ExportButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // PrintButton
@@ -117,7 +118,7 @@
             // DeleteButton
             // 
             this.DeleteButton.BackColor = System.Drawing.Color.White;
-            this.DeleteButton.Location = new System.Drawing.Point(733, 204);
+            this.DeleteButton.Location = new System.Drawing.Point(652, 204);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(75, 40);
             this.DeleteButton.TabIndex = 7;
@@ -163,7 +164,7 @@
             // ResizeButton
             // 
             this.ResizeButton.BackColor = System.Drawing.Color.White;
-            this.ResizeButton.Location = new System.Drawing.Point(652, 204);
+            this.ResizeButton.Location = new System.Drawing.Point(571, 204);
             this.ResizeButton.Name = "ResizeButton";
             this.ResizeButton.Size = new System.Drawing.Size(75, 40);
             this.ResizeButton.TabIndex = 6;
@@ -202,7 +203,7 @@
             // SavePictureButton
             // 
             this.SavePictureButton.BackColor = System.Drawing.Color.White;
-            this.SavePictureButton.Location = new System.Drawing.Point(652, 250);
+            this.SavePictureButton.Location = new System.Drawing.Point(733, 250);
             this.SavePictureButton.Name = "SavePictureButton";
             this.SavePictureButton.Size = new System.Drawing.Size(75, 40);
             this.SavePictureButton.TabIndex = 28;
@@ -286,7 +287,7 @@
             // LoadPictureButton
             // 
             this.LoadPictureButton.BackColor = System.Drawing.Color.White;
-            this.LoadPictureButton.Location = new System.Drawing.Point(733, 250);
+            this.LoadPictureButton.Location = new System.Drawing.Point(652, 250);
             this.LoadPictureButton.Name = "LoadPictureButton";
             this.LoadPictureButton.Size = new System.Drawing.Size(75, 40);
             this.LoadPictureButton.TabIndex = 39;
@@ -296,7 +297,7 @@
             // RectChbx
             // 
             this.RectChbx.AutoSize = true;
-            this.RectChbx.Location = new System.Drawing.Point(571, 217);
+            this.RectChbx.Location = new System.Drawing.Point(571, 172);
             this.RectChbx.Name = "RectChbx";
             this.RectChbx.Size = new System.Drawing.Size(75, 17);
             this.RectChbx.TabIndex = 41;
@@ -304,12 +305,24 @@
             this.RectChbx.UseVisualStyleBackColor = true;
             this.RectChbx.CheckStateChanged += new System.EventHandler(this.RectChbx_CheckStateChanged);
             // 
+            // ExportButton
+            // 
+            this.ExportButton.BackColor = System.Drawing.Color.White;
+            this.ExportButton.Location = new System.Drawing.Point(733, 204);
+            this.ExportButton.Name = "ExportButton";
+            this.ExportButton.Size = new System.Drawing.Size(75, 40);
+            this.ExportButton.TabIndex = 42;
+            this.ExportButton.Text = "Export to PNG";
+            this.ExportButton.UseVisualStyleBackColor = false;
+            this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
+            // 
             // BarcodePrinter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(845, 342);
+            this.ClientSize = new System.Drawing.Size(845, 340);
+            this.Controls.Add(this.ExportButton);
             this.Controls.Add(this.RectChbx);
             this.Controls.Add(this.LoadPictureButton);
             this.Controls.Add(this.TextSizeLabel);
@@ -338,7 +351,7 @@
             this.Controls.Add(this.BarcodeTextTbx);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "BarcodePrinter";
-            this.Text = "BarCodePrinter";
+            this.Text = "Simpline";
             this.Load += new System.EventHandler(this.BarcodePrinter_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -373,6 +386,7 @@
         private System.Windows.Forms.TextBox TextTbx;
         private System.Windows.Forms.Button LoadPictureButton;
         private System.Windows.Forms.CheckBox RectChbx;
+        private System.Windows.Forms.Button ExportButton;
     }
 }
 

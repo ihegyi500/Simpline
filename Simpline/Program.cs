@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Printing;
 
-namespace BCPS
+namespace Simpline
 {
     static class Program
     {
@@ -17,7 +17,7 @@ namespace BCPS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new BarcodePrinter());
+            Application.Run(new Simpline());
         }
     }
 }

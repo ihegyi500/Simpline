@@ -3,12 +3,12 @@ using System.Drawing;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing.Printing;
-using Nyomtatas;
+using SimplinePrinter;
 using System.Drawing.Text;
 using System.IO;
 using System.Drawing.Imaging;
 
-namespace BCPS
+namespace Simpline
 {
     public partial class BarcodePrinter : Form
     {
@@ -162,7 +162,8 @@ namespace BCPS
         private void SavePictureButton_Click(object sender, EventArgs e)
         {
             GraphicMaker gm = new GraphicMaker(bclList, PrintersList);
-            FileMaker fmk = new FileMaker(gm.GetBitmap());
+            FileMaker fmk = new FileMaker();
+            fmk.SaveTxt(bclList);
         }
 
         private void SetTextButton_Click(object sender, EventArgs e)
@@ -207,6 +208,13 @@ namespace BCPS
                         bclList[i].BorderStyle = BorderStyle.None;
                 }
             }
+        }
+
+        private void ExportButton_Click(object sender, EventArgs e)
+        {
+            GraphicMaker gm = new GraphicMaker(bclList, PrintersList);
+            FileMaker fmk = new FileMaker();
+            fmk.ExportPng(gm.GetBitmap());
         }
     }
 }
