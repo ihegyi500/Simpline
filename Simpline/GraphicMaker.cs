@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace SimplinePrinter
 {
@@ -9,20 +10,32 @@ namespace SimplinePrinter
     {
         Graphics g;
         List<BarcodeLabel> bclL = new List<BarcodeLabel>();
-        ComboBox PrintersList;
+        ComboBox PrintersList, PaperSizeList;
         Bitmap bmp = new Bitmap(595, 842);
+        PaperSize papers = new PaperSize();
 
-        public GraphicMaker(List<BarcodeLabel> bclList, ComboBox box)
+        public void PrintDialog()
+        {
+            PrintDialog printDiag = new PrintDialog();
+            printDiag.ShowDialog();
+
+        }
+
+        public void Printing(List<BarcodeLabel> bclList, ComboBox box, ComboBox box2)
         {
             bclL = bclList;
             PrintersList = box;
-        }
+            PaperSizeList = box2;
 
-        public void Printing()
-        {
+            PaperKind p = (PaperKind)PaperSizeList.SelectedIndex;
+            PrinterSettings ps = new PrinterSettings();
+            IEnumerable<PaperSize> paperSizes = ps.PaperSizes.Cast<PaperSize>();
+            PaperSize papers = paperSizes.First<PaperSize>(size => size.Kind == p);
             PrintDocument PrintDoc = new PrintDocument();
             PrintDoc.PrinterSettings.PrinterName =
             PrintersList.SelectedItem.ToString();
+            PrintDoc.DefaultPageSettings.PaperSize = papers;
+
             PrintDoc.PrintPage += new PrintPageEventHandler(PrintPageMethod);
             PrintPreviewDialog printPrvDlg = new PrintPreviewDialog();
             printPrvDlg.Document = PrintDoc;

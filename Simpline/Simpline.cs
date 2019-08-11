@@ -44,6 +44,8 @@ namespace Simpline
                 PrintersList.Items.Add(printer.ToString());
             }
             this.PrintersList.SelectedItem = settings.PrinterName;
+            //Papírméretlista feltöltése
+            PaperSizeList.DataSource = Enum.GetValues(typeof(PaperKind));
         }
 
         private void bcl_MouseDown(object sender, MouseEventArgs e)
@@ -155,13 +157,13 @@ namespace Simpline
 
         private void PrintButton_Click(object sender, EventArgs e)
         {
-            GraphicMaker gm = new GraphicMaker(bclList, PrintersList);
-            gm.Printing();
+            GraphicMaker gm = new GraphicMaker();
+            gm.Printing(bclList, PrintersList, PaperSizeList);
         }
 
         private void SavePictureButton_Click(object sender, EventArgs e)
         {
-            GraphicMaker gm = new GraphicMaker(bclList, PrintersList);
+            GraphicMaker gm = new GraphicMaker();
             FileMaker fmk = new FileMaker();
             fmk.SaveTxt(bclList);
         }
@@ -212,7 +214,7 @@ namespace Simpline
 
         private void ExportButton_Click(object sender, EventArgs e)
         {
-            GraphicMaker gm = new GraphicMaker(bclList, PrintersList);
+            GraphicMaker gm = new GraphicMaker();
             FileMaker fmk = new FileMaker();
             fmk.ExportPng(gm.GetBitmap());
         }
@@ -221,6 +223,12 @@ namespace Simpline
         {
             FileMaker fmk = new FileMaker();
             fmk.LoadTxt(panel1, bclList);
+        }
+
+        private void PrintPropLabel_Click(object sender, EventArgs e)
+        {
+            GraphicMaker gm = new GraphicMaker();
+            gm.PrintDialog();
         }
     }
 }

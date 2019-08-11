@@ -55,12 +55,15 @@
             this.LoadPictureButton = new System.Windows.Forms.Button();
             this.RectChbx = new System.Windows.Forms.CheckBox();
             this.ExportButton = new System.Windows.Forms.Button();
+            this.PaperSizeList = new System.Windows.Forms.ComboBox();
+            this.PaperSizeLabel = new System.Windows.Forms.Label();
+            this.PrintPropLabel = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // PrintButton
             // 
             this.PrintButton.BackColor = System.Drawing.Color.White;
-            this.PrintButton.Location = new System.Drawing.Point(21, 279);
+            this.PrintButton.Location = new System.Drawing.Point(21, 288);
             this.PrintButton.Name = "PrintButton";
             this.PrintButton.Size = new System.Drawing.Size(75, 40);
             this.PrintButton.TabIndex = 9;
@@ -71,7 +74,7 @@
             // PrintersList
             // 
             this.PrintersList.FormattingEnabled = true;
-            this.PrintersList.Location = new System.Drawing.Point(21, 250);
+            this.PrintersList.Location = new System.Drawing.Point(21, 192);
             this.PrintersList.Name = "PrintersList";
             this.PrintersList.Size = new System.Drawing.Size(240, 21);
             this.PrintersList.TabIndex = 8;
@@ -79,7 +82,7 @@
             // printersLabel
             // 
             this.printersLabel.AutoSize = true;
-            this.printersLabel.Location = new System.Drawing.Point(19, 226);
+            this.printersLabel.Location = new System.Drawing.Point(18, 176);
             this.printersLabel.Name = "printersLabel";
             this.printersLabel.Size = new System.Drawing.Size(91, 13);
             this.printersLabel.TabIndex = 0;
@@ -318,12 +321,45 @@
             this.ExportButton.UseVisualStyleBackColor = false;
             this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
             // 
+            // PaperSizeList
+            // 
+            this.PaperSizeList.FormattingEnabled = true;
+            this.PaperSizeList.Location = new System.Drawing.Point(21, 234);
+            this.PaperSizeList.Name = "PaperSizeList";
+            this.PaperSizeList.Size = new System.Drawing.Size(240, 21);
+            this.PaperSizeList.TabIndex = 44;
+            // 
+            // PaperSizeLabel
+            // 
+            this.PaperSizeLabel.AutoSize = true;
+            this.PaperSizeLabel.Location = new System.Drawing.Point(18, 218);
+            this.PaperSizeLabel.Name = "PaperSizeLabel";
+            this.PaperSizeLabel.Size = new System.Drawing.Size(59, 13);
+            this.PaperSizeLabel.TabIndex = 43;
+            this.PaperSizeLabel.Text = "Paper size:";
+            // 
+            // PrintPropLabel
+            // 
+            this.PrintPropLabel.AutoSize = true;
+            this.PrintPropLabel.Location = new System.Drawing.Point(18, 264);
+            this.PrintPropLabel.Name = "PrintPropLabel";
+            this.PrintPropLabel.Size = new System.Drawing.Size(87, 13);
+            this.PrintPropLabel.TabIndex = 45;
+            this.PrintPropLabel.TabStop = true;
+            this.PrintPropLabel.Text = "Printer Properties";
+            this.PrintPropLabel.Click += new System.EventHandler(this.PrintPropLabel_Click);
+            // 
             // Simpline
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(845, 340);
+            this.Controls.Add(this.PrintPropLabel);
+            this.Controls.Add(this.PrintersList);
+            this.Controls.Add(this.printersLabel);
+            this.Controls.Add(this.PaperSizeList);
+            this.Controls.Add(this.PaperSizeLabel);
             this.Controls.Add(this.ExportButton);
             this.Controls.Add(this.RectChbx);
             this.Controls.Add(this.LoadPictureButton);
@@ -345,9 +381,7 @@
             this.Controls.Add(this.BarcodeText);
             this.Controls.Add(this.DeleteButton);
             this.Controls.Add(this.SetBarcodeButton);
-            this.Controls.Add(this.PrintersList);
             this.Controls.Add(this.AddBarcodeButton);
-            this.Controls.Add(this.printersLabel);
             this.Controls.Add(this.BarcodeTypeCbx);
             this.Controls.Add(this.PrintButton);
             this.Controls.Add(this.BarcodeTextTbx);
@@ -389,6 +423,9 @@
         private System.Windows.Forms.Button LoadPictureButton;
         private System.Windows.Forms.CheckBox RectChbx;
         private System.Windows.Forms.Button ExportButton;
+        private System.Windows.Forms.ComboBox PaperSizeList;
+        private System.Windows.Forms.Label PaperSizeLabel;
+        private System.Windows.Forms.LinkLabel PrintPropLabel;
     }
 }
 
