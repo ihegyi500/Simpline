@@ -3,10 +3,10 @@ using System.Drawing;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing.Printing;
-using SimplinePrinter;
 using System.Drawing.Text;
 using System.IO;
 using System.Drawing.Imaging;
+using SimplinePrinter;
 
 namespace Simpline
 {
@@ -46,11 +46,12 @@ namespace Simpline
             this.PrintersList.SelectedItem = settings.PrinterName;
             //Papírméretlista feltöltése
             PaperSizeList.DataSource = Enum.GetValues(typeof(PaperKind));
+            PaperSizeList.SelectedIndex = 9;
         }
 
         private void bcl_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            if (e.Button == MouseButtons.Left)
             {
                 MouseDownLocation = e.Location;
             }

@@ -55,7 +55,7 @@ namespace SimplinePrinter
         {
             int ps = 4;
             Pen pen;
-            Font font = new Font("Arial", 12);
+            Font font;
             SolidBrush brush = new SolidBrush(Color.Black);
             foreach (BarcodeLabel l in bclL)
             {
