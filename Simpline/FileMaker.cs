@@ -35,12 +35,14 @@ namespace SimplinePrinter
                     {
                         foreach (BarcodeLabel b in bcl)
                         {
-                            file.Write("A " + b.getX() + "," + b.getY() + Environment.NewLine
-                                        + "B " + b.getLabX() + "," + b.getLabY() + Environment.NewLine
-                                        + "C " + b.getBarcodeString() + Environment.NewLine
-                                        + "D " + b.getBarcodeSize() + Environment.NewLine
-                                        + "E " + b.getBarcodeType()
-                                        + Environment.NewLine + Environment.NewLine);
+                            file.Write(b.getX() + "," + b.getY() + ";"
+                                        + b.getLabX() + "," + b.getLabY() + ";"
+                                        + b.getBarcodeString() + ";"
+                                        + b.getBarcodeSize() + ";"
+                                        + b.getBarcodeType());
+                            if (b.BorderStyle == BorderStyle.FixedSingle)
+                                file.Write(";1");
+                            file.Write(Environment.NewLine + Environment.NewLine);
                         }
                     }
                 }
@@ -60,52 +62,27 @@ namespace SimplinePrinter
                     {
                         while ((line = sr.ReadLine()) != null)
                         {
-                            BarcodeLabel bcl = new BarcodeLabel();
-                            bclList.Add(bcl);
-                            p.Controls.Add(bcl);
                             if (line == "");
                             else
                             {
-                                switch (line[0])
-                                {
-                                    case 'A':
-                                        {
-                                            string[] words = line.Split(',');
-                                            words[0] = words[0].Remove(0, 2);
-                                            bcl.setX(Convert.ToInt32(words[0]));
-                                            bcl.setY(Convert.ToInt32(words[1]));
-                                            break;
-                                        }
-                                    case 'B':
-                                        {
-                                            string[] words = line.Split(',');
-                                            words[0] = words[0].Remove(0, 2);
-                                            bcl.setLabX(Convert.ToInt32(words[0]));
-                                            bcl.setLabY(Convert.ToInt32(words[1]));
-                                            break;
-                                        }
-                                    case 'C':
-                                        {
-                                            string[] words = line.Split(',');
-                                            words[0] = words[0].Remove(0, 2);
-                                            bcl.setBarcodeString(words[0]);
-                                            break;
-                                        }
-                                    case 'D':
-                                        {
-                                            string[] words = line.Split(',');
-                                            words[0] = words[0].Remove(0, 2);
-                                            bcl.setBarcodeSize(Convert.ToInt32(words[0]));
-                                            break;
-                                        }
-                                    case 'E':
-                                        {
-                                            string[] words = line.Split(',');
-                                            words[0] = words[0].Remove(0, 2);
-                                            bcl.setBarcodeType(words[0]);
-                                            break;
-                                        }
-                                }
+                                string[] parameters = line.Split(';');
+                                string[] panparam = parameters[0].Split(',');
+                                string[] labparam = parameters[1].Split(',');
+                                BarcodeLabel bcl = new BarcodeLabel();
+                                bcl.setX(Convert.ToInt32(panparam[0]));
+                                bcl.setY(Convert.ToInt32(panparam[1]));
+                                bcl.setLabX(Convert.ToInt32(labparam[0]));
+                                bcl.setLabY(Convert.ToInt32(labparam[1]));
+                                bcl.setBarcodeString(parameters[2]);
+                                bcl.setBarcodeSize(Convert.ToInt32(parameters[3]));
+                                bcl.setBarcodeType(parameters[4]);
+                                if (parameters.Length == 6)
+                                    bcl.BorderStyle = BorderStyle.FixedSingle;
+                                /*bcl.MouseDown += bcl_MouseDown;
+                                bcl.MouseMove += bcl_MouseMove;
+                                bcl.MouseClick += bcl_MouseClick;*/
+                                bclList.Add(bcl);
+                                p.Controls.Add(bcl);
                             }
                         }
                     }
