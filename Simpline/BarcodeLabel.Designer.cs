@@ -51,6 +51,9 @@
             this.Size = new System.Drawing.Size(146, 54);
             this.Load += new System.EventHandler(this.BarcodeLabel_Load);
             this.SizeChanged += new System.EventHandler(this.BarcodeLabel_SizeChanged);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.bcl_MouseClick);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.bcl_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.bcl_MouseMove);
             this.ResumeLayout(false);
             this.PerformLayout();
 

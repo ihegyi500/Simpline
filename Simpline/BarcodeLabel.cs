@@ -6,6 +6,7 @@ namespace SimplinePrinter
 {
     public partial class BarcodeLabel : UserControl
     {
+        private Point MouseDownLocation;
         public BarcodeLabel()
         {
             InitializeComponent();
@@ -104,6 +105,37 @@ namespace SimplinePrinter
         {
             label1.Left = (this.Width - label1.Width) / 2;
             label1.Top = (this.Height - label1.Height) / 2;
+        }
+
+        public void bcl_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                MouseDownLocation = e.Location;
+            }
+        }
+
+        public void bcl_MouseMove(object sender, MouseEventArgs e)
+        {
+            /*if (e.Button == MouseButtons.Left && resizeOn)
+            {
+                this.Height = this.Top + e.Y;
+                this.Width = this.Left + e.X;
+
+            }
+            else*/ if (e.Button == MouseButtons.Left)
+            {
+                this.Left = e.X + this.Left - MouseDownLocation.X;
+                this.Top = e.Y + this.Top - MouseDownLocation.Y;
+            }
+        }
+
+        public void bcl_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (this.BackColor == Color.LightGray)
+                this.BackColor = Color.Empty;
+            else
+                this.BackColor = Color.LightGray;
         }
     }
 }

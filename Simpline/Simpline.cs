@@ -12,7 +12,6 @@ namespace Simpline
 {
     public partial class Simpline : Form
     {
-        private Point MouseDownLocation;
         List<BarcodeLabel> bclList = new List<BarcodeLabel>();
         bool resizeOn = false;
         int bclcounter = 0;
@@ -49,37 +48,6 @@ namespace Simpline
             PaperSizeList.SelectedIndex = 9;
         }
 
-        private void bcl_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                MouseDownLocation = e.Location;
-            }
-        }
-
-        private void bcl_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left && resizeOn)
-            {
-                ActiveControl.Height = ActiveControl.Top + e.Y;
-                ActiveControl.Width = ActiveControl.Left + e.X;
-
-            }
-            else if (e.Button == MouseButtons.Left)
-            {
-                ActiveControl.Left = e.X + ActiveControl.Left - MouseDownLocation.X;
-                ActiveControl.Top = e.Y + ActiveControl.Top - MouseDownLocation.Y;
-            }
-        }
-
-        private void bcl_MouseClick(object sender, MouseEventArgs e)
-        {
-            if(ActiveControl.BackColor == Color.LightGray)
-                ActiveControl.BackColor = Color.Empty;
-            else
-                ActiveControl.BackColor = Color.LightGray;
-        }
-
         private void AddButton_Click(object sender, EventArgs e)
         {
             bclcounter++;
@@ -91,9 +59,6 @@ namespace Simpline
             barcodeLabel.Name = "Bcl" + bclcounter;
             panel1.Controls.Add(barcodeLabel);
             bclList.Add(barcodeLabel);
-            barcodeLabel.MouseDown += bcl_MouseDown;
-            barcodeLabel.MouseMove += bcl_MouseMove;
-            barcodeLabel.MouseClick += bcl_MouseClick;
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
@@ -146,9 +111,6 @@ namespace Simpline
                     BarcodeLabel barcodeLabel = new BarcodeLabel();
                     barcodeLabel.Name = "Bcl" + bclcounter;
                     bclList.Add(barcodeLabel);
-                    barcodeLabel.MouseDown += bcl_MouseDown;
-                    barcodeLabel.MouseMove += bcl_MouseMove;
-                    barcodeLabel.MouseClick += bcl_MouseClick;
                     bclList[bclList.Count-1].setBarcode(bclList[i].getBarcodeString(), bclList[i].getBarcodeType(), bclList[i].getBarcodeSize());
                     barcodeLabel.Size = bclList[i].Size;
                     panel1.Controls.Add(barcodeLabel);
@@ -194,9 +156,6 @@ namespace Simpline
             barcodeLabel.Name = "Bcl" + bclcounter;
             panel1.Controls.Add(barcodeLabel);
             bclList.Add(barcodeLabel);
-            barcodeLabel.MouseDown += bcl_MouseDown;
-            barcodeLabel.MouseMove += bcl_MouseMove;
-            barcodeLabel.MouseClick += bcl_MouseClick;
         }
 
         private void RectChbx_CheckStateChanged(object sender, EventArgs e)

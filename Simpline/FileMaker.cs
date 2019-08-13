@@ -42,7 +42,7 @@ namespace SimplinePrinter
                                         + b.getBarcodeType());
                             if (b.BorderStyle == BorderStyle.FixedSingle)
                                 file.Write(";1");
-                            file.Write(Environment.NewLine + Environment.NewLine);
+                            file.Write(Environment.NewLine);
                         }
                     }
                 }
@@ -62,9 +62,6 @@ namespace SimplinePrinter
                     {
                         while ((line = sr.ReadLine()) != null)
                         {
-                            if (line == "");
-                            else
-                            {
                                 string[] parameters = line.Split(';');
                                 string[] panparam = parameters[0].Split(',');
                                 string[] labparam = parameters[1].Split(',');
@@ -83,7 +80,6 @@ namespace SimplinePrinter
                                 bcl.MouseClick += bcl_MouseClick;*/
                                 bclList.Add(bcl);
                                 p.Controls.Add(bcl);
-                            }
                         }
                     }
                 }
