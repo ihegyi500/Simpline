@@ -29,17 +29,22 @@ namespace SimplinePrinter
 
             PaperKind p = (PaperKind)PaperSizeList.SelectedIndex;
             PrinterSettings ps = new PrinterSettings();
-            IEnumerable<PaperSize> paperSizes = ps.PaperSizes.Cast<PaperSize>();
-            PaperSize papers = paperSizes.First<PaperSize>(size => size.Kind == p);
+            /*IEnumerable<PaperSize> paperSizes = ps.PaperSizes.Cast<PaperSize>();
+            PaperSize papers = paperSizes.First<PaperSize>(size => size.Kind == p);*/
             PrintDocument PrintDoc = new PrintDocument();
             PrintDoc.PrinterSettings.PrinterName =
             PrintersList.SelectedItem.ToString();
-            PrintDoc.DefaultPageSettings.PaperSize = papers;
-
+            //PrintDoc.DefaultPageSettings.PaperSize = papers;
             PrintDoc.PrintPage += new PrintPageEventHandler(PrintPageMethod);
             PrintPreviewDialog printPrvDlg = new PrintPreviewDialog();
+            PageSetupDialog psd = new PageSetupDialog();
+            psd.Document = PrintDoc;
             printPrvDlg.Document = PrintDoc;
             if(printPrvDlg.ShowDialog() == DialogResult.OK)
+            {
+                PrintDoc.Print();
+            }
+            if (psd.ShowDialog() == DialogResult.OK)
             {
                 PrintDoc.Print();
             }

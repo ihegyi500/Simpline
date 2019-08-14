@@ -279,7 +279,6 @@
             this.TextFontCbx.Name = "TextFontCbx";
             this.TextFontCbx.Size = new System.Drawing.Size(121, 21);
             this.TextFontCbx.TabIndex = 10;
-            this.TextFontCbx.Text = "Calibri";
             // 
             // TextTbx
             // 

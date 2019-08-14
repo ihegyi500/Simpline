@@ -36,6 +36,7 @@ namespace Simpline
                     TextFontCbx.Items.Add(font.Name);
                 }
             }
+            TextFontCbx.SelectedIndex = 1;
             //Nyomtatólista feltöltése
             PrinterSettings settings = new PrinterSettings();
             foreach (String printer in PrinterSettings.InstalledPrinters)
