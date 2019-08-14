@@ -12,6 +12,12 @@ namespace SimplinePrinter
 {
     class FileMaker
     {
+        bool resizeOn = false;
+
+        public FileMaker(bool resOn)
+        {
+            resizeOn = resOn;
+        }
         public void ExportPng(Bitmap bmp)
         {
             using (SaveFileDialog sfd = new SaveFileDialog() { Filter = "PNG Image|*.png", ValidateNames = true, Title = "Save an Image" })
@@ -65,7 +71,7 @@ namespace SimplinePrinter
                                 string[] parameters = line.Split(';');
                                 string[] panparam = parameters[0].Split(',');
                                 string[] labparam = parameters[1].Split(',');
-                                BarcodeLabel bcl = new BarcodeLabel();
+                                BarcodeLabel bcl = new BarcodeLabel(resizeOn);
                                 bcl.setX(Convert.ToInt32(panparam[0]));
                                 bcl.setY(Convert.ToInt32(panparam[1]));
                                 bcl.setLabX(Convert.ToInt32(labparam[0]));
@@ -75,9 +81,6 @@ namespace SimplinePrinter
                                 bcl.setBarcodeType(parameters[4]);
                                 if (parameters.Length == 6)
                                     bcl.BorderStyle = BorderStyle.FixedSingle;
-                                /*bcl.MouseDown += bcl_MouseDown;
-                                bcl.MouseMove += bcl_MouseMove;
-                                bcl.MouseClick += bcl_MouseClick;*/
                                 bclList.Add(bcl);
                                 p.Controls.Add(bcl);
                         }

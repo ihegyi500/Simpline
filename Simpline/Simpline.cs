@@ -51,7 +51,7 @@ namespace Simpline
         private void AddButton_Click(object sender, EventArgs e)
         {
             bclcounter++;
-            BarcodeLabel barcodeLabel = new BarcodeLabel();
+            BarcodeLabel barcodeLabel = new BarcodeLabel(resizeOn);
             if(BarcodeTypeCbx.SelectedItem.ToString() == "Free 3 of 9 Extended")
                 barcodeLabel.setBarcode("*" + BarcodeTextTbx.Text+ "*", BarcodeTypeCbx.Text, Convert.ToInt32(BarcodeSizeTbx.Text));
             else
@@ -67,8 +67,14 @@ namespace Simpline
             {
                 if (bclList[i].BackColor == Color.LightGray)
                 {
-                    panel1.Controls.Remove(bclList[i]);
                     bclList.RemoveAt(i);
+                }
+            }
+            foreach(Control c in panel1.Controls)
+            {
+                if(c.BackColor == Color.LightGray)
+                {
+                    panel1.Controls.Remove(c);
                 }
             }
         }
@@ -108,7 +114,7 @@ namespace Simpline
                 if (bclList[i].BackColor == Color.LightGray)
                 {
                     bclcounter++;
-                    BarcodeLabel barcodeLabel = new BarcodeLabel();
+                    BarcodeLabel barcodeLabel = new BarcodeLabel(resizeOn);
                     barcodeLabel.Name = "Bcl" + bclcounter;
                     bclList.Add(barcodeLabel);
                     bclList[bclList.Count-1].setBarcode(bclList[i].getBarcodeString(), bclList[i].getBarcodeType(), bclList[i].getBarcodeSize());
@@ -127,7 +133,7 @@ namespace Simpline
         private void SavePictureButton_Click(object sender, EventArgs e)
         {
             GraphicMaker gm = new GraphicMaker();
-            FileMaker fmk = new FileMaker();
+            FileMaker fmk = new FileMaker(resizeOn);
             fmk.SaveTxt(bclList);
         }
 
@@ -148,7 +154,7 @@ namespace Simpline
         private void AddTextButton_Click(object sender, EventArgs e)
         {
             bclcounter++;
-            BarcodeLabel barcodeLabel = new BarcodeLabel();
+            BarcodeLabel barcodeLabel = new BarcodeLabel(resizeOn);
             if (TextFontCbx.SelectedItem.ToString() == "Free 3 of 9 Extended")
                 barcodeLabel.setBarcode("*" + TextTbx.Text + "*", TextFontCbx.Text, Convert.ToInt32(TextSizeTbx.Text));
             else
@@ -175,13 +181,13 @@ namespace Simpline
         private void ExportButton_Click(object sender, EventArgs e)
         {
             GraphicMaker gm = new GraphicMaker();
-            FileMaker fmk = new FileMaker();
+            FileMaker fmk = new FileMaker(resizeOn);
             fmk.ExportPng(gm.GetBitmap());
         }
 
         private void LoadPictureButton_Click(object sender, EventArgs e)
         {
-            FileMaker fmk = new FileMaker();
+            FileMaker fmk = new FileMaker(resizeOn);
             fmk.LoadTxt(panel1, bclList);
         }
 
@@ -189,6 +195,16 @@ namespace Simpline
         {
             GraphicMaker gm = new GraphicMaker();
             gm.PrintDialog();
+        }
+
+        private void RectButton_Click(object sender, EventArgs e)
+        {
+            BarcodeLabel bcl = new BarcodeLabel(resizeOn);
+            bcl.setBarcodeString("");
+            bcl.BorderStyle = BorderStyle.FixedSingle;
+            bcl.BackColor = Color.Transparent;
+            panel1.Controls.Add(bcl);
+            bcl.SendToBack();
         }
     }
 }
