@@ -71,7 +71,7 @@ namespace SimplinePrinter
                                 string[] parameters = line.Split(';');
                                 string[] panparam = parameters[0].Split(',');
                                 string[] labparam = parameters[1].Split(',');
-                                BarcodeLabel bcl = new BarcodeLabel(resizeOn);
+                                BarcodeLabel bcl = new BarcodeLabel();
                                 bcl.setX(Convert.ToInt32(panparam[0]));
                                 bcl.setY(Convert.ToInt32(panparam[1]));
                                 bcl.setLabX(Convert.ToInt32(labparam[0]));

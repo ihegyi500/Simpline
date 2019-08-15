@@ -51,15 +51,7 @@ namespace Simpline
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            bclcounter++;
-            BarcodeLabel barcodeLabel = new BarcodeLabel(resizeOn);
-            if(BarcodeTypeCbx.SelectedItem.ToString() == "Free 3 of 9 Extended")
-                barcodeLabel.setBarcode("*" + BarcodeTextTbx.Text+ "*", BarcodeTypeCbx.Text, Convert.ToInt32(BarcodeSizeTbx.Text));
-            else
-                barcodeLabel.setBarcode(BarcodeTextTbx.Text, BarcodeTypeCbx.Text, Convert.ToInt32(BarcodeSizeTbx.Text));
-            barcodeLabel.Name = "Bcl" + bclcounter;
-            panel1.Controls.Add(barcodeLabel);
-            bclList.Add(barcodeLabel);
+            AddFunc(BarcodeTypeCbx, BarcodeTextTbx, BarcodeSizeTbx);
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
@@ -106,6 +98,10 @@ namespace Simpline
                 resizeOn = true;
                 ActiveControl.BackColor = Color.LightGray;
             }
+            foreach(BarcodeLabel b in bclList)
+            {
+                b.setResize(resizeOn);
+            }
         }
 
         private void CopyPasteButton_Click(object sender, EventArgs e)
@@ -115,7 +111,7 @@ namespace Simpline
                 if (bclList[i].BackColor == Color.LightGray)
                 {
                     bclcounter++;
-                    BarcodeLabel barcodeLabel = new BarcodeLabel(resizeOn);
+                    BarcodeLabel barcodeLabel = new BarcodeLabel();
                     barcodeLabel.Name = "Bcl" + bclcounter;
                     bclList.Add(barcodeLabel);
                     bclList[bclList.Count-1].setBarcode(bclList[i].getBarcodeString(), bclList[i].getBarcodeType(), bclList[i].getBarcodeSize());
@@ -154,15 +150,7 @@ namespace Simpline
 
         private void AddTextButton_Click(object sender, EventArgs e)
         {
-            bclcounter++;
-            BarcodeLabel barcodeLabel = new BarcodeLabel(resizeOn);
-            if (TextFontCbx.SelectedItem.ToString() == "Free 3 of 9 Extended")
-                barcodeLabel.setBarcode("*" + TextTbx.Text + "*", TextFontCbx.Text, Convert.ToInt32(TextSizeTbx.Text));
-            else
-                barcodeLabel.setBarcode(TextTbx.Text, TextFontCbx.Text, Convert.ToInt32(TextSizeTbx.Text));
-            barcodeLabel.Name = "Bcl" + bclcounter;
-            panel1.Controls.Add(barcodeLabel);
-            bclList.Add(barcodeLabel);
+            AddFunc(TextFontCbx, TextTbx, TextSizeTbx);
         }
 
         private void RectChbx_CheckStateChanged(object sender, EventArgs e)
@@ -200,12 +188,24 @@ namespace Simpline
 
         private void RectButton_Click(object sender, EventArgs e)
         {
-            BarcodeLabel bcl = new BarcodeLabel(resizeOn);
+            BarcodeLabel bcl = new BarcodeLabel();
             bcl.setBarcodeString("");
             bcl.BorderStyle = BorderStyle.FixedSingle;
-            bcl.BackColor = Color.Transparent;
             panel1.Controls.Add(bcl);
-            bcl.SendToBack();
+            bclList.Add(bcl);
+        }
+
+        private void AddFunc(ComboBox FontType, TextBox value, TextBox size)
+        {
+            bclcounter++;
+            BarcodeLabel barcodeLabel = new BarcodeLabel();
+            if (FontType.SelectedItem.ToString() == "Free 3 of 9 Extended")
+                barcodeLabel.setBarcode("*" + value.Text + "*", FontType.Text, Convert.ToInt32(size.Text));
+            else
+                barcodeLabel.setBarcode(value.Text, FontType.Text, Convert.ToInt32(size.Text));
+            barcodeLabel.Name = "Bcl" + bclcounter;
+            panel1.Controls.Add(barcodeLabel);
+            bclList.Add(barcodeLabel);
         }
     }
 }

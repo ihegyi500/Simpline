@@ -8,9 +8,9 @@ namespace SimplinePrinter
     {
         private Point MouseDownLocation;
         bool resizeOn = false;
-        public BarcodeLabel(bool resOn)
+
+        public BarcodeLabel()
         {
-            resizeOn = resOn;
             InitializeComponent();
         }
 
@@ -138,6 +138,10 @@ namespace SimplinePrinter
                 this.BackColor = Color.Empty;
             else
                 this.BackColor = Color.LightGray;
+        }
+         public void setResize(bool resOn)
+        {
+            resizeOn = resOn;
         }
     }
 }

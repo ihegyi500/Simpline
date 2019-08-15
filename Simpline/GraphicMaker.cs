@@ -46,7 +46,7 @@ namespace SimplinePrinter
             }
             if (psd.ShowDialog() == DialogResult.OK)
             {
-                PrintDoc.Print();
+                PrintDoc.DefaultPageSettings = psd.PageSettings;
             }
         }
 
