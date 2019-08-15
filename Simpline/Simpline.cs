@@ -45,7 +45,10 @@ namespace Simpline
             }
             this.PrintersList.SelectedItem = settings.PrinterName;
             //Papírméretlista feltöltése
-            PaperSizeList.DataSource = Enum.GetValues(typeof(PaperKind));
+            foreach (PaperSize ps in settings.PaperSizes)
+            {
+                 PaperSizeList.Items.Add(ps.Kind.ToString());
+            }
             PaperSizeList.SelectedIndex = 9;
         }
 
@@ -206,6 +209,18 @@ namespace Simpline
             barcodeLabel.Name = "Bcl" + bclcounter;
             panel1.Controls.Add(barcodeLabel);
             bclList.Add(barcodeLabel);
+        }
+
+        private void PrintersList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PrinterSettings settings = new PrinterSettings();
+            settings.PrinterName = this.PrintersList.SelectedItem.ToString();
+            //Papírméretlista feltöltése
+            PaperSizeList.Items.Clear();
+            foreach (PaperSize ps in settings.PaperSizes)
+            {
+                PaperSizeList.Items.Add(ps.Kind.ToString());
+            }
         }
     }
 }

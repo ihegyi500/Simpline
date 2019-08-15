@@ -79,6 +79,7 @@
             this.PrintersList.Name = "PrintersList";
             this.PrintersList.Size = new System.Drawing.Size(240, 21);
             this.PrintersList.TabIndex = 8;
+            this.PrintersList.SelectedIndexChanged += new System.EventHandler(this.PrintersList_SelectedIndexChanged);
             // 
             // printersLabel
             // 
