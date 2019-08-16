@@ -41,7 +41,7 @@ namespace Simpline
             PrinterSettings settings = new PrinterSettings();
             foreach (String printer in PrinterSettings.InstalledPrinters)
             {
-                PrintersList.Items.Add(printer.ToString());
+                PrintersList.Items.Add(printer);
             }
             this.PrintersList.SelectedItem = settings.PrinterName;
             //Papírméretlista feltöltése
@@ -221,6 +221,25 @@ namespace Simpline
             {
                 PaperSizeList.Items.Add(ps.Kind.ToString());
             }
+        }
+
+        private void PaperSizeList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PrinterSettings settings = new PrinterSettings();
+            settings.PrinterName = PrintersList.SelectedItem.ToString();
+            foreach (PaperSize ps in settings.PaperSizes)
+            {
+                if(ps.Kind.ToString() == PaperSizeList.SelectedItem.ToString())
+                {
+                    panel1.Height = ps.Height/2;
+                    panel1.Width = ps.Width/2;
+                }
+            }
+        }
+
+        private void Panel1_SizeChanged(object sender, EventArgs e)
+        {
+            panel2.Left = panel1.Right + 25;
         }
     }
 }

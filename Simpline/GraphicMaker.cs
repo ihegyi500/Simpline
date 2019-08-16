@@ -58,7 +58,7 @@ namespace SimplinePrinter
 
         private void GraphicSetter(/*int ps*/)
         {
-            int ps = 4;
+            int ps = 2;
             Pen pen;
             Font font;
             SolidBrush brush = new SolidBrush(Color.Black);
