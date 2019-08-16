@@ -49,12 +49,17 @@ namespace Simpline
             {
                  PaperSizeList.Items.Add(ps.Kind.ToString());
             }
-            PaperSizeList.SelectedIndex = 9;
+            PaperSizeList.SelectedIndex = 0;
         }
 
         private void AddButton_Click(object sender, EventArgs e)
         {
             AddFunc(BarcodeTypeCbx, BarcodeTextTbx, BarcodeSizeTbx);
+        }
+
+        private void SetBarcodeButton_Click(object sender, EventArgs e)
+        {
+            SetFunc(BarcodeTypeCbx, BarcodeTextTbx, BarcodeSizeTbx);
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
@@ -71,20 +76,6 @@ namespace Simpline
                 if(c.BackColor == Color.LightGray)
                 {
                     panel1.Controls.Remove(c);
-                }
-            }
-        }
-
-        private void SetBarcodeButton_Click(object sender, EventArgs e)
-        {
-            for(int i = 0; i < bclList.Count; i++)
-            {
-                if (bclList[i].BackColor == Color.LightGray)
-                {
-                    if (BarcodeTypeCbx.SelectedItem.ToString() == "Free 3 of 9 Extended")
-                        bclList[i].setBarcode("*" + BarcodeTextTbx.Text + "*", BarcodeTypeCbx.Text, Convert.ToInt32(BarcodeSizeTbx.Text));
-                    else
-                        bclList[i].setBarcode(BarcodeTextTbx.Text, BarcodeTypeCbx.Text, Convert.ToInt32(BarcodeSizeTbx.Text));
                 }
             }
         }
@@ -119,6 +110,8 @@ namespace Simpline
                     bclList.Add(barcodeLabel);
                     bclList[bclList.Count-1].setBarcode(bclList[i].getBarcodeString(), bclList[i].getBarcodeType(), bclList[i].getBarcodeSize());
                     barcodeLabel.Size = bclList[i].Size;
+                    if (bclList[i].BorderStyle == BorderStyle.FixedSingle)
+                        barcodeLabel.BorderStyle = BorderStyle.FixedSingle;
                     panel1.Controls.Add(barcodeLabel);
                 }
             }
@@ -137,23 +130,14 @@ namespace Simpline
             fmk.SaveTxt(bclList);
         }
 
-        private void SetTextButton_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < bclList.Count; i++)
-            {
-                if (bclList[i].BackColor == Color.LightGray)
-                {
-                    if (TextFontCbx.SelectedItem.ToString() == "Free 3 of 9 Extended")
-                        bclList[i].setBarcode("*" + TextTbx.Text + "*", TextFontCbx.Text, Convert.ToInt32(TextSizeTbx.Text));
-                    else
-                        bclList[i].setBarcode(TextTbx.Text, TextFontCbx.Text, Convert.ToInt32(TextSizeTbx.Text));
-                }
-            }
-        }
-
         private void AddTextButton_Click(object sender, EventArgs e)
         {
             AddFunc(TextFontCbx, TextTbx, TextSizeTbx);
+        }
+
+        private void SetTextButton_Click(object sender, EventArgs e)
+        {
+            SetFunc(TextFontCbx, TextTbx, TextSizeTbx);
         }
 
         private void RectChbx_CheckStateChanged(object sender, EventArgs e)
@@ -211,6 +195,21 @@ namespace Simpline
             bclList.Add(barcodeLabel);
         }
 
+        private void SetFunc(ComboBox FontType, TextBox value, TextBox size)
+        {
+            for (int i = 0; i < bclList.Count; i++)
+            {
+                if (bclList[i].BackColor == Color.LightGray)
+                {
+                    if (FontType.SelectedItem.ToString() == "Free 3 of 9 Extended")
+                        bclList[i].setBarcode("*" + value.Text + "*", FontType.Text, Convert.ToInt32(size.Text));
+                    else
+                        bclList[i].setBarcode(value.Text, FontType.Text, Convert.ToInt32(size.Text));
+                }
+            }
+
+        }
+
         private void PrintersList_SelectedIndexChanged(object sender, EventArgs e)
         {
             PrinterSettings settings = new PrinterSettings();
@@ -231,8 +230,8 @@ namespace Simpline
             {
                 if(ps.Kind.ToString() == PaperSizeList.SelectedItem.ToString())
                 {
-                    panel1.Height = ps.Height/2;
-                    panel1.Width = ps.Width/2;
+                    panel1.Height = ps.Height;
+                    panel1.Width = ps.Width;
                 }
             }
         }
@@ -240,6 +239,12 @@ namespace Simpline
         private void Panel1_SizeChanged(object sender, EventArgs e)
         {
             panel2.Left = panel1.Right + 25;
+        }
+
+        private void Panel1_MouseMove(object sender, MouseEventArgs e)
+        {
+            X.Text = e.X.ToString();
+            Y.Text = e.Y.ToString();
         }
     }
 }

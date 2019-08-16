@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Simpline;
 
 namespace SimplinePrinter
 {
@@ -91,6 +92,26 @@ namespace SimplinePrinter
             label1.Top = Y;
         }
 
+        public int getPanHeight()
+        {
+            return this.Height;
+        }
+
+        public void setPanHeight(int height)
+        {
+            this.Height = height;
+        }
+        public int getPanWidth()
+        {
+            return this.Width;
+        }
+
+        public void setPanWidth(int width)
+        {
+            this.Width = width;
+        }
+
+
         //Középen tartja a vonalkódot a panel méretezése után is
         private void BarcodeLabel_SizeChanged(object sender, EventArgs e)
         {
@@ -142,6 +163,18 @@ namespace SimplinePrinter
          public void setResize(bool resOn)
         {
             resizeOn = resOn;
+        }
+
+        private void Label1_DoubleClick(object sender, EventArgs e)
+        {
+            ObjectLoc ol = new ObjectLoc(this);
+            ol.Show();
+        }
+
+        private void BarcodeLabel_DoubleClick(object sender, EventArgs e)
+        {
+            ObjectLoc ol = new ObjectLoc(this);
+            ol.Show();
         }
     }
 }

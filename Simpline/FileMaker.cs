@@ -45,7 +45,9 @@ namespace SimplinePrinter
                                         + b.getLabX() + "," + b.getLabY() + ";"
                                         + b.getBarcodeString() + ";"
                                         + b.getBarcodeSize() + ";"
-                                        + b.getBarcodeType());
+                                        + b.getBarcodeType() + ";"
+                                        + b.getPanHeight() + ";"
+                                        + b.getPanWidth());
                             if (b.BorderStyle == BorderStyle.FixedSingle)
                                 file.Write(";1");
                             file.Write(Environment.NewLine);
@@ -68,21 +70,23 @@ namespace SimplinePrinter
                     {
                         while ((line = sr.ReadLine()) != null)
                         {
-                                string[] parameters = line.Split(';');
-                                string[] panparam = parameters[0].Split(',');
-                                string[] labparam = parameters[1].Split(',');
-                                BarcodeLabel bcl = new BarcodeLabel();
-                                bcl.setX(Convert.ToInt32(panparam[0]));
-                                bcl.setY(Convert.ToInt32(panparam[1]));
-                                bcl.setLabX(Convert.ToInt32(labparam[0]));
-                                bcl.setLabY(Convert.ToInt32(labparam[1]));
-                                bcl.setBarcodeString(parameters[2]);
-                                bcl.setBarcodeSize(Convert.ToInt32(parameters[3]));
-                                bcl.setBarcodeType(parameters[4]);
-                                if (parameters.Length == 6)
-                                    bcl.BorderStyle = BorderStyle.FixedSingle;
-                                bclList.Add(bcl);
-                                p.Controls.Add(bcl);
+                            string[] parameters = line.Split(';');
+                            string[] panparam = parameters[0].Split(',');
+                            string[] labparam = parameters[1].Split(',');
+                            BarcodeLabel bcl = new BarcodeLabel();
+                            bcl.setX(Convert.ToInt32(panparam[0]));
+                            bcl.setY(Convert.ToInt32(panparam[1]));
+                            bcl.setLabX(Convert.ToInt32(labparam[0]));
+                            bcl.setLabY(Convert.ToInt32(labparam[1]));
+                            bcl.setBarcodeString(parameters[2]);
+                            bcl.setBarcodeSize(Convert.ToInt32(parameters[3]));
+                            bcl.setBarcodeType(parameters[4]);
+                            bcl.setPanHeight(Convert.ToInt32(parameters[5]));
+                            bcl.setPanWidth(Convert.ToInt32(parameters[6]));
+                            if (parameters.Length == 8)
+                                bcl.BorderStyle = BorderStyle.FixedSingle;
+                            bclList.Add(bcl);
+                            p.Controls.Add(bcl);
                         }
                     }
                 }

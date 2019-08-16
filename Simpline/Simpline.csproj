@@ -70,6 +70,12 @@
     <Compile Include="BarcodeLabel.Designer.cs">
       <DependentUpon>BarcodeLabel.cs</DependentUpon>
     </Compile>
+    <Compile Include="ObjectLoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ObjectLoc.Designer.cs">
+      <DependentUpon>ObjectLoc.cs</DependentUpon>
+    </Compile>
     <Compile Include="Simpline.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +89,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="BarcodeLabel.resx">
       <DependentUpon>BarcodeLabel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ObjectLoc.resx">
+      <DependentUpon>ObjectLoc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Simpline.resx">
       <DependentUpon>Simpline.cs</DependentUpon>

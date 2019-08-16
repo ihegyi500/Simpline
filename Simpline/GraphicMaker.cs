@@ -26,15 +26,9 @@ namespace SimplinePrinter
             bclL = bclList;
             PrintersList = box;
             PaperSizeList = box2;
-
-            PaperKind p = (PaperKind)PaperSizeList.SelectedIndex;
-            PrinterSettings ps = new PrinterSettings();
-            /*IEnumerable<PaperSize> paperSizes = ps.PaperSizes.Cast<PaperSize>();
-            PaperSize papers = paperSizes.First<PaperSize>(size => size.Kind == p);*/
             PrintDocument PrintDoc = new PrintDocument();
             PrintDoc.PrinterSettings.PrinterName =
             PrintersList.SelectedItem.ToString();
-            //PrintDoc.DefaultPageSettings.PaperSize = papers;
             PrintDoc.PrintPage += new PrintPageEventHandler(PrintPageMethod);
             PrintPreviewDialog printPrvDlg = new PrintPreviewDialog();
             PageSetupDialog psd = new PageSetupDialog();
@@ -46,7 +40,7 @@ namespace SimplinePrinter
             }
             if (psd.ShowDialog() == DialogResult.OK)
             {
-                PrintDoc.DefaultPageSettings = psd.PageSettings;
+                PrintDoc.Print();
             }
         }
 
@@ -58,7 +52,7 @@ namespace SimplinePrinter
 
         private void GraphicSetter(/*int ps*/)
         {
-            int ps = 2;
+            int ps = 1;
             Pen pen;
             Font font;
             SolidBrush brush = new SolidBrush(Color.Black);

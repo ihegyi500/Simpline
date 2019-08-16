@@ -40,6 +40,10 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
             this.label1.SizeChanged += new System.EventHandler(this.BarcodeLabel_SizeChanged);
+            this.label1.DoubleClick += new System.EventHandler(this.Label1_DoubleClick);
+            this.label1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.bcl_MouseClick);
+            this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.bcl_MouseDown);
+            this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.bcl_MouseMove);
             // 
             // BarcodeLabel
             // 
@@ -51,6 +55,7 @@
             this.Size = new System.Drawing.Size(146, 54);
             this.Load += new System.EventHandler(this.BarcodeLabel_Load);
             this.SizeChanged += new System.EventHandler(this.BarcodeLabel_SizeChanged);
+            this.DoubleClick += new System.EventHandler(this.BarcodeLabel_DoubleClick);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.bcl_MouseClick);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.bcl_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.bcl_MouseMove);

@@ -61,6 +61,10 @@
             this.RectButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.X = new System.Windows.Forms.Label();
+            this.Y = new System.Windows.Forms.Label();
+            this.Labx = new System.Windows.Forms.Label();
+            this.laby = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -165,11 +169,12 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point(316, 21);
+            this.panel1.Location = new System.Drawing.Point(314, 30);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(210, 297);
             this.panel1.TabIndex = 23;
             this.panel1.SizeChanged += new System.EventHandler(this.Panel1_SizeChanged);
+            this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Panel1_MouseMove);
             // 
             // ResizeButton
             // 
@@ -411,18 +416,58 @@
             this.panel3.Size = new System.Drawing.Size(271, 331);
             this.panel3.TabIndex = 48;
             // 
+            // X
+            // 
+            this.X.AutoSize = true;
+            this.X.Location = new System.Drawing.Point(334, 12);
+            this.X.Name = "X";
+            this.X.Size = new System.Drawing.Size(14, 13);
+            this.X.TabIndex = 49;
+            this.X.Text = "X";
+            // 
+            // Y
+            // 
+            this.Y.AutoSize = true;
+            this.Y.Location = new System.Drawing.Point(392, 12);
+            this.Y.Name = "Y";
+            this.Y.Size = new System.Drawing.Size(14, 13);
+            this.Y.TabIndex = 50;
+            this.Y.Text = "Y";
+            // 
+            // Labx
+            // 
+            this.Labx.AutoSize = true;
+            this.Labx.Location = new System.Drawing.Point(311, 12);
+            this.Labx.Name = "Labx";
+            this.Labx.Size = new System.Drawing.Size(17, 13);
+            this.Labx.TabIndex = 51;
+            this.Labx.Text = "X:";
+            // 
+            // laby
+            // 
+            this.laby.AutoSize = true;
+            this.laby.Location = new System.Drawing.Point(369, 12);
+            this.laby.Name = "laby";
+            this.laby.Size = new System.Drawing.Size(17, 13);
+            this.laby.TabIndex = 52;
+            this.laby.Text = "Y:";
+            // 
             // Simpline
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(851, 369);
+            this.Controls.Add(this.laby);
+            this.Controls.Add(this.Labx);
+            this.Controls.Add(this.Y);
+            this.Controls.Add(this.X);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Simpline";
             this.Text = "Simpline";
             this.Load += new System.EventHandler(this.BarcodePrinter_Load);
@@ -431,6 +476,7 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -469,6 +515,10 @@
         private System.Windows.Forms.Button RectButton;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label X;
+        private System.Windows.Forms.Label Y;
+        private System.Windows.Forms.Label Labx;
+        private System.Windows.Forms.Label laby;
     }
 }
 
