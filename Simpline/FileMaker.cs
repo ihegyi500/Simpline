@@ -12,12 +12,6 @@ namespace SimplinePrinter
 {
     class FileMaker
     {
-        bool resizeOn = false;
-
-        public FileMaker(bool resOn)
-        {
-            resizeOn = resOn;
-        }
         public void ExportPng(Bitmap bmp)
         {
             using (SaveFileDialog sfd = new SaveFileDialog() { Filter = "PNG Image|*.png", ValidateNames = true, Title = "Save an Image" })

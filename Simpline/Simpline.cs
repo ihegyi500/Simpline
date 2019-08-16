@@ -125,8 +125,7 @@ namespace Simpline
 
         private void SavePictureButton_Click(object sender, EventArgs e)
         {
-            //GraphicMaker gm = new GraphicMaker();
-            FileMaker fmk = new FileMaker(resizeOn);
+            FileMaker fmk = new FileMaker();
             fmk.SaveTxt(bclList);
         }
 
@@ -157,13 +156,13 @@ namespace Simpline
         private void ExportButton_Click(object sender, EventArgs e)
         {
             GraphicMaker gm = new GraphicMaker();
-            FileMaker fmk = new FileMaker(resizeOn);
+            FileMaker fmk = new FileMaker();
             fmk.ExportPng(gm.GetBitmap());
         }
 
         private void LoadPictureButton_Click(object sender, EventArgs e)
         {
-            FileMaker fmk = new FileMaker(resizeOn);
+            FileMaker fmk = new FileMaker();
             fmk.LoadTxt(panel1, bclList);
         }
 
