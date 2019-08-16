@@ -120,12 +120,12 @@ namespace Simpline
         private void PrintButton_Click(object sender, EventArgs e)
         {
             GraphicMaker gm = new GraphicMaker();
-            gm.Printing(bclList, PrintersList, PaperSizeList);
+            gm.Printing(bclList, PrintersList, 3,(short)Convert.ToInt32(CopiesTbx.Text));
         }
 
         private void SavePictureButton_Click(object sender, EventArgs e)
         {
-            GraphicMaker gm = new GraphicMaker();
+            //GraphicMaker gm = new GraphicMaker();
             FileMaker fmk = new FileMaker(resizeOn);
             fmk.SaveTxt(bclList);
         }
@@ -245,6 +245,18 @@ namespace Simpline
         {
             X.Text = e.X.ToString();
             Y.Text = e.Y.ToString();
+        }
+
+        private void PrintPreviewLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            GraphicMaker gm = new GraphicMaker();
+            gm.Printing(bclList, PrintersList, 1, (short)Convert.ToInt32(CopiesTbx.Text));
+        }
+
+        private void PageSetupLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            GraphicMaker gm = new GraphicMaker();
+            gm.Printing(bclList, PrintersList, 2, (short)Convert.ToInt32(CopiesTbx.Text));
         }
     }
 }

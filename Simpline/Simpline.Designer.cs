@@ -61,10 +61,14 @@
             this.RectButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.PrintPreviewLabel = new System.Windows.Forms.LinkLabel();
             this.X = new System.Windows.Forms.Label();
             this.Y = new System.Windows.Forms.Label();
             this.Labx = new System.Windows.Forms.Label();
             this.laby = new System.Windows.Forms.Label();
+            this.CopiesLabel = new System.Windows.Forms.Label();
+            this.CopiesTbx = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -397,6 +401,10 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.CopiesTbx);
+            this.panel3.Controls.Add(this.CopiesLabel);
+            this.panel3.Controls.Add(this.linkLabel1);
+            this.panel3.Controls.Add(this.PrintPreviewLabel);
             this.panel3.Controls.Add(this.PrintPropLabel);
             this.panel3.Controls.Add(this.PrintersList);
             this.panel3.Controls.Add(this.printersLabel);
@@ -415,6 +423,28 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(271, 331);
             this.panel3.TabIndex = 48;
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(195, 251);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(61, 13);
+            this.linkLabel1.TabIndex = 47;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Page setup";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.PageSetupLabel_LinkClicked);
+            // 
+            // PrintPreviewLabel
+            // 
+            this.PrintPreviewLabel.AutoSize = true;
+            this.PrintPreviewLabel.Location = new System.Drawing.Point(112, 251);
+            this.PrintPreviewLabel.Name = "PrintPreviewLabel";
+            this.PrintPreviewLabel.Size = new System.Drawing.Size(68, 13);
+            this.PrintPreviewLabel.TabIndex = 46;
+            this.PrintPreviewLabel.TabStop = true;
+            this.PrintPreviewLabel.Text = "Print preview";
+            this.PrintPreviewLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.PrintPreviewLabel_LinkClicked);
             // 
             // X
             // 
@@ -451,6 +481,22 @@
             this.laby.Size = new System.Drawing.Size(17, 13);
             this.laby.TabIndex = 52;
             this.laby.Text = "Y:";
+            // 
+            // CopiesLabel
+            // 
+            this.CopiesLabel.AutoSize = true;
+            this.CopiesLabel.Location = new System.Drawing.Point(112, 289);
+            this.CopiesLabel.Name = "CopiesLabel";
+            this.CopiesLabel.Size = new System.Drawing.Size(77, 13);
+            this.CopiesLabel.TabIndex = 48;
+            this.CopiesLabel.Text = "Copies to print:";
+            // 
+            // CopiesTbx
+            // 
+            this.CopiesTbx.Location = new System.Drawing.Point(195, 286);
+            this.CopiesTbx.Name = "CopiesTbx";
+            this.CopiesTbx.Size = new System.Drawing.Size(61, 20);
+            this.CopiesTbx.TabIndex = 49;
             // 
             // Simpline
             // 
@@ -519,6 +565,10 @@
         private System.Windows.Forms.Label Y;
         private System.Windows.Forms.Label Labx;
         private System.Windows.Forms.Label laby;
+        private System.Windows.Forms.LinkLabel PrintPreviewLabel;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.TextBox CopiesTbx;
+        private System.Windows.Forms.Label CopiesLabel;
     }
 }
 

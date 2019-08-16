@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
 using System.Linq;
+using System;
 
 namespace SimplinePrinter
 {
@@ -10,9 +11,8 @@ namespace SimplinePrinter
     {
         Graphics g;
         List<BarcodeLabel> bclL = new List<BarcodeLabel>();
-        ComboBox PrintersList, PaperSizeList;
+        ComboBox PrintersList;
         Bitmap bmp = new Bitmap(595, 842);
-        PaperSize papers = new PaperSize();
 
         public void PrintDialog()
         {
@@ -21,26 +21,47 @@ namespace SimplinePrinter
 
         }
 
-        public void Printing(List<BarcodeLabel> bclList, ComboBox box, ComboBox box2)
+        public void Printing(List<BarcodeLabel> bclList, ComboBox box, int sent, int copies)
         {
             bclL = bclList;
             PrintersList = box;
-            PaperSizeList = box2;
             PrintDocument PrintDoc = new PrintDocument();
             PrintDoc.PrinterSettings.PrinterName =
             PrintersList.SelectedItem.ToString();
             PrintDoc.PrintPage += new PrintPageEventHandler(PrintPageMethod);
-            PrintPreviewDialog printPrvDlg = new PrintPreviewDialog();
-            PageSetupDialog psd = new PageSetupDialog();
-            psd.Document = PrintDoc;
-            printPrvDlg.Document = PrintDoc;
-            if(printPrvDlg.ShowDialog() == DialogResult.OK)
+            switch (sent)
             {
-                PrintDoc.Print();
-            }
-            if (psd.ShowDialog() == DialogResult.OK)
-            {
-                PrintDoc.Print();
+               case 1:
+                    {
+                        PrintPreviewDialog ppd = new PrintPreviewDialog();
+                        ppd.Document = PrintDoc;
+                        if (ppd.ShowDialog() == DialogResult.OK)
+                        {
+                        if(copies != 0)
+                            PrintDoc.PrinterSettings.Copies = (short)copies;
+                        PrintDoc.Print();
+                        }
+                        break;
+                    }
+               case 2:
+                    {
+                        PageSetupDialog psd = new PageSetupDialog();
+                        psd.Document = PrintDoc;
+                        if (psd.ShowDialog() == DialogResult.OK)
+                        {
+                            if (copies != 0)
+                                PrintDoc.PrinterSettings.Copies = (short)copies;
+                            PrintDoc.Print();
+                        }
+                        break;
+                    }
+               case 3:
+                    {
+                        if (copies != 0)
+                            PrintDoc.PrinterSettings.Copies = (short)copies;
+                        PrintDoc.Print();
+                        break;
+                    }
             }
         }
 
