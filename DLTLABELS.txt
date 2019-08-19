@@ -1,0 +1,12 @@
+122,72;138,74;*KML030L6*;25;Free 3 of 9 Extended;30;175
+122,137;138,139;*KML031L6*;25;Free 3 of 9 Extended;30;175
+122,7;138,9;*KML029L6*;25;Free 3 of 9 Extended;30;175
+122,202;138,204;*KML032L6*;25;Free 3 of 9 Extended;30;175
+169,41;172,43;*KML029L6*;7;Arial Black;18;85
+169,106;172,109;*KML030L6*;7;Arial Black;21;85
+169,170;172,173;*KML031L6*;7;Arial Black;21;85
+169,235;172,238;*KML032L6*;7;Arial Black;21;85
+69,67;208,93;;8;Microsoft Sans Serif;65;278;1
+69,132;208,158;;8;Microsoft Sans Serif;65;278;1
+69,2;208,28;;8;Microsoft Sans Serif;65;278;1
+69,197;208,223;;8;Microsoft Sans Serif;65;278;1
