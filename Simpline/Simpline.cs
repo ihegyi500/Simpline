@@ -153,11 +153,10 @@ namespace Simpline
             }
         }
 
-        private void ExportButton_Click(object sender, EventArgs e)
+        private void OpenPicButton_Click(object sender, EventArgs e)
         {
-            GraphicMaker gm = new GraphicMaker();
             FileMaker fmk = new FileMaker();
-            fmk.ExportPng(gm.GetBitmap());
+            fmk.AddPicture(panel1, bclList);
         }
 
         private void LoadPictureButton_Click(object sender, EventArgs e)

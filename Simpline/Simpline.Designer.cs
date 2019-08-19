@@ -54,21 +54,21 @@
             this.TextTbx = new System.Windows.Forms.TextBox();
             this.LoadPictureButton = new System.Windows.Forms.Button();
             this.RectChbx = new System.Windows.Forms.CheckBox();
-            this.ExportButton = new System.Windows.Forms.Button();
+            this.OpenPicButton = new System.Windows.Forms.Button();
             this.PaperSizeList = new System.Windows.Forms.ComboBox();
             this.PaperSizeLabel = new System.Windows.Forms.Label();
             this.PrintPropLabel = new System.Windows.Forms.LinkLabel();
             this.RectButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.CopiesTbx = new System.Windows.Forms.TextBox();
+            this.CopiesLabel = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.PrintPreviewLabel = new System.Windows.Forms.LinkLabel();
             this.X = new System.Windows.Forms.Label();
             this.Y = new System.Windows.Forms.Label();
             this.Labx = new System.Windows.Forms.Label();
             this.laby = new System.Windows.Forms.Label();
-            this.CopiesLabel = new System.Windows.Forms.Label();
-            this.CopiesTbx = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -135,7 +135,7 @@
             // DeleteButton
             // 
             this.DeleteButton.BackColor = System.Drawing.Color.White;
-            this.DeleteButton.Location = new System.Drawing.Point(93, 229);
+            this.DeleteButton.Location = new System.Drawing.Point(12, 275);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(75, 40);
             this.DeleteButton.TabIndex = 7;
@@ -183,7 +183,7 @@
             // ResizeButton
             // 
             this.ResizeButton.BackColor = System.Drawing.Color.White;
-            this.ResizeButton.Location = new System.Drawing.Point(12, 229);
+            this.ResizeButton.Location = new System.Drawing.Point(93, 229);
             this.ResizeButton.Name = "ResizeButton";
             this.ResizeButton.Size = new System.Drawing.Size(75, 40);
             this.ResizeButton.TabIndex = 6;
@@ -211,7 +211,7 @@
             // CopyPasteButton
             // 
             this.CopyPasteButton.BackColor = System.Drawing.Color.White;
-            this.CopyPasteButton.Location = new System.Drawing.Point(12, 275);
+            this.CopyPasteButton.Location = new System.Drawing.Point(174, 229);
             this.CopyPasteButton.Name = "CopyPasteButton";
             this.CopyPasteButton.Size = new System.Drawing.Size(75, 40);
             this.CopyPasteButton.TabIndex = 27;
@@ -317,7 +317,7 @@
             // RectChbx
             // 
             this.RectChbx.AutoSize = true;
-            this.RectChbx.Location = new System.Drawing.Point(12, 205);
+            this.RectChbx.Location = new System.Drawing.Point(12, 242);
             this.RectChbx.Name = "RectChbx";
             this.RectChbx.Size = new System.Drawing.Size(75, 17);
             this.RectChbx.TabIndex = 41;
@@ -325,16 +325,16 @@
             this.RectChbx.UseVisualStyleBackColor = true;
             this.RectChbx.CheckStateChanged += new System.EventHandler(this.RectChbx_CheckStateChanged);
             // 
-            // ExportButton
+            // OpenPicButton
             // 
-            this.ExportButton.BackColor = System.Drawing.Color.White;
-            this.ExportButton.Location = new System.Drawing.Point(174, 229);
-            this.ExportButton.Name = "ExportButton";
-            this.ExportButton.Size = new System.Drawing.Size(75, 40);
-            this.ExportButton.TabIndex = 42;
-            this.ExportButton.Text = "Export to PNG";
-            this.ExportButton.UseVisualStyleBackColor = false;
-            this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
+            this.OpenPicButton.BackColor = System.Drawing.Color.White;
+            this.OpenPicButton.Location = new System.Drawing.Point(93, 160);
+            this.OpenPicButton.Name = "OpenPicButton";
+            this.OpenPicButton.Size = new System.Drawing.Size(75, 40);
+            this.OpenPicButton.TabIndex = 42;
+            this.OpenPicButton.Text = "New Picture";
+            this.OpenPicButton.UseVisualStyleBackColor = false;
+            this.OpenPicButton.Click += new System.EventHandler(this.OpenPicButton_Click);
             // 
             // PaperSizeList
             // 
@@ -368,7 +368,7 @@
             // RectButton
             // 
             this.RectButton.BackColor = System.Drawing.Color.White;
-            this.RectButton.Location = new System.Drawing.Point(12, 149);
+            this.RectButton.Location = new System.Drawing.Point(12, 160);
             this.RectButton.Name = "RectButton";
             this.RectButton.Size = new System.Drawing.Size(75, 40);
             this.RectButton.TabIndex = 46;
@@ -379,7 +379,7 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.RectButton);
-            this.panel2.Controls.Add(this.ExportButton);
+            this.panel2.Controls.Add(this.OpenPicButton);
             this.panel2.Controls.Add(this.RectChbx);
             this.panel2.Controls.Add(this.LoadPictureButton);
             this.panel2.Controls.Add(this.TextFontLabel);
@@ -423,6 +423,22 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(271, 331);
             this.panel3.TabIndex = 48;
+            // 
+            // CopiesTbx
+            // 
+            this.CopiesTbx.Location = new System.Drawing.Point(195, 286);
+            this.CopiesTbx.Name = "CopiesTbx";
+            this.CopiesTbx.Size = new System.Drawing.Size(61, 20);
+            this.CopiesTbx.TabIndex = 49;
+            // 
+            // CopiesLabel
+            // 
+            this.CopiesLabel.AutoSize = true;
+            this.CopiesLabel.Location = new System.Drawing.Point(112, 289);
+            this.CopiesLabel.Name = "CopiesLabel";
+            this.CopiesLabel.Size = new System.Drawing.Size(77, 13);
+            this.CopiesLabel.TabIndex = 48;
+            this.CopiesLabel.Text = "Copies to print:";
             // 
             // linkLabel1
             // 
@@ -482,22 +498,6 @@
             this.laby.TabIndex = 52;
             this.laby.Text = "Y:";
             // 
-            // CopiesLabel
-            // 
-            this.CopiesLabel.AutoSize = true;
-            this.CopiesLabel.Location = new System.Drawing.Point(112, 289);
-            this.CopiesLabel.Name = "CopiesLabel";
-            this.CopiesLabel.Size = new System.Drawing.Size(77, 13);
-            this.CopiesLabel.TabIndex = 48;
-            this.CopiesLabel.Text = "Copies to print:";
-            // 
-            // CopiesTbx
-            // 
-            this.CopiesTbx.Location = new System.Drawing.Point(195, 286);
-            this.CopiesTbx.Name = "CopiesTbx";
-            this.CopiesTbx.Size = new System.Drawing.Size(61, 20);
-            this.CopiesTbx.TabIndex = 49;
-            // 
             // Simpline
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -554,7 +554,7 @@
         private System.Windows.Forms.TextBox TextTbx;
         private System.Windows.Forms.Button LoadPictureButton;
         private System.Windows.Forms.CheckBox RectChbx;
-        private System.Windows.Forms.Button ExportButton;
+        private System.Windows.Forms.Button OpenPicButton;
         private System.Windows.Forms.ComboBox PaperSizeList;
         private System.Windows.Forms.Label PaperSizeLabel;
         private System.Windows.Forms.LinkLabel PrintPropLabel;

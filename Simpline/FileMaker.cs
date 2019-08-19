@@ -12,16 +12,27 @@ namespace SimplinePrinter
 {
     class FileMaker
     {
-        public void ExportPng(Bitmap bmp)
+        public void AddPicture(Panel p, List<BarcodeLabel> bclList)
         {
-            using (SaveFileDialog sfd = new SaveFileDialog() { Filter = "PNG Image|*.png", ValidateNames = true, Title = "Save an Image" })
+            try
             {
-                if (sfd.ShowDialog() == DialogResult.OK)
+                OpenFileDialog open = new OpenFileDialog(){ ValidateNames = true, Title = "Add a picture" };
+                open.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp";
+                if (open.ShowDialog() == DialogResult.OK)
                 {
-                    FileStream fs = (FileStream)sfd.OpenFile();
-                    bmp.Save(fs, ImageFormat.Png);
-                    fs.Close();
+                    Bitmap b = new Bitmap(open.FileName);
+                    BarcodeLabel bcl = new BarcodeLabel();
+                    bcl.setBarcodeString("");
+                    bcl.Height = b.Height;
+                    bcl.Width = b.Width;
+                    bcl.BackgroundImage = b;
+                    bclList.Add(bcl);
+                    p.Controls.Add(bcl);
                 }
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Failed loading image");
             }
         }
 
