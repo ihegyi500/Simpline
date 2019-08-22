@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Drawing.Printing;
 using System.Drawing.Text;
 using SimplinePrinter;
+using ZXing;
 
 namespace Simpline
 {
@@ -191,8 +192,15 @@ namespace Simpline
         {
             bclcounter++;
             BarcodeLabel barcodeLabel = new BarcodeLabel();
+            barcodeLabel.setBarcodeString("");
+            BarcodeWriter w = new BarcodeWriter();
             if (FontType.SelectedItem.ToString() == "Free 3 of 9 Extended")
                 barcodeLabel.setBarcode("*" + value.Text + "*", FontType.Text, Convert.ToInt32(size.Text));
+            else if (FontType.SelectedItem.ToString() == "Code 128")
+            {
+                w.Format = BarcodeFormat.CODE_128;
+                barcodeLabel.BackgroundImage = w.Write(value.Text);
+            }
             else
                 barcodeLabel.setBarcode(value.Text, FontType.Text, Convert.ToInt32(size.Text));
             barcodeLabel.Name = "Bcl" + bclcounter;
@@ -202,14 +210,34 @@ namespace Simpline
 
         private void SetFunc(ComboBox FontType, TextBox value, TextBox size)
         {
+            BarcodeWriter w = new BarcodeWriter();
             for (int i = 0; i < bclList.Count; i++)
             {
                 if (bclList[i].BackColor == Color.LightGray)
                 {
+                    bclList[i].BackgroundImage = null;
                     if (FontType.SelectedItem.ToString() == "Free 3 of 9 Extended")
-                        bclList[i].setBarcode("*" + value.Text + "*", FontType.Text, Convert.ToInt32(size.Text));
+                    {
+                        /*bclList[i].BackgroundImage = null;
+                        bclList[i].setBarcode("*" + value.Text + "*", FontType.Text, Convert.ToInt32(size.Text));*/
+                        bclList[i].setBarcodeString("");
+                        w.Format = BarcodeFormat.CODE_39;
+                        w.Options.Height = bclList[i].getPanHeight();
+                        w.Options.Width = bclList[i].getPanWidth();
+                        bclList[i].BackgroundImage = w.Write(value.Text);
+                    }
+                    else if (FontType.SelectedItem.ToString() == "Code 128")
+                    {
+                        bclList[i].setBarcodeString("");
+                        w.Format = BarcodeFormat.CODE_128;
+                        w.Options.Height = bclList[i].getPanHeight();
+                        w.Options.Width = bclList[i].getPanWidth();
+                        bclList[i].BackgroundImage = w.Write(value.Text);
+                    }
                     else
+                    {
                         bclList[i].setBarcode(value.Text, FontType.Text, Convert.ToInt32(size.Text));
+                    }
                 }
             }
 

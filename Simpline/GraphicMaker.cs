@@ -10,7 +10,6 @@ namespace SimplinePrinter
         Graphics g;
         List<BarcodeLabel> bclL = new List<BarcodeLabel>();
         ComboBox PrintersList;
-        Bitmap bmp = new Bitmap(595, 842);
 
         public void PrintDialog()
         {
@@ -87,5 +86,6 @@ namespace SimplinePrinter
                 g.DrawString(l.getBarcodeString(), font, brush, l.getLabX() * ps, l.getLabY() * ps);
             }
         }
+
     }
 }
