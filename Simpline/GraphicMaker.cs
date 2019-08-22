@@ -70,7 +70,6 @@ namespace SimplinePrinter
 
         private void GraphicSetter()
         {
-            int ps = 1;
             Pen pen;
             Font font;
             SolidBrush brush = new SolidBrush(Color.Black);
@@ -80,10 +79,12 @@ namespace SimplinePrinter
                     pen = new Pen(Color.Black);
                 else
                     pen = new Pen(Color.Transparent);
-                Rectangle rec = new Rectangle(l.getX() * ps, l.getY() * ps, l.Width * ps, l.Height * ps);
+                Rectangle rec = new Rectangle(l.getX(), l.getY(), l.Width, l.Height);
                 g.DrawRectangle(pen, rec);
-                font = new Font(l.getBarcodeType(), l.getBarcodeSize() * ps);
-                g.DrawString(l.getBarcodeString(), font, brush, l.getLabX() * ps, l.getLabY() * ps);
+                font = new Font(l.getBarcodeType(), l.getBarcodeSize());
+                g.DrawString(l.getBarcodeString(), font, brush, l.getLabX(), l.getLabY());
+                if (l.BackgroundImage != null)
+                    g.DrawImage(l.BackgroundImage, l.getX(), l.getY(), l.Width, l.Height);
             }
         }
 

@@ -25,6 +25,7 @@ namespace Simpline
             //Vonalkódtípuslista feltöltése
             BarcodeTypeCbx.Items.Add("Free 3 of 9 Extended");
             BarcodeTypeCbx.Items.Add("Code 128");
+            BarcodeTypeCbx.Items.Add("QR Code");
             BarcodeTypeCbx.SelectedIndex = 0;
             //Betűtípuslista feltöltése
             using (InstalledFontCollection fontsCollection = new InstalledFontCollection())
@@ -216,10 +217,40 @@ namespace Simpline
                 if (bclList[i].BackColor == Color.LightGray)
                 {
                     bclList[i].BackgroundImage = null;
+                    bclList[i].setBarcodeString("");
+                    w.Options.PureBarcode = true;
+                    w.Options.Height = bclList[i].getPanHeight();
+                    w.Options.Width = bclList[i].getPanWidth();
+
+                    switch (FontType.SelectedItem.ToString())
+                    {
+                        case "Free 3 of 9 Extended":
+                            {
+                                w.Format = BarcodeFormat.CODE_39;
+                                bclList[i].BackgroundImage = w.Write(value.Text);
+                                break;
+                            }
+                        case "Code 128":
+                            {
+                                w.Format = BarcodeFormat.CODE_128;
+                                bclList[i].BackgroundImage = w.Write(value.Text);
+                                break;
+                            }
+                        case "QR Code":
+                            {
+                                w.Format = BarcodeFormat.QR_CODE;
+                                bclList[i].BackgroundImage = w.Write(value.Text);
+                                break;
+                            }
+                        default:
+                            {
+                                bclList[i].setBarcode(value.Text, FontType.Text, Convert.ToInt32(size.Text));
+                                break;
+                            }
+                    }
+
                     if (FontType.SelectedItem.ToString() == "Free 3 of 9 Extended")
                     {
-                        /*bclList[i].BackgroundImage = null;
-                        bclList[i].setBarcode("*" + value.Text + "*", FontType.Text, Convert.ToInt32(size.Text));*/
                         bclList[i].setBarcodeString("");
                         w.Format = BarcodeFormat.CODE_39;
                         w.Options.Height = bclList[i].getPanHeight();
