@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing.Printing;
 using System.Drawing.Text;
-using System.IO;
-using System.Drawing.Imaging;
 using SimplinePrinter;
 
 namespace Simpline
@@ -55,6 +53,7 @@ namespace Simpline
         private void AddButton_Click(object sender, EventArgs e)
         {
             AddFunc(BarcodeTypeCbx, BarcodeTextTbx, BarcodeSizeTbx);
+            SendRectToBack();
         }
 
         private void SetBarcodeButton_Click(object sender, EventArgs e)
@@ -68,14 +67,9 @@ namespace Simpline
             {
                 if (bclList[i].BackColor == Color.LightGray)
                 {
+                    panel1.Controls.Remove(bclList[i]);
                     bclList.RemoveAt(i);
-                }
-            }
-            foreach(Control c in panel1.Controls)
-            {
-                if(c.BackColor == Color.LightGray)
-                {
-                    panel1.Controls.Remove(c);
+                    i -= 1;
                 }
             }
         }
@@ -132,6 +126,7 @@ namespace Simpline
         private void AddTextButton_Click(object sender, EventArgs e)
         {
             AddFunc(TextFontCbx, TextTbx, TextSizeTbx);
+            SendRectToBack();
         }
 
         private void SetTextButton_Click(object sender, EventArgs e)
@@ -178,6 +173,18 @@ namespace Simpline
             bcl.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(bcl);
             bclList.Add(bcl);
+            SendRectToBack();
+        }
+
+        private void SendRectToBack()
+        {
+            foreach (BarcodeLabel b in panel1.Controls)
+            {
+                if (b.getBarcodeString() == "" && b.BorderStyle == BorderStyle.FixedSingle)
+                    b.SendToBack();
+                else
+                    b.BringToFront();
+            }
         }
 
         private void AddFunc(ComboBox FontType, TextBox value, TextBox size)
@@ -218,6 +225,7 @@ namespace Simpline
             {
                 PaperSizeList.Items.Add(ps.Kind.ToString());
             }
+            PaperSizeList.SelectedIndex = 0;
         }
 
         private void PaperSizeList_SelectedIndexChanged(object sender, EventArgs e)

@@ -430,6 +430,7 @@
             this.CopiesTbx.Name = "CopiesTbx";
             this.CopiesTbx.Size = new System.Drawing.Size(61, 20);
             this.CopiesTbx.TabIndex = 49;
+            this.CopiesTbx.Text = "1";
             // 
             // CopiesLabel
             // 

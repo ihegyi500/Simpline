@@ -2,8 +2,6 @@
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
-using System.Linq;
-using System;
 
 namespace SimplinePrinter
 {
@@ -68,10 +66,10 @@ namespace SimplinePrinter
         private void PrintPageMethod(object sender, PrintPageEventArgs e)
         {
             g = e.Graphics;
-            GraphicSetter(/*4*/);
+            GraphicSetter();
         }
 
-        private void GraphicSetter(/*int ps*/)
+        private void GraphicSetter()
         {
             int ps = 1;
             Pen pen;
@@ -88,13 +86,6 @@ namespace SimplinePrinter
                 font = new Font(l.getBarcodeType(), l.getBarcodeSize() * ps);
                 g.DrawString(l.getBarcodeString(), font, brush, l.getLabX() * ps, l.getLabY() * ps);
             }
-        }
-
-        public Bitmap GetBitmap()
-        {
-            g = Graphics.FromImage(bmp);
-            GraphicSetter(/*2*/);
-            return bmp;
         }
     }
 }
