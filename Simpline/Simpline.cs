@@ -193,17 +193,37 @@ namespace Simpline
         {
             bclcounter++;
             BarcodeLabel barcodeLabel = new BarcodeLabel();
-            barcodeLabel.setBarcodeString("");
             BarcodeWriter w = new BarcodeWriter();
-            if (FontType.SelectedItem.ToString() == "Free 3 of 9 Extended")
-                barcodeLabel.setBarcode("*" + value.Text + "*", FontType.Text, Convert.ToInt32(size.Text));
-            else if (FontType.SelectedItem.ToString() == "Code 128")
+            w.Options.PureBarcode = true;
+            w.Options.Height = barcodeLabel.getPanHeight();
+            w.Options.Width = barcodeLabel.getPanWidth();
+
+            switch (FontType.SelectedItem.ToString())
             {
-                w.Format = BarcodeFormat.CODE_128;
-                barcodeLabel.BackgroundImage = w.Write(value.Text);
+                case "Free 3 of 9 Extended":
+                    {
+                        w.Format = BarcodeFormat.CODE_39;
+                        barcodeLabel.BackgroundImage = w.Write(value.Text);
+                        break;
+                    }
+                case "Code 128":
+                    {
+                        w.Format = BarcodeFormat.CODE_128;
+                        barcodeLabel.BackgroundImage = w.Write(value.Text);
+                        break;
+                    }
+                case "QR Code":
+                    {
+                        w.Format = BarcodeFormat.QR_CODE;
+                        barcodeLabel.BackgroundImage = w.Write(value.Text);
+                        break;
+                    }
+                default:
+                    {
+                        barcodeLabel.setBarcode(value.Text, FontType.Text, Convert.ToInt32(size.Text));
+                        break;
+                    }
             }
-            else
-                barcodeLabel.setBarcode(value.Text, FontType.Text, Convert.ToInt32(size.Text));
             barcodeLabel.Name = "Bcl" + bclcounter;
             panel1.Controls.Add(barcodeLabel);
             bclList.Add(barcodeLabel);
@@ -217,7 +237,6 @@ namespace Simpline
                 if (bclList[i].BackColor == Color.LightGray)
                 {
                     bclList[i].BackgroundImage = null;
-                    bclList[i].setBarcodeString("");
                     w.Options.PureBarcode = true;
                     w.Options.Height = bclList[i].getPanHeight();
                     w.Options.Width = bclList[i].getPanWidth();
@@ -247,27 +266,6 @@ namespace Simpline
                                 bclList[i].setBarcode(value.Text, FontType.Text, Convert.ToInt32(size.Text));
                                 break;
                             }
-                    }
-
-                    if (FontType.SelectedItem.ToString() == "Free 3 of 9 Extended")
-                    {
-                        bclList[i].setBarcodeString("");
-                        w.Format = BarcodeFormat.CODE_39;
-                        w.Options.Height = bclList[i].getPanHeight();
-                        w.Options.Width = bclList[i].getPanWidth();
-                        bclList[i].BackgroundImage = w.Write(value.Text);
-                    }
-                    else if (FontType.SelectedItem.ToString() == "Code 128")
-                    {
-                        bclList[i].setBarcodeString("");
-                        w.Format = BarcodeFormat.CODE_128;
-                        w.Options.Height = bclList[i].getPanHeight();
-                        w.Options.Width = bclList[i].getPanWidth();
-                        bclList[i].BackgroundImage = w.Write(value.Text);
-                    }
-                    else
-                    {
-                        bclList[i].setBarcode(value.Text, FontType.Text, Convert.ToInt32(size.Text));
                     }
                 }
             }

@@ -156,9 +156,17 @@ namespace SimplinePrinter
         public void bcl_MouseClick(object sender, MouseEventArgs e)
         {
             if (this.BackColor == Color.LightGray)
+            {
                 this.BackColor = Color.Empty;
+                if (this.BackgroundImage != null || this.label1.Text != "")
+                    this.BorderStyle = BorderStyle.None;
+            }
             else
+            {
                 this.BackColor = Color.LightGray;
+                if (this.BackgroundImage != null || this.label1.Text != "")
+                    this.BorderStyle = BorderStyle.FixedSingle;
+            }
         }
          public void setResize(bool resOn)
         {
