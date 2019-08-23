@@ -8,7 +8,8 @@ namespace SimplinePrinter
     class GraphicMaker
     {
         Graphics g;
-        List<BarcodeLabel> bclL = new List<BarcodeLabel>();
+        //List<BarcodeLabel> bclL = new List<BarcodeLabel>();
+        Dictionary<BarcodeLabel, string> bcldict = new Dictionary<BarcodeLabel, string>();
         ComboBox PrintersList;
 
         public void PrintDialog()
@@ -18,9 +19,9 @@ namespace SimplinePrinter
 
         }
 
-        public void Printing(List<BarcodeLabel> bclList, ComboBox box, int sent, int copies)
+        public void Printing(Dictionary<BarcodeLabel, string> dict, ComboBox box, int sent, int copies)
         {
-            bclL = bclList;
+            bcldict = dict;
             PrintersList = box;
             PrintDocument PrintDoc = new PrintDocument();
             PrintDoc.PrinterSettings.PrinterName =
@@ -73,7 +74,7 @@ namespace SimplinePrinter
             Pen pen;
             Font font;
             SolidBrush brush = new SolidBrush(Color.Black);
-            foreach (BarcodeLabel l in bclL)
+            foreach (BarcodeLabel l in bcldict.Keys)
             {
                 if (l.BorderStyle == BorderStyle.FixedSingle)
                     pen = new Pen(Color.Black);

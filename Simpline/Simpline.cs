@@ -5,13 +5,14 @@ using System.Windows.Forms;
 using System.Drawing.Printing;
 using System.Drawing.Text;
 using SimplinePrinter;
+using System.Linq;
 using ZXing;
 
 namespace Simpline
 {
     public partial class Simpline : Form
     {
-        List<BarcodeLabel> bclList = new List<BarcodeLabel>();
+        Dictionary<BarcodeLabel, string> bcldict = new Dictionary<BarcodeLabel, string>();
         bool resizeOn = false;
         int bclcounter = 0;
 
@@ -56,6 +57,10 @@ namespace Simpline
         {
             AddFunc(BarcodeTypeCbx, BarcodeTextTbx, BarcodeSizeTbx);
             SendRectToBack();
+            foreach(BarcodeLabel b in bcldict.Keys)
+            {
+                MessageBox.Show(b.Name + "=>" + bcldict[b]);
+            }
         }
 
         private void SetBarcodeButton_Click(object sender, EventArgs e)
@@ -65,13 +70,14 @@ namespace Simpline
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < bclList.Count; i++)
+            for (int i = 0; i < bcldict.Count; i++)
             {
-                if (bclList[i].BackColor == Color.LightGray)
+                if (bcldict.ElementAt(i).Key.BackColor == Color.LightGray)
                 {
-                    panel1.Controls.Remove(bclList[i]);
-                    bclList.RemoveAt(i);
+                    panel1.Controls.Remove(bcldict.ElementAt(i).Key);
+                    bcldict.Remove(bcldict.ElementAt(i).Key);
                     i -= 1;
+                    bclcounter--;
                 }
             }
         }
@@ -88,7 +94,7 @@ namespace Simpline
                 resizeOn = true;
                 ActiveControl.BackColor = Color.LightGray;
             }
-            foreach(BarcodeLabel b in bclList)
+            foreach(BarcodeLabel b in bcldict.Keys)
             {
                 b.setResize(resizeOn);
             }
@@ -96,19 +102,16 @@ namespace Simpline
 
         private void CopyPasteButton_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < bclList.Count; i++)
+            foreach (BarcodeLabel b in panel1.Controls)
             {
-                if (bclList[i].BackColor == Color.LightGray)
+                if(b.BackColor == Color.LightGray)
                 {
-                    bclcounter++;
-                    BarcodeLabel barcodeLabel = new BarcodeLabel();
-                    barcodeLabel.Name = "Bcl" + bclcounter;
-                    bclList.Add(barcodeLabel);
-                    bclList[bclList.Count-1].setBarcode(bclList[i].getBarcodeString(), bclList[i].getBarcodeType(), bclList[i].getBarcodeSize());
-                    barcodeLabel.Size = bclList[i].Size;
-                    if (bclList[i].BorderStyle == BorderStyle.FixedSingle)
-                        barcodeLabel.BorderStyle = BorderStyle.FixedSingle;
-                    panel1.Controls.Add(barcodeLabel);
+                    BarcodeLabel bcl = new BarcodeLabel();
+                    bcl.BackgroundImage = b.BackgroundImage;
+                    bcl.Height = b.Height;
+                    bcl.Width = b.Width;
+                    panel1.Controls.Add(bcl);
+                    bcldict.Add(bcl, bcldict[b]);
                 }
             }
         }
@@ -116,13 +119,13 @@ namespace Simpline
         private void PrintButton_Click(object sender, EventArgs e)
         {
             GraphicMaker gm = new GraphicMaker();
-            gm.Printing(bclList, PrintersList, 3,(short)Convert.ToInt32(CopiesTbx.Text));
+            gm.Printing(bcldict, PrintersList, 3,(short)Convert.ToInt32(CopiesTbx.Text));
         }
 
         private void SavePictureButton_Click(object sender, EventArgs e)
         {
             FileMaker fmk = new FileMaker();
-            fmk.SaveTxt(bclList);
+            fmk.SaveTxt(bcldict);
         }
 
         private void AddTextButton_Click(object sender, EventArgs e)
@@ -138,14 +141,14 @@ namespace Simpline
 
         private void RectChbx_CheckStateChanged(object sender, EventArgs e)
         {
-            for (int i = 0; i < bclList.Count; i++)
+            for (int i = 0; i < bcldict.Count; i++)
             {
-                if (bclList[i].BackColor == Color.LightGray)
+                if (bcldict.ElementAt(i).Key.BackColor == Color.LightGray)
                 {
                     if (RectChbx.CheckState == CheckState.Checked)
-                        bclList[i].BorderStyle = BorderStyle.FixedSingle;
+                        bcldict.ElementAt(i).Key.BorderStyle = BorderStyle.FixedSingle;
                     else
-                        bclList[i].BorderStyle = BorderStyle.None;
+                        bcldict.ElementAt(i).Key.BorderStyle = BorderStyle.None;
                 }
             }
         }
@@ -153,13 +156,13 @@ namespace Simpline
         private void OpenPicButton_Click(object sender, EventArgs e)
         {
             FileMaker fmk = new FileMaker();
-            fmk.AddPicture(panel1, bclList);
+            fmk.AddPicture(panel1, bcldict);
         }
 
         private void LoadPictureButton_Click(object sender, EventArgs e)
         {
             FileMaker fmk = new FileMaker();
-            fmk.LoadTxt(panel1, bclList);
+            fmk.LoadTxt(panel1, bcldict);
         }
 
         private void PrintPropLabel_Click(object sender, EventArgs e)
@@ -174,7 +177,7 @@ namespace Simpline
             bcl.setBarcodeString("");
             bcl.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(bcl);
-            bclList.Add(bcl);
+            bcldict.Add(bcl, "");
             SendRectToBack();
         }
 
@@ -182,7 +185,7 @@ namespace Simpline
         {
             foreach (BarcodeLabel b in panel1.Controls)
             {
-                if (b.getBarcodeString() == "" && b.BorderStyle == BorderStyle.FixedSingle)
+                if (b.getBarcodeString() == "" && b.BorderStyle == BorderStyle.FixedSingle && b.BackgroundImage == null)
                     b.SendToBack();
                 else
                     b.BringToFront();
@@ -226,49 +229,51 @@ namespace Simpline
             }
             barcodeLabel.Name = "Bcl" + bclcounter;
             panel1.Controls.Add(barcodeLabel);
-            bclList.Add(barcodeLabel);
+            bcldict.Add(barcodeLabel, FontType.Text);
         }
 
         private void SetFunc(ComboBox FontType, TextBox value, TextBox size)
         {
             BarcodeWriter w = new BarcodeWriter();
-            for (int i = 0; i < bclList.Count; i++)
+            for (int i = 0; i < bcldict.Count; i++)
             {
-                if (bclList[i].BackColor == Color.LightGray)
+                if (bcldict.ElementAt(i).Key.BackColor == Color.LightGray)
                 {
-                    bclList[i].BackgroundImage = null;
+                    bcldict.ElementAt(i).Key.BackgroundImage = null;
                     w.Options.PureBarcode = true;
-                    w.Options.Height = bclList[i].getPanHeight();
-                    w.Options.Width = bclList[i].getPanWidth();
+                    w.Options.Height = bcldict.ElementAt(i).Key.getPanHeight();
+                    w.Options.Width = bcldict.ElementAt(i).Key.getPanWidth();
 
                     switch (FontType.SelectedItem.ToString())
                     {
                         case "Free 3 of 9 Extended":
                             {
                                 w.Format = BarcodeFormat.CODE_39;
-                                bclList[i].BackgroundImage = w.Write(value.Text);
+                                bcldict.ElementAt(i).Key.BackgroundImage = w.Write(value.Text);
                                 break;
                             }
                         case "Code 128":
                             {
                                 w.Format = BarcodeFormat.CODE_128;
-                                bclList[i].BackgroundImage = w.Write(value.Text);
+                                bcldict.ElementAt(i).Key.BackgroundImage = w.Write(value.Text);
                                 break;
                             }
                         case "QR Code":
                             {
                                 w.Format = BarcodeFormat.QR_CODE;
-                                bclList[i].BackgroundImage = w.Write(value.Text);
+                                bcldict.ElementAt(i).Key.BackgroundImage = w.Write(value.Text);
                                 break;
                             }
                         default:
                             {
-                                bclList[i].setBarcode(value.Text, FontType.Text, Convert.ToInt32(size.Text));
+                                bcldict.ElementAt(i).Key.setBarcode(value.Text, FontType.Text, Convert.ToInt32(size.Text));
                                 break;
                             }
                     }
+                    bcldict[bcldict.ElementAt(i).Key] = FontType.Text;
                 }
             }
+
 
         }
 
@@ -313,13 +318,13 @@ namespace Simpline
         private void PrintPreviewLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             GraphicMaker gm = new GraphicMaker();
-            gm.Printing(bclList, PrintersList, 1, (short)Convert.ToInt32(CopiesTbx.Text));
+            gm.Printing(bcldict, PrintersList, 1, (short)Convert.ToInt32(CopiesTbx.Text));
         }
 
         private void PageSetupLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             GraphicMaker gm = new GraphicMaker();
-            gm.Printing(bclList, PrintersList, 2, (short)Convert.ToInt32(CopiesTbx.Text));
+            gm.Printing(bcldict, PrintersList, 2, (short)Convert.ToInt32(CopiesTbx.Text));
         }
     }
 }
