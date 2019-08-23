@@ -73,10 +73,10 @@ namespace SimplinePrinter
 
         public void LoadTxt(Panel p, Dictionary<BarcodeLabel, string> bcldict)
         {
+            int counter = 0;
             string line;
             Bitmap bitmap;
             List<string> fonts = new List<string>();
-            BarcodeLabel bcl = new BarcodeLabel();
             BarcodeWriter w = new BarcodeWriter();
             w.Options.PureBarcode = true;
             InstalledFontCollection ifc = new InstalledFontCollection();
@@ -94,6 +94,7 @@ namespace SimplinePrinter
                     {
                         while ((line = sr.ReadLine()) != null)
                         {
+                            BarcodeLabel bcl = new BarcodeLabel();
                             string[] parameters = line.Split(';');
                             bcl.setX(Convert.ToInt32(parameters[0]));
                             bcl.setY(Convert.ToInt32(parameters[1]));
@@ -146,7 +147,7 @@ namespace SimplinePrinter
                                     bcl.BackgroundImage = bitmap;
                                     bcldict.Add(bcl, "");
                                 }
-                                if (parameters[parameters.Length] == "1")
+                                /*if (parameters[parameters.Length] == "1")*/
                                     bcl.BorderStyle = BorderStyle.FixedSingle;
                             }
                             p.Controls.Add(bcl);
