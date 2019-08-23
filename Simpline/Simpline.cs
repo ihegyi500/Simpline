@@ -57,10 +57,6 @@ namespace Simpline
         {
             AddFunc(BarcodeTypeCbx, BarcodeTextTbx, BarcodeSizeTbx);
             SendRectToBack();
-            foreach(BarcodeLabel b in bcldict.Keys)
-            {
-                MessageBox.Show(b.Name + "=>" + bcldict[b]);
-            }
         }
 
         private void SetBarcodeButton_Click(object sender, EventArgs e)
@@ -206,7 +202,7 @@ namespace Simpline
                 case "Free 3 of 9 Extended":
                     {
                         w.Format = BarcodeFormat.CODE_39;
-                        barcodeLabel.BackgroundImage = w.Write(value.Text);
+                        barcodeLabel.BackgroundImage = w.Write(value.Text.ToUpper());
                         break;
                     }
                 case "Code 128":
@@ -249,7 +245,7 @@ namespace Simpline
                         case "Free 3 of 9 Extended":
                             {
                                 w.Format = BarcodeFormat.CODE_39;
-                                bcldict.ElementAt(i).Key.BackgroundImage = w.Write(value.Text);
+                                bcldict.ElementAt(i).Key.BackgroundImage = w.Write(value.Text.ToUpper());
                                 break;
                             }
                         case "Code 128":

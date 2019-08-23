@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Windows.Forms;
 using System.IO;
 using ZXing;
@@ -35,6 +36,7 @@ namespace SimplinePrinter
         public void SaveTxt(/*List<BarcodeLabel> bcl*/Dictionary<BarcodeLabel, string> bcldict)
         {
             BarcodeReader read = new BarcodeReader();
+            Bitmap bitmap;
             using (SaveFileDialog sfd = new SaveFileDialog() { Filter = "Txt file|*.txt", ValidateNames = true, Title = "Save a Txt file" })
             {
                 if (sfd.ShowDialog() == DialogResult.OK)
@@ -43,17 +45,25 @@ namespace SimplinePrinter
                     {
                         foreach (BarcodeLabel b in bcldict.Keys)
                         {
-                            file.Write(b.getX() + "," + b.getY() + ";"
-                                        + b.getLabX() + "," + b.getLabY() + ";"
+                            file.Write(b.getX() + ";" 
+                                        + b.getY() + ";"
                                         + b.getPanHeight() + ";"
                                         + b.getPanWidth() + ";"
-
-                                        + b.getBarcodeString() + ";"
-                                        + b.getBarcodeSize() + ";"
-                                        + b.getBarcodeType() + ";"
-                                        + bcldict[b]);
+                                        + bcldict[b] + ";");
+                            if (bcldict[b] != "" && b.BackgroundImage != null) {
+                                bitmap = new Bitmap(b.BackgroundImage);
+                                file.Write(read.Decode(bitmap) + ";");
+                            }
+                            file.Write(b.getBarcodeString() + ";");
+                            if(b.getBarcodeString() != "")
+                            {
+                                file.Write(b.getLabX() + ";"
+                                    + b.getLabY() + ";"
+                                    + b.getBarcodeSize() + ";"
+                                    /*+ b.getBarcodeType() + ";"*/);
+                            }
                             if (b.BorderStyle == BorderStyle.FixedSingle)
-                                file.Write(";1");
+                                file.Write("1");
                             file.Write(Environment.NewLine);
                         }
                     }
@@ -64,6 +74,16 @@ namespace SimplinePrinter
         public void LoadTxt(Panel p, Dictionary<BarcodeLabel, string> bcldict)
         {
             string line;
+            Bitmap bitmap;
+            List<string> fonts = new List<string>();
+            BarcodeLabel bcl = new BarcodeLabel();
+            BarcodeWriter w = new BarcodeWriter();
+            w.Options.PureBarcode = true;
+            InstalledFontCollection ifc = new InstalledFontCollection();
+            foreach(FontFamily ff in ifc.Families)
+            {
+                fonts.Add(ff.Name);
+            }
             p.Controls.Clear();
             bcldict.Clear();
             using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "Txt file|*.txt", ValidateNames = true, Multiselect = false, Title = "Open a txt file" })
@@ -75,43 +95,60 @@ namespace SimplinePrinter
                         while ((line = sr.ReadLine()) != null)
                         {
                             string[] parameters = line.Split(';');
-                            string[] panparam = parameters[0].Split(',');
-                            string[] labparam = parameters[1].Split(',');
-                            BarcodeLabel bcl = new BarcodeLabel();
-                            BarcodeWriter w = new BarcodeWriter();
-                            w.Options.PureBarcode = true;
-                            bcl.setX(Convert.ToInt32(panparam[0]));
-                            bcl.setY(Convert.ToInt32(panparam[1]));
-                            bcl.setLabX(Convert.ToInt32(labparam[0]));
-                            bcl.setLabY(Convert.ToInt32(labparam[1]));
-                            bcl.setBarcodeString(parameters[2]);
-                            bcl.setBarcodeSize(Convert.ToInt32(parameters[3]));
-                            bcl.setBarcodeType(parameters[4]);
-                            bcl.setPanHeight(Convert.ToInt32(parameters[5]));
-                            bcl.setPanWidth(Convert.ToInt32(parameters[6]));
+                            bcl.setX(Convert.ToInt32(parameters[0]));
+                            bcl.setY(Convert.ToInt32(parameters[1]));
+                            bcl.setPanHeight(Convert.ToInt32(parameters[2]));
+                            bcl.setPanWidth(Convert.ToInt32(parameters[3]));
                             w.Options.Height = bcl.getPanHeight();
                             w.Options.Width = bcl.getPanWidth();
-                            switch (parameters[7])
+                            if (parameters[4] != "")
                             {
-                                case "Free 3 of 9 Extended":
+                                if (parameters[4] == "Free 3 of 9 Extended" || parameters[4] == "Code 128" || parameters[4] == "QR Code")
+                                {
+                                    switch (parameters[4])
                                     {
-
-                                        break;
+                                        case "Free 3 of 9 Extended":
+                                            {
+                                                w.Format = BarcodeFormat.CODE_39;
+                                                bcl.BackgroundImage = w.Write(parameters[5]);
+                                                bcldict.Add(bcl, parameters[4]);
+                                                break;
+                                            }
+                                        case "Code 128":
+                                            {
+                                                w.Format = BarcodeFormat.CODE_128;
+                                                bcl.BackgroundImage = w.Write(parameters[5]);
+                                                bcldict.Add(bcl, parameters[4]);
+                                                break;
+                                            }
+                                        case "QR Code":
+                                            {
+                                                w.Format = BarcodeFormat.QR_CODE;
+                                                bcl.BackgroundImage = w.Write(parameters[5]);
+                                                bcldict.Add(bcl, parameters[4]);
+                                                break;
+                                            }
                                     }
-                                case "Code 128":
-                                    {
+                                }
+                                else if (fonts.Contains(parameters[4]))
+                                {
+                                    bcl.setBarcodeType(parameters[4]);
+                                    bcl.setBarcodeString(parameters[5]);
+                                    bcl.setLabX(Convert.ToInt32(parameters[6]));
+                                    bcl.setLabY(Convert.ToInt32(parameters[7]));
+                                    bcl.setBarcodeSize(Convert.ToInt32(parameters[8]));
+                                    bcldict.Add(bcl, parameters[4]);
 
-                                        break;
-                                    }
-                                case "QR Code":
-                                    {
-
-                                        break;
-                                    }
+                                }
+                                else
+                                {
+                                    bitmap = new Bitmap(parameters[4]);
+                                    bcl.BackgroundImage = bitmap;
+                                    bcldict.Add(bcl, "");
+                                }
+                                if (parameters[parameters.Length] == "1")
+                                    bcl.BorderStyle = BorderStyle.FixedSingle;
                             }
-                            if (parameters.Length == 8)
-                                bcl.BorderStyle = BorderStyle.FixedSingle;
-                            bcldict.Add(bcl, "");
                             p.Controls.Add(bcl);
                         }
                     }
