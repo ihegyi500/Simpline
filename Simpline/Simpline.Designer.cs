@@ -40,8 +40,6 @@
             this.BarcodeText = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.ResizeButton = new System.Windows.Forms.Button();
-            this.BarcodeSizeLabel = new System.Windows.Forms.Label();
-            this.BarcodeSizeTbx = new System.Windows.Forms.TextBox();
             this.CopyPasteButton = new System.Windows.Forms.Button();
             this.SavePictureButton = new System.Windows.Forms.Button();
             this.TextSizeLabel = new System.Windows.Forms.Label();
@@ -126,7 +124,7 @@
             // 
             // BarcodeTextTbx
             // 
-            this.BarcodeTextTbx.Location = new System.Drawing.Point(99, 58);
+            this.BarcodeTextTbx.Location = new System.Drawing.Point(97, 36);
             this.BarcodeTextTbx.Name = "BarcodeTextTbx";
             this.BarcodeTextTbx.Size = new System.Drawing.Size(100, 20);
             this.BarcodeTextTbx.TabIndex = 3;
@@ -163,7 +161,7 @@
             // BarcodeText
             // 
             this.BarcodeText.AutoSize = true;
-            this.BarcodeText.Location = new System.Drawing.Point(19, 61);
+            this.BarcodeText.Location = new System.Drawing.Point(17, 39);
             this.BarcodeText.Name = "BarcodeText";
             this.BarcodeText.Size = new System.Drawing.Size(74, 13);
             this.BarcodeText.TabIndex = 0;
@@ -190,23 +188,6 @@
             this.ResizeButton.Text = "Resize";
             this.ResizeButton.UseVisualStyleBackColor = false;
             this.ResizeButton.Click += new System.EventHandler(this.ResizeButton_Click);
-            // 
-            // BarcodeSizeLabel
-            // 
-            this.BarcodeSizeLabel.AutoSize = true;
-            this.BarcodeSizeLabel.Location = new System.Drawing.Point(21, 35);
-            this.BarcodeSizeLabel.Name = "BarcodeSizeLabel";
-            this.BarcodeSizeLabel.Size = new System.Drawing.Size(71, 13);
-            this.BarcodeSizeLabel.TabIndex = 0;
-            this.BarcodeSizeLabel.Text = "Barcode size:";
-            // 
-            // BarcodeSizeTbx
-            // 
-            this.BarcodeSizeTbx.Location = new System.Drawing.Point(99, 32);
-            this.BarcodeSizeTbx.Name = "BarcodeSizeTbx";
-            this.BarcodeSizeTbx.Size = new System.Drawing.Size(40, 20);
-            this.BarcodeSizeTbx.TabIndex = 2;
-            this.BarcodeSizeTbx.Text = "22";
             // 
             // CopyPasteButton
             // 
@@ -410,8 +391,6 @@
             this.panel3.Controls.Add(this.printersLabel);
             this.panel3.Controls.Add(this.PaperSizeList);
             this.panel3.Controls.Add(this.PaperSizeLabel);
-            this.panel3.Controls.Add(this.BarcodeSizeLabel);
-            this.panel3.Controls.Add(this.BarcodeSizeTbx);
             this.panel3.Controls.Add(this.BarcodeTypeLabel);
             this.panel3.Controls.Add(this.BarcodeText);
             this.panel3.Controls.Add(this.SetBarcodeButton);
@@ -541,8 +520,6 @@
         private System.Windows.Forms.Label BarcodeText;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button ResizeButton;
-        private System.Windows.Forms.Label BarcodeSizeLabel;
-        private System.Windows.Forms.TextBox BarcodeSizeTbx;
         private System.Windows.Forms.Button CopyPasteButton;
         private System.Windows.Forms.Button SavePictureButton;
         private System.Windows.Forms.Label TextSizeLabel;

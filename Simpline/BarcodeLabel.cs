@@ -115,12 +115,17 @@ namespace SimplinePrinter
         //Középen tartja a vonalkódot a panel méretezése után is
         private void BarcodeLabel_SizeChanged(object sender, EventArgs e)
         {
-            label1.Left = (this.Width - label1.Width) / 2;
-            label1.Top = (this.Height - label1.Height) / 2;
-            if(this.Width < label1.Width || this.Height < label1.Height)
+            if (this.BackgroundImage != null)
+                this.BackgroundImageLayout = ImageLayout.Stretch;
+            else
             {
-                this.Width = label1.Width + Convert.ToInt32(label1.Font.Size);
-                this.Height = label1.Height + Convert.ToInt32(label1.Font.Size);
+                label1.Left = (this.Width - label1.Width) / 2;
+                label1.Top = (this.Height - label1.Height) / 2;
+                if (this.Width < label1.Width || this.Height < label1.Height)
+                {
+                    this.Width = label1.Width + Convert.ToInt32(label1.Font.Size);
+                    this.Height = label1.Height + Convert.ToInt32(label1.Font.Size);
+                }
             }
         }
         //Betöltéskor középre rakja a vonalkódot

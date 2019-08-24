@@ -55,13 +55,13 @@ namespace Simpline
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            AddFunc(BarcodeTypeCbx, BarcodeTextTbx, BarcodeSizeTbx);
+            AddFunc(BarcodeTypeCbx, BarcodeTextTbx, "");
             SendRectToBack();
         }
 
         private void SetBarcodeButton_Click(object sender, EventArgs e)
         {
-            SetFunc(BarcodeTypeCbx, BarcodeTextTbx, BarcodeSizeTbx);
+            SetFunc(BarcodeTypeCbx, BarcodeTextTbx, "");
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
@@ -126,13 +126,13 @@ namespace Simpline
 
         private void AddTextButton_Click(object sender, EventArgs e)
         {
-            AddFunc(TextFontCbx, TextTbx, TextSizeTbx);
+            AddFunc(TextFontCbx, TextTbx, TextSizeTbx.Text);
             SendRectToBack();
         }
 
         private void SetTextButton_Click(object sender, EventArgs e)
         {
-            SetFunc(TextFontCbx, TextTbx, TextSizeTbx);
+            SetFunc(TextFontCbx, TextTbx, TextSizeTbx.Text);
         }
 
         private void RectChbx_CheckStateChanged(object sender, EventArgs e)
@@ -188,7 +188,7 @@ namespace Simpline
             }
         }
 
-        private void AddFunc(ComboBox FontType, TextBox value, TextBox size)
+        private void AddFunc(ComboBox FontType, TextBox value, string size)
         {
             bclcounter++;
             BarcodeLabel barcodeLabel = new BarcodeLabel();
@@ -219,7 +219,7 @@ namespace Simpline
                     }
                 default:
                     {
-                        barcodeLabel.setBarcode(value.Text, FontType.Text, Convert.ToInt32(size.Text));
+                        barcodeLabel.setBarcode(value.Text, FontType.Text, Convert.ToInt32(size));
                         break;
                     }
             }
@@ -228,7 +228,7 @@ namespace Simpline
             bcldict.Add(barcodeLabel, FontType.Text);
         }
 
-        private void SetFunc(ComboBox FontType, TextBox value, TextBox size)
+        private void SetFunc(ComboBox FontType, TextBox value, string size)
         {
             BarcodeWriter w = new BarcodeWriter();
             for (int i = 0; i < bcldict.Count; i++)
@@ -262,7 +262,7 @@ namespace Simpline
                             }
                         default:
                             {
-                                bcldict.ElementAt(i).Key.setBarcode(value.Text, FontType.Text, Convert.ToInt32(size.Text));
+                                bcldict.ElementAt(i).Key.setBarcode(value.Text, FontType.Text, Convert.ToInt32(size));
                                 break;
                             }
                     }

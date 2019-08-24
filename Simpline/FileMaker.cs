@@ -73,7 +73,6 @@ namespace SimplinePrinter
 
         public void LoadTxt(Panel p, Dictionary<BarcodeLabel, string> bcldict)
         {
-            int counter = 0;
             string line;
             Bitmap bitmap;
             List<string> fonts = new List<string>();
@@ -130,6 +129,7 @@ namespace SimplinePrinter
                                                 break;
                                             }
                                     }
+                                    bcl.BackgroundImageLayout = ImageLayout.Stretch;
                                 }
                                 else if (fonts.Contains(parameters[4]))
                                 {
@@ -145,10 +145,11 @@ namespace SimplinePrinter
                                 {
                                     bitmap = new Bitmap(parameters[4]);
                                     bcl.BackgroundImage = bitmap;
-                                    bcldict.Add(bcl, "");
+                                    bcl.BackgroundImageLayout = ImageLayout.Stretch;
+                                    bcldict.Add(bcl, parameters[4]);
                                 }
-                                /*if (parameters[parameters.Length] == "1")*/
-                                    bcl.BorderStyle = BorderStyle.FixedSingle;
+                                /*if (parameters[parameters.Length] == "1")
+                                    bcl.BorderStyle = BorderStyle.FixedSingle;*/
                             }
                             p.Controls.Add(bcl);
                         }
