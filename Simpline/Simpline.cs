@@ -108,6 +108,12 @@ namespace Simpline
                     bcl.Width = b.Width;
                     panel1.Controls.Add(bcl);
                     bcldict.Add(bcl, bcldict[b]);
+                    if (bcldict[b] != "Free 3 of 9 Extended" &&
+                        bcldict[b] != "Code 128" &&
+                        bcldict[b] != "QR Code")
+                        bcl.setPicture(bcldict[b]);
+                    else
+                        bcl.setCodeType(bcldict[b]);
                 }
             }
         }
@@ -170,7 +176,7 @@ namespace Simpline
         private void RectButton_Click(object sender, EventArgs e)
         {
             BarcodeLabel bcl = new BarcodeLabel();
-            bcl.setBarcodeString("");
+            bcl.setBarcodeLabelString("");
             bcl.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(bcl);
             bcldict.Add(bcl, "");
@@ -181,7 +187,7 @@ namespace Simpline
         {
             foreach (BarcodeLabel b in panel1.Controls)
             {
-                if (b.getBarcodeString() == "" && b.BorderStyle == BorderStyle.FixedSingle && b.BackgroundImage == null)
+                if (b.getBarcodeLabelString() == "" && b.BorderStyle == BorderStyle.FixedSingle && b.BackgroundImage == null)
                     b.SendToBack();
                 else
                     b.BringToFront();
@@ -196,7 +202,6 @@ namespace Simpline
             w.Options.PureBarcode = true;
             w.Options.Height = barcodeLabel.getPanHeight();
             w.Options.Width = barcodeLabel.getPanWidth();
-
             switch (FontType.SelectedItem.ToString())
             {
                 case "Free 3 of 9 Extended":
@@ -219,13 +224,19 @@ namespace Simpline
                     }
                 default:
                     {
-                        barcodeLabel.setBarcode(value.Text, FontType.Text, Convert.ToInt32(size));
+                        barcodeLabel.setBarcodeLabel(value.Text, FontType.Text, Convert.ToInt32(size));
                         break;
                     }
             }
             barcodeLabel.Name = "Bcl" + bclcounter;
             panel1.Controls.Add(barcodeLabel);
             bcldict.Add(barcodeLabel, FontType.Text);
+            if (FontType.Text == "Free 3 of 9 Extended" ||
+                FontType.Text == "Code 128" ||
+                FontType.Text == "QR Code")
+                barcodeLabel.setCodeType(bcldict[barcodeLabel]);
+            else
+                barcodeLabel.setBarcodeLabelType(FontType.Text);
         }
 
         private void SetFunc(ComboBox FontType, TextBox value, string size)
@@ -262,11 +273,17 @@ namespace Simpline
                             }
                         default:
                             {
-                                bcldict.ElementAt(i).Key.setBarcode(value.Text, FontType.Text, Convert.ToInt32(size));
+                                bcldict.ElementAt(i).Key.setBarcodeLabel(value.Text, FontType.Text, Convert.ToInt32(size));
                                 break;
                             }
                     }
                     bcldict[bcldict.ElementAt(i).Key] = FontType.Text;
+                    if (FontType.Text == "Free 3 of 9 Extended" ||
+                        FontType.Text == "Code 128" ||
+                        FontType.Text == "QR Code")
+                        bcldict.ElementAt(i).Key.setCodeType(bcldict[bcldict.ElementAt(i).Key]);
+                    else
+                        bcldict.ElementAt(i).Key.setBarcodeLabelType(FontType.Text);
                 }
             }
 

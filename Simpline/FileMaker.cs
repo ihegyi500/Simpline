@@ -24,6 +24,7 @@ namespace SimplinePrinter
                     bcl.Width = b.Width;
                     bcl.BackgroundImage = b;
                     bcldict.Add(bcl, open.FileName);
+                    bcl.setPicture(open.FileName);
                     p.Controls.Add(bcl);
                 }
             }
@@ -54,13 +55,13 @@ namespace SimplinePrinter
                                 bitmap = new Bitmap(b.BackgroundImage);
                                 file.Write(read.Decode(bitmap) + ";");
                             }
-                            file.Write(b.getBarcodeString() + ";");
-                            if(b.getBarcodeString() != "")
+                            file.Write(b.getBarcodeLabelString() + ";");
+                            if(b.getBarcodeLabelString() != "")
                             {
                                 file.Write(b.getLabX() + ";"
                                     + b.getLabY() + ";"
-                                    + b.getBarcodeSize() + ";"
-                                    /*+ b.getBarcodeType() + ";"*/);
+                                    + b.getBarcodeLabelSize() + ";"
+                                    /*+ b.getBarcodeLabelType() + ";"*/);
                             }
                             if (b.BorderStyle == BorderStyle.FixedSingle)
                                 file.Write("1");
@@ -130,16 +131,16 @@ namespace SimplinePrinter
                                             }
                                     }
                                     bcl.BackgroundImageLayout = ImageLayout.Stretch;
+                                    bcl.setCodeType(parameters[4]);
                                 }
                                 else if (fonts.Contains(parameters[4]))
                                 {
-                                    bcl.setBarcodeType(parameters[4]);
-                                    bcl.setBarcodeString(parameters[5]);
+                                    bcl.setBarcodeLabelType(parameters[4]);
+                                    bcl.setBarcodeLabelString(parameters[5]);
                                     bcl.setLabX(Convert.ToInt32(parameters[6]));
                                     bcl.setLabY(Convert.ToInt32(parameters[7]));
-                                    bcl.setBarcodeSize(Convert.ToInt32(parameters[8]));
+                                    bcl.setBarcodeLabelSize(Convert.ToInt32(parameters[8]));
                                     bcldict.Add(bcl, parameters[4]);
-
                                 }
                                 else
                                 {
@@ -147,6 +148,7 @@ namespace SimplinePrinter
                                     bcl.BackgroundImage = bitmap;
                                     bcl.BackgroundImageLayout = ImageLayout.Stretch;
                                     bcldict.Add(bcl, parameters[4]);
+                                    bcl.setPicture(parameters[4]);
                                 }
                                 /*if (parameters[parameters.Length] == "1")
                                     bcl.BorderStyle = BorderStyle.FixedSingle;*/

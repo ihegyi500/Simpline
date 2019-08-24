@@ -82,8 +82,8 @@ namespace SimplinePrinter
                     pen = new Pen(Color.Transparent);
                 Rectangle rec = new Rectangle(l.getX(), l.getY(), l.Width, l.Height);
                 g.DrawRectangle(pen, rec);
-                font = new Font(l.getBarcodeType(), l.getBarcodeSize());
-                g.DrawString(l.getBarcodeString(), font, brush, l.getLabX(), l.getLabY());
+                font = new Font(l.getBarcodeLabelType(), l.getBarcodeLabelSize());
+                g.DrawString(l.getBarcodeLabelString(), font, brush, l.getLabX(), l.getLabY());
                 if (l.BackgroundImage != null)
                     g.DrawImage(l.BackgroundImage, l.getX(), l.getY(), l.Width, l.Height);
             }

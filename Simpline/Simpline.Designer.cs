@@ -78,7 +78,7 @@
             this.PrintButton.Name = "PrintButton";
             this.PrintButton.Size = new System.Drawing.Size(75, 40);
             this.PrintButton.TabIndex = 9;
-            this.PrintButton.Text = "Print";
+            this.PrintButton.Text = "Nyomtatás";
             this.PrintButton.UseVisualStyleBackColor = false;
             this.PrintButton.Click += new System.EventHandler(this.PrintButton_Click);
             // 
@@ -96,9 +96,9 @@
             this.printersLabel.AutoSize = true;
             this.printersLabel.Location = new System.Drawing.Point(13, 163);
             this.printersLabel.Name = "printersLabel";
-            this.printersLabel.Size = new System.Drawing.Size(91, 13);
+            this.printersLabel.Size = new System.Drawing.Size(101, 13);
             this.printersLabel.TabIndex = 0;
-            this.printersLabel.Text = "Available Printers:";
+            this.printersLabel.Text = "Elérhető nyomtatók:";
             // 
             // AddBarcodeButton
             // 
@@ -107,7 +107,7 @@
             this.AddBarcodeButton.Name = "AddBarcodeButton";
             this.AddBarcodeButton.Size = new System.Drawing.Size(75, 40);
             this.AddBarcodeButton.TabIndex = 5;
-            this.AddBarcodeButton.Text = "Add new";
+            this.AddBarcodeButton.Text = "Új vonalkód";
             this.AddBarcodeButton.UseVisualStyleBackColor = false;
             this.AddBarcodeButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
@@ -118,13 +118,13 @@
             this.SetBarcodeButton.Name = "SetBarcodeButton";
             this.SetBarcodeButton.Size = new System.Drawing.Size(75, 40);
             this.SetBarcodeButton.TabIndex = 4;
-            this.SetBarcodeButton.Text = "Set";
+            this.SetBarcodeButton.Text = "Alkalmaz";
             this.SetBarcodeButton.UseVisualStyleBackColor = false;
             this.SetBarcodeButton.Click += new System.EventHandler(this.SetBarcodeButton_Click);
             // 
             // BarcodeTextTbx
             // 
-            this.BarcodeTextTbx.Location = new System.Drawing.Point(97, 36);
+            this.BarcodeTextTbx.Location = new System.Drawing.Point(99, 36);
             this.BarcodeTextTbx.Name = "BarcodeTextTbx";
             this.BarcodeTextTbx.Size = new System.Drawing.Size(100, 20);
             this.BarcodeTextTbx.TabIndex = 3;
@@ -137,7 +137,7 @@
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(75, 40);
             this.DeleteButton.TabIndex = 7;
-            this.DeleteButton.Text = "Delete";
+            this.DeleteButton.Text = "Objektum törlése";
             this.DeleteButton.UseVisualStyleBackColor = false;
             this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
@@ -152,20 +152,20 @@
             // BarcodeTypeLabel
             // 
             this.BarcodeTypeLabel.AutoSize = true;
-            this.BarcodeTypeLabel.Location = new System.Drawing.Point(7, 9);
+            this.BarcodeTypeLabel.Location = new System.Drawing.Point(14, 9);
             this.BarcodeTypeLabel.Name = "BarcodeTypeLabel";
-            this.BarcodeTypeLabel.Size = new System.Drawing.Size(89, 13);
+            this.BarcodeTypeLabel.Size = new System.Drawing.Size(79, 13);
             this.BarcodeTypeLabel.TabIndex = 0;
-            this.BarcodeTypeLabel.Text = "Type of Barcode:";
+            this.BarcodeTypeLabel.Text = "Vonalkódtípus:";
             // 
             // BarcodeText
             // 
             this.BarcodeText.AutoSize = true;
-            this.BarcodeText.Location = new System.Drawing.Point(17, 39);
+            this.BarcodeText.Location = new System.Drawing.Point(47, 39);
             this.BarcodeText.Name = "BarcodeText";
-            this.BarcodeText.Size = new System.Drawing.Size(74, 13);
+            this.BarcodeText.Size = new System.Drawing.Size(46, 13);
             this.BarcodeText.TabIndex = 0;
-            this.BarcodeText.Text = "Barcode Text:";
+            this.BarcodeText.Text = "Szöveg:";
             // 
             // panel1
             // 
@@ -185,7 +185,7 @@
             this.ResizeButton.Name = "ResizeButton";
             this.ResizeButton.Size = new System.Drawing.Size(75, 40);
             this.ResizeButton.TabIndex = 6;
-            this.ResizeButton.Text = "Resize";
+            this.ResizeButton.Text = "Méretező mód";
             this.ResizeButton.UseVisualStyleBackColor = false;
             this.ResizeButton.Click += new System.EventHandler(this.ResizeButton_Click);
             // 
@@ -196,7 +196,7 @@
             this.CopyPasteButton.Name = "CopyPasteButton";
             this.CopyPasteButton.Size = new System.Drawing.Size(75, 40);
             this.CopyPasteButton.TabIndex = 27;
-            this.CopyPasteButton.Text = "Copy Paste";
+            this.CopyPasteButton.Text = "Másol Beilleszt";
             this.CopyPasteButton.UseVisualStyleBackColor = false;
             this.CopyPasteButton.Click += new System.EventHandler(this.CopyPasteButton_Click);
             // 
@@ -207,18 +207,18 @@
             this.SavePictureButton.Name = "SavePictureButton";
             this.SavePictureButton.Size = new System.Drawing.Size(75, 40);
             this.SavePictureButton.TabIndex = 28;
-            this.SavePictureButton.Text = "Save Picture";
+            this.SavePictureButton.Text = "Fájl mentése";
             this.SavePictureButton.UseVisualStyleBackColor = false;
             this.SavePictureButton.Click += new System.EventHandler(this.SavePictureButton_Click);
             // 
             // TextSizeLabel
             // 
             this.TextSizeLabel.AutoSize = true;
-            this.TextSizeLabel.Location = new System.Drawing.Point(43, 35);
+            this.TextSizeLabel.Location = new System.Drawing.Point(36, 35);
             this.TextSizeLabel.Name = "TextSizeLabel";
-            this.TextSizeLabel.Size = new System.Drawing.Size(52, 13);
+            this.TextSizeLabel.Size = new System.Drawing.Size(58, 13);
             this.TextSizeLabel.TabIndex = 38;
-            this.TextSizeLabel.Text = "Text size:";
+            this.TextSizeLabel.Text = "Betűméret:";
             // 
             // TextSizeTbx
             // 
@@ -231,20 +231,20 @@
             // TextFontLabel
             // 
             this.TextFontLabel.AutoSize = true;
-            this.TextFontLabel.Location = new System.Drawing.Point(38, 9);
+            this.TextFontLabel.Location = new System.Drawing.Point(36, 9);
             this.TextFontLabel.Name = "TextFontLabel";
-            this.TextFontLabel.Size = new System.Drawing.Size(55, 13);
+            this.TextFontLabel.Size = new System.Drawing.Size(56, 13);
             this.TextFontLabel.TabIndex = 34;
-            this.TextFontLabel.Text = "Text Font:";
+            this.TextFontLabel.Text = "Betűtípus:";
             // 
             // TextLabel
             // 
             this.TextLabel.AutoSize = true;
-            this.TextLabel.Location = new System.Drawing.Point(64, 61);
+            this.TextLabel.Location = new System.Drawing.Point(46, 61);
             this.TextLabel.Name = "TextLabel";
-            this.TextLabel.Size = new System.Drawing.Size(31, 13);
+            this.TextLabel.Size = new System.Drawing.Size(46, 13);
             this.TextLabel.TabIndex = 35;
-            this.TextLabel.Text = "Text:";
+            this.TextLabel.Text = "Szöveg:";
             // 
             // SetTextButton
             // 
@@ -253,7 +253,7 @@
             this.SetTextButton.Name = "SetTextButton";
             this.SetTextButton.Size = new System.Drawing.Size(75, 40);
             this.SetTextButton.TabIndex = 30;
-            this.SetTextButton.Text = "Set";
+            this.SetTextButton.Text = "Alkalmaz";
             this.SetTextButton.UseVisualStyleBackColor = false;
             this.SetTextButton.Click += new System.EventHandler(this.SetTextButton_Click);
             // 
@@ -264,7 +264,7 @@
             this.AddTextButton.Name = "AddTextButton";
             this.AddTextButton.Size = new System.Drawing.Size(75, 40);
             this.AddTextButton.TabIndex = 32;
-            this.AddTextButton.Text = "Add new";
+            this.AddTextButton.Text = "Új szöveg";
             this.AddTextButton.UseVisualStyleBackColor = false;
             this.AddTextButton.Click += new System.EventHandler(this.AddTextButton_Click);
             // 
@@ -291,7 +291,7 @@
             this.LoadPictureButton.Name = "LoadPictureButton";
             this.LoadPictureButton.Size = new System.Drawing.Size(75, 40);
             this.LoadPictureButton.TabIndex = 39;
-            this.LoadPictureButton.Text = "Load Picture";
+            this.LoadPictureButton.Text = "Fájl betöltése";
             this.LoadPictureButton.UseVisualStyleBackColor = false;
             this.LoadPictureButton.Click += new System.EventHandler(this.LoadPictureButton_Click);
             // 
@@ -300,9 +300,9 @@
             this.RectChbx.AutoSize = true;
             this.RectChbx.Location = new System.Drawing.Point(12, 242);
             this.RectChbx.Name = "RectChbx";
-            this.RectChbx.Size = new System.Drawing.Size(75, 17);
+            this.RectChbx.Size = new System.Drawing.Size(51, 17);
             this.RectChbx.TabIndex = 41;
-            this.RectChbx.Text = "Rectangle";
+            this.RectChbx.Text = "Keret";
             this.RectChbx.UseVisualStyleBackColor = true;
             this.RectChbx.CheckStateChanged += new System.EventHandler(this.RectChbx_CheckStateChanged);
             // 
@@ -313,7 +313,7 @@
             this.OpenPicButton.Name = "OpenPicButton";
             this.OpenPicButton.Size = new System.Drawing.Size(75, 40);
             this.OpenPicButton.TabIndex = 42;
-            this.OpenPicButton.Text = "New Picture";
+            this.OpenPicButton.Text = "Kép betöltése";
             this.OpenPicButton.UseVisualStyleBackColor = false;
             this.OpenPicButton.Click += new System.EventHandler(this.OpenPicButton_Click);
             // 
@@ -331,19 +331,19 @@
             this.PaperSizeLabel.AutoSize = true;
             this.PaperSizeLabel.Location = new System.Drawing.Point(13, 205);
             this.PaperSizeLabel.Name = "PaperSizeLabel";
-            this.PaperSizeLabel.Size = new System.Drawing.Size(59, 13);
+            this.PaperSizeLabel.Size = new System.Drawing.Size(62, 13);
             this.PaperSizeLabel.TabIndex = 43;
-            this.PaperSizeLabel.Text = "Paper size:";
+            this.PaperSizeLabel.Text = "Papírméret:";
             // 
             // PrintPropLabel
             // 
             this.PrintPropLabel.AutoSize = true;
             this.PrintPropLabel.Location = new System.Drawing.Point(13, 251);
             this.PrintPropLabel.Name = "PrintPropLabel";
-            this.PrintPropLabel.Size = new System.Drawing.Size(87, 13);
+            this.PrintPropLabel.Size = new System.Drawing.Size(92, 13);
             this.PrintPropLabel.TabIndex = 45;
             this.PrintPropLabel.TabStop = true;
-            this.PrintPropLabel.Text = "Printer Properties";
+            this.PrintPropLabel.Text = "Nyomtatóbeállítás";
             this.PrintPropLabel.Click += new System.EventHandler(this.PrintPropLabel_Click);
             // 
             // RectButton
@@ -353,7 +353,7 @@
             this.RectButton.Name = "RectButton";
             this.RectButton.Size = new System.Drawing.Size(75, 40);
             this.RectButton.TabIndex = 46;
-            this.RectButton.Text = "New rectangle";
+            this.RectButton.Text = "Új keret";
             this.RectButton.UseVisualStyleBackColor = false;
             this.RectButton.Click += new System.EventHandler(this.RectButton_Click);
             // 
@@ -414,32 +414,32 @@
             // CopiesLabel
             // 
             this.CopiesLabel.AutoSize = true;
-            this.CopiesLabel.Location = new System.Drawing.Point(112, 289);
+            this.CopiesLabel.Location = new System.Drawing.Point(121, 289);
             this.CopiesLabel.Name = "CopiesLabel";
-            this.CopiesLabel.Size = new System.Drawing.Size(77, 13);
+            this.CopiesLabel.Size = new System.Drawing.Size(60, 13);
             this.CopiesLabel.TabIndex = 48;
-            this.CopiesLabel.Text = "Copies to print:";
+            this.CopiesLabel.Text = "Példányok:";
             // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(195, 251);
+            this.linkLabel1.Location = new System.Drawing.Point(185, 251);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(61, 13);
+            this.linkLabel1.Size = new System.Drawing.Size(71, 13);
             this.linkLabel1.TabIndex = 47;
             this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Page setup";
+            this.linkLabel1.Text = "Oldalbeállítás";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.PageSetupLabel_LinkClicked);
             // 
             // PrintPreviewLabel
             // 
             this.PrintPreviewLabel.AutoSize = true;
-            this.PrintPreviewLabel.Location = new System.Drawing.Point(112, 251);
+            this.PrintPreviewLabel.Location = new System.Drawing.Point(121, 251);
             this.PrintPreviewLabel.Name = "PrintPreviewLabel";
-            this.PrintPreviewLabel.Size = new System.Drawing.Size(68, 13);
+            this.PrintPreviewLabel.Size = new System.Drawing.Size(48, 13);
             this.PrintPreviewLabel.TabIndex = 46;
             this.PrintPreviewLabel.TabStop = true;
-            this.PrintPreviewLabel.Text = "Print preview";
+            this.PrintPreviewLabel.Text = "Előnézet";
             this.PrintPreviewLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.PrintPreviewLabel_LinkClicked);
             // 
             // X

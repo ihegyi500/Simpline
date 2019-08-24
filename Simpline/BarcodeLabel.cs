@@ -8,46 +8,67 @@ namespace SimplinePrinter
     public partial class BarcodeLabel : UserControl
     {
         private Point MouseDownLocation;
-        bool resizeOn = false;
+        private bool resizeOn = false;
+        private string pictureFilePath, codeType;
 
         public BarcodeLabel()
         {
             InitializeComponent();
         }
 
-        public void setBarcode(string str, string s, int i)
+        public string getPicture()
+        {
+            return pictureFilePath;
+        }
+
+        public void setPicture(string str)
+        {
+            pictureFilePath = str;
+        }
+
+        public string getCodeType()
+        {
+            return codeType;
+        }
+
+        public void setCodeType(string str)
+        {
+            codeType = str;
+        }
+
+        public void setBarcodeLabel(string str, string s, int i)
         {
             label1.Font = new Font(s, i);
             label1.Text = str;
         }
 
-        public string getBarcodeString()
+        public string getBarcodeLabelString()
         {
             return this.label1.Text;
         }
 
-        public void setBarcodeString(string String)
+        public void setBarcodeLabelString(string String)
         {
             label1.Text = String;
         }
 
 
-        public int getBarcodeSize()
+        public int getBarcodeLabelSize()
         {
             return Convert.ToInt32(this.label1.Font.Size);
         }
 
-        public void setBarcodeSize(int Size)
+        public void setBarcodeLabelSize(int Size)
         {
             label1.Font = new Font(label1.Font.FontFamily,Size,label1.Font.Style);
         }
 
-        public string getBarcodeType()
+        public string getBarcodeLabelType()
         {
             return this.label1.Font.Name;
         }
 
-        public void setBarcodeType(string String)
+        public void setBarcodeLabelType(string String)
         {
             label1.Font = new Font(String, label1.Font.Size);
         }
