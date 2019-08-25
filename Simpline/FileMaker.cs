@@ -150,9 +150,14 @@ namespace SimplinePrinter
                                     bcldict.Add(bcl, parameters[4]);
                                     bcl.setPicture(parameters[4]);
                                 }
-                                /*if (parameters[parameters.Length] == "1")
-                                    bcl.BorderStyle = BorderStyle.FixedSingle;*/
                             }
+                            else
+                            {
+                                bcl.BorderStyle = BorderStyle.FixedSingle;
+                                bcldict.Add(bcl, "");
+                            }
+                            if (parameters[parameters.Length - 1] == "1")
+                            bcl.BorderStyle = BorderStyle.FixedSingle;
                             p.Controls.Add(bcl);
                         }
                     }

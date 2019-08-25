@@ -67,6 +67,8 @@
             this.Y = new System.Windows.Forms.Label();
             this.Labx = new System.Windows.Forms.Label();
             this.laby = new System.Windows.Forms.Label();
+            this.BringFrontButton = new System.Windows.Forms.Button();
+            this.SendBackButton = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -298,7 +300,7 @@
             // RectChbx
             // 
             this.RectChbx.AutoSize = true;
-            this.RectChbx.Location = new System.Drawing.Point(12, 242);
+            this.RectChbx.Location = new System.Drawing.Point(12, 173);
             this.RectChbx.Name = "RectChbx";
             this.RectChbx.Size = new System.Drawing.Size(51, 17);
             this.RectChbx.TabIndex = 41;
@@ -309,7 +311,7 @@
             // OpenPicButton
             // 
             this.OpenPicButton.BackColor = System.Drawing.Color.White;
-            this.OpenPicButton.Location = new System.Drawing.Point(93, 160);
+            this.OpenPicButton.Location = new System.Drawing.Point(174, 160);
             this.OpenPicButton.Name = "OpenPicButton";
             this.OpenPicButton.Size = new System.Drawing.Size(75, 40);
             this.OpenPicButton.TabIndex = 42;
@@ -349,7 +351,7 @@
             // RectButton
             // 
             this.RectButton.BackColor = System.Drawing.Color.White;
-            this.RectButton.Location = new System.Drawing.Point(12, 160);
+            this.RectButton.Location = new System.Drawing.Point(93, 160);
             this.RectButton.Name = "RectButton";
             this.RectButton.Size = new System.Drawing.Size(75, 40);
             this.RectButton.TabIndex = 46;
@@ -359,6 +361,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.SendBackButton);
+            this.panel2.Controls.Add(this.BringFrontButton);
             this.panel2.Controls.Add(this.RectButton);
             this.panel2.Controls.Add(this.OpenPicButton);
             this.panel2.Controls.Add(this.RectChbx);
@@ -478,6 +482,28 @@
             this.laby.TabIndex = 52;
             this.laby.Text = "Y:";
             // 
+            // BringFrontButton
+            // 
+            this.BringFrontButton.BackColor = System.Drawing.Color.White;
+            this.BringFrontButton.Location = new System.Drawing.Point(12, 229);
+            this.BringFrontButton.Name = "BringFrontButton";
+            this.BringFrontButton.Size = new System.Drawing.Size(75, 23);
+            this.BringFrontButton.TabIndex = 47;
+            this.BringFrontButton.Text = "Előrehozás";
+            this.BringFrontButton.UseVisualStyleBackColor = false;
+            this.BringFrontButton.Click += new System.EventHandler(this.BringFrontButton_Click);
+            // 
+            // SendBackButton
+            // 
+            this.SendBackButton.BackColor = System.Drawing.Color.White;
+            this.SendBackButton.Location = new System.Drawing.Point(12, 251);
+            this.SendBackButton.Name = "SendBackButton";
+            this.SendBackButton.Size = new System.Drawing.Size(75, 20);
+            this.SendBackButton.TabIndex = 48;
+            this.SendBackButton.Text = "Hátraküldés";
+            this.SendBackButton.UseVisualStyleBackColor = false;
+            this.SendBackButton.Click += new System.EventHandler(this.SendBackButton_Click);
+            // 
             // Simpline
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -547,6 +573,8 @@
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.TextBox CopiesTbx;
         private System.Windows.Forms.Label CopiesLabel;
+        private System.Windows.Forms.Button SendBackButton;
+        private System.Windows.Forms.Button BringFrontButton;
     }
 }
 

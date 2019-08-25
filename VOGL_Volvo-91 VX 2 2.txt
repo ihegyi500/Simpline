@@ -1,0 +1,6 @@
+240;70;75;75;C:\Users\Hegyii71\Desktop\Simpline\eac.jpg;;;
+28;61;64;200;Arial Black;31316040;39;72;22;
+40;150;30;231;Arial;MADE IN HUNGARY;41;152;17;
+319;70;75;50;C:\Users\Hegyii71\Desktop\Simpline\ic.jpg;;;
+6;182;37;310;Code 128;V0;;
+9;225;38;313;Code 128;31316040;;

@@ -114,6 +114,7 @@ namespace Simpline
                         bcl.setPicture(bcldict[b]);
                     else
                         bcl.setCodeType(bcldict[b]);
+
                 }
             }
         }
@@ -338,6 +339,28 @@ namespace Simpline
         {
             GraphicMaker gm = new GraphicMaker();
             gm.Printing(bcldict, PrintersList, 2, (short)Convert.ToInt32(CopiesTbx.Text));
+        }
+
+        private void BringFrontButton_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < bcldict.Count; i++)
+            {
+                if (bcldict.ElementAt(i).Key.BackColor == Color.LightGray)
+                {
+                    bcldict.ElementAt(i).Key.BringToFront();
+                }
+            }
+        }
+
+        private void SendBackButton_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < bcldict.Count; i++)
+            {
+                if (bcldict.ElementAt(i).Key.BackColor == Color.LightGray)
+                {
+                    bcldict.ElementAt(i).Key.SendToBack();
+                }
+            }
         }
     }
 }
