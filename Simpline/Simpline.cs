@@ -108,13 +108,17 @@ namespace Simpline
                     bcl.Width = b.Width;
                     panel1.Controls.Add(bcl);
                     bcldict.Add(bcl, bcldict[b]);
-                    if (bcldict[b] != "Free 3 of 9 Extended" &&
+                    if (b.BackgroundImage != null &&
+                        bcldict[b] != "Free 3 of 9 Extended" &&
                         bcldict[b] != "Code 128" &&
                         bcldict[b] != "QR Code")
                         bcl.setPicture(bcldict[b]);
-                    else
+                    else if (b.BackgroundImage != null)
                         bcl.setCodeType(bcldict[b]);
-
+                    else
+                    {
+                        bcl.setBarcodeLabel(b.getBarcodeLabelString(), b.getBarcodeLabelType(), b.getBarcodeLabelSize());
+                    }
                 }
             }
         }
@@ -287,8 +291,6 @@ namespace Simpline
                         bcldict.ElementAt(i).Key.setBarcodeLabelType(FontType.Text);
                 }
             }
-
-
         }
 
         private void PrintersList_SelectedIndexChanged(object sender, EventArgs e)
