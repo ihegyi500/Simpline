@@ -11,11 +11,16 @@ namespace SimplinePrinter
         //List<BarcodeLabel> bclL = new List<BarcodeLabel>();
         Dictionary<BarcodeLabel, string> bcldict = new Dictionary<BarcodeLabel, string>();
         ComboBox PrintersList;
+        PrintDocument PrintDoc = new PrintDocument();
 
         public void PrintDialog()
         {
             PrintDialog printDiag = new PrintDialog();
-            printDiag.ShowDialog();
+            printDiag.PrinterSettings = PrintDoc.PrinterSettings;
+            if (printDiag.ShowDialog() == DialogResult.OK)
+            {
+                PrintDoc.PrinterSettings = printDiag.PrinterSettings;
+            }
 
         }
 
@@ -23,7 +28,6 @@ namespace SimplinePrinter
         {
             bcldict = dict;
             PrintersList = box;
-            PrintDocument PrintDoc = new PrintDocument();
             PrintDoc.PrinterSettings.PrinterName =
             PrintersList.SelectedItem.ToString();
             PrintDoc.PrintPage += new PrintPageEventHandler(PrintPageMethod);
@@ -35,9 +39,9 @@ namespace SimplinePrinter
                         ppd.Document = PrintDoc;
                         if (ppd.ShowDialog() == DialogResult.OK)
                         {
-                        if(copies != 0)
-                            PrintDoc.PrinterSettings.Copies = (short)copies;
-                        PrintDoc.Print();
+                            if(copies != 0)
+                                PrintDoc.PrinterSettings.Copies = (short)copies;
+                            PrintDoc.Print();
                         }
                         break;
                     }
@@ -47,9 +51,8 @@ namespace SimplinePrinter
                         psd.Document = PrintDoc;
                         if (psd.ShowDialog() == DialogResult.OK)
                         {
-                            if (copies != 0)
-                                PrintDoc.PrinterSettings.Copies = (short)copies;
-                            PrintDoc.Print();
+                            MessageBox.Show(psd.PageSettings.Margins.ToString());
+                            PrintDoc.DefaultPageSettings = psd.PageSettings;
                         }
                         break;
                     }

@@ -58,6 +58,8 @@
             this.PrintPropLabel = new System.Windows.Forms.LinkLabel();
             this.RectButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.SendBackButton = new System.Windows.Forms.Button();
+            this.BringFrontButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.CopiesTbx = new System.Windows.Forms.TextBox();
             this.CopiesLabel = new System.Windows.Forms.Label();
@@ -67,8 +69,6 @@
             this.Y = new System.Windows.Forms.Label();
             this.Labx = new System.Windows.Forms.Label();
             this.laby = new System.Windows.Forms.Label();
-            this.BringFrontButton = new System.Windows.Forms.Button();
-            this.SendBackButton = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -384,6 +384,28 @@
             this.panel2.Size = new System.Drawing.Size(268, 332);
             this.panel2.TabIndex = 47;
             // 
+            // SendBackButton
+            // 
+            this.SendBackButton.BackColor = System.Drawing.Color.White;
+            this.SendBackButton.Location = new System.Drawing.Point(12, 251);
+            this.SendBackButton.Name = "SendBackButton";
+            this.SendBackButton.Size = new System.Drawing.Size(75, 20);
+            this.SendBackButton.TabIndex = 48;
+            this.SendBackButton.Text = "Hátraküldés";
+            this.SendBackButton.UseVisualStyleBackColor = false;
+            this.SendBackButton.Click += new System.EventHandler(this.SendBackButton_Click);
+            // 
+            // BringFrontButton
+            // 
+            this.BringFrontButton.BackColor = System.Drawing.Color.White;
+            this.BringFrontButton.Location = new System.Drawing.Point(12, 229);
+            this.BringFrontButton.Name = "BringFrontButton";
+            this.BringFrontButton.Size = new System.Drawing.Size(75, 23);
+            this.BringFrontButton.TabIndex = 47;
+            this.BringFrontButton.Text = "Előrehozás";
+            this.BringFrontButton.UseVisualStyleBackColor = false;
+            this.BringFrontButton.Click += new System.EventHandler(this.BringFrontButton_Click);
+            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.CopiesTbx);
@@ -481,28 +503,6 @@
             this.laby.Size = new System.Drawing.Size(17, 13);
             this.laby.TabIndex = 52;
             this.laby.Text = "Y:";
-            // 
-            // BringFrontButton
-            // 
-            this.BringFrontButton.BackColor = System.Drawing.Color.White;
-            this.BringFrontButton.Location = new System.Drawing.Point(12, 229);
-            this.BringFrontButton.Name = "BringFrontButton";
-            this.BringFrontButton.Size = new System.Drawing.Size(75, 23);
-            this.BringFrontButton.TabIndex = 47;
-            this.BringFrontButton.Text = "Előrehozás";
-            this.BringFrontButton.UseVisualStyleBackColor = false;
-            this.BringFrontButton.Click += new System.EventHandler(this.BringFrontButton_Click);
-            // 
-            // SendBackButton
-            // 
-            this.SendBackButton.BackColor = System.Drawing.Color.White;
-            this.SendBackButton.Location = new System.Drawing.Point(12, 251);
-            this.SendBackButton.Name = "SendBackButton";
-            this.SendBackButton.Size = new System.Drawing.Size(75, 20);
-            this.SendBackButton.TabIndex = 48;
-            this.SendBackButton.Text = "Hátraküldés";
-            this.SendBackButton.UseVisualStyleBackColor = false;
-            this.SendBackButton.Click += new System.EventHandler(this.SendBackButton_Click);
             // 
             // Simpline
             // 

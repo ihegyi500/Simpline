@@ -15,6 +15,7 @@ namespace Simpline
         Dictionary<BarcodeLabel, string> bcldict = new Dictionary<BarcodeLabel, string>();
         bool resizeOn = false;
         int bclcounter = 0;
+        GraphicMaker gm = new GraphicMaker();
 
         public Simpline()
         {
@@ -125,7 +126,7 @@ namespace Simpline
 
         private void PrintButton_Click(object sender, EventArgs e)
         {
-            GraphicMaker gm = new GraphicMaker();
+            //GraphicMaker gm = new GraphicMaker();
             gm.Printing(bcldict, PrintersList, 3,(short)Convert.ToInt32(CopiesTbx.Text));
         }
 
@@ -174,7 +175,7 @@ namespace Simpline
 
         private void PrintPropLabel_Click(object sender, EventArgs e)
         {
-            GraphicMaker gm = new GraphicMaker();
+            //GraphicMaker gm = new GraphicMaker();
             gm.PrintDialog();
         }
 
@@ -333,13 +334,13 @@ namespace Simpline
 
         private void PrintPreviewLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            GraphicMaker gm = new GraphicMaker();
+            //GraphicMaker gm = new GraphicMaker();
             gm.Printing(bcldict, PrintersList, 1, (short)Convert.ToInt32(CopiesTbx.Text));
         }
 
         private void PageSetupLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            GraphicMaker gm = new GraphicMaker();
+            //GraphicMaker gm = new GraphicMaker();
             gm.Printing(bcldict, PrintersList, 2, (short)Convert.ToInt32(CopiesTbx.Text));
         }
 
