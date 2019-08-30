@@ -17,6 +17,7 @@ namespace SimplinePrinter
         {
             PrintDialog printDiag = new PrintDialog();
             printDiag.PrinterSettings = PrintDoc.PrinterSettings;
+            MessageBox.Show(PrintDoc.DefaultPageSettings.PaperSize.Height + ", " + PrintDoc.DefaultPageSettings.PaperSize.Width);
             if (printDiag.ShowDialog() == DialogResult.OK)
             {
                 PrintDoc.PrinterSettings = printDiag.PrinterSettings;
