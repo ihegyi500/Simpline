@@ -69,6 +69,8 @@
             this.Y = new System.Windows.Forms.Label();
             this.Labx = new System.Windows.Forms.Label();
             this.laby = new System.Windows.Forms.Label();
+            this.labFileName = new System.Windows.Forms.Label();
+            this.FileName = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -471,7 +473,7 @@
             // X
             // 
             this.X.AutoSize = true;
-            this.X.Location = new System.Drawing.Point(334, 12);
+            this.X.Location = new System.Drawing.Point(327, 12);
             this.X.Name = "X";
             this.X.Size = new System.Drawing.Size(14, 13);
             this.X.TabIndex = 49;
@@ -480,7 +482,7 @@
             // Y
             // 
             this.Y.AutoSize = true;
-            this.Y.Location = new System.Drawing.Point(392, 12);
+            this.Y.Location = new System.Drawing.Point(371, 12);
             this.Y.Name = "Y";
             this.Y.Size = new System.Drawing.Size(14, 13);
             this.Y.TabIndex = 50;
@@ -498,11 +500,29 @@
             // laby
             // 
             this.laby.AutoSize = true;
-            this.laby.Location = new System.Drawing.Point(369, 12);
+            this.laby.Location = new System.Drawing.Point(354, 12);
             this.laby.Name = "laby";
             this.laby.Size = new System.Drawing.Size(17, 13);
             this.laby.TabIndex = 52;
             this.laby.Text = "Y:";
+            // 
+            // labFileName
+            // 
+            this.labFileName.AutoSize = true;
+            this.labFileName.Location = new System.Drawing.Point(404, 12);
+            this.labFileName.Name = "labFileName";
+            this.labFileName.Size = new System.Drawing.Size(26, 13);
+            this.labFileName.TabIndex = 53;
+            this.labFileName.Text = "Fájl:";
+            // 
+            // FileName
+            // 
+            this.FileName.AutoSize = true;
+            this.FileName.Location = new System.Drawing.Point(445, 12);
+            this.FileName.Name = "FileName";
+            this.FileName.Size = new System.Drawing.Size(0, 13);
+            this.FileName.TabIndex = 54;
+            this.FileName.TextChanged += new System.EventHandler(this.FileName_TextChanged);
             // 
             // Simpline
             // 
@@ -513,6 +533,8 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(851, 369);
+            this.Controls.Add(this.FileName);
+            this.Controls.Add(this.labFileName);
             this.Controls.Add(this.laby);
             this.Controls.Add(this.Labx);
             this.Controls.Add(this.Y);
@@ -575,6 +597,8 @@
         private System.Windows.Forms.Label CopiesLabel;
         private System.Windows.Forms.Button SendBackButton;
         private System.Windows.Forms.Button BringFrontButton;
+        private System.Windows.Forms.Label labFileName;
+        private System.Windows.Forms.Label FileName;
     }
 }
 

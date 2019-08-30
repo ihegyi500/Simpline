@@ -8,10 +8,18 @@ namespace SimplinePrinter
     class GraphicMaker
     {
         Graphics g;
-        //List<BarcodeLabel> bclL = new List<BarcodeLabel>();
         Dictionary<BarcodeLabel, string> bcldict = new Dictionary<BarcodeLabel, string>();
         ComboBox PrintersList;
         PrintDocument PrintDoc = new PrintDocument();
+        public GraphicMaker(Label l, Panel p)
+        {
+            if (l.Text.Contains("Renault") || l.Text.Contains("Volvo"))
+            {
+                //PrintDoc.DefaultPageSettings.PaperSize = new PaperSize("Renault", 197, 272);
+                PrintDoc.DefaultPageSettings.PaperSize.Height = p.Height;
+                PrintDoc.DefaultPageSettings.PaperSize.Width = p.Width;
+            }
+        }
 
         public void PrintDialog()
         {

@@ -50,10 +50,9 @@ namespace Simpline
             bcl.Top = Convert.ToInt32(textBox2.Text);
             bcl.Height = Convert.ToInt32(textBox3.Text);
             bcl.Width = Convert.ToInt32(textBox4.Text);
-            BarcodeWriter w = new BarcodeWriter();
-            w.Options.PureBarcode = true;
-            w.Options.Height = bcl.getPanHeight();
-            w.Options.Width = bcl.getPanWidth();
+            bcw.Options.PureBarcode = true;
+            bcw.Options.Height = bcl.getPanHeight();
+            bcw.Options.Width = bcl.getPanWidth();
             if (textBox6.Text == "Free 3 of 9 Extended" || textBox6.Text == "Code 128" || textBox6.Text == "QR Code")
             {
                 bcl.BackgroundImage = null;
@@ -61,20 +60,20 @@ namespace Simpline
                 {
                     case "Free 3 of 9 Extended":
                         {
-                            w.Format = BarcodeFormat.CODE_39;
-                            bcl.BackgroundImage = w.Write(textBox5.Text.ToUpper());
+                            bcw.Format = BarcodeFormat.CODE_39;
+                            bcl.BackgroundImage = bcw.Write(textBox5.Text.ToUpper());
                             break;
                         }
                     case "Code 128":
                         {
-                            w.Format = BarcodeFormat.CODE_128;
-                            bcl.BackgroundImage = w.Write(textBox5.Text);
+                            bcw.Format = BarcodeFormat.CODE_128;
+                            bcl.BackgroundImage = bcw.Write(textBox5.Text);
                             break;
                         }
                     case "QR Code":
                         {
-                            w.Format = BarcodeFormat.QR_CODE;
-                            bcl.BackgroundImage = w.Write(textBox5.Text);
+                            bcw.Format = BarcodeFormat.QR_CODE;
+                            bcl.BackgroundImage = bcw.Write(textBox5.Text);
                             break;
                         }
                 }

@@ -15,7 +15,7 @@ namespace Simpline
         Dictionary<BarcodeLabel, string> bcldict = new Dictionary<BarcodeLabel, string>();
         bool resizeOn = false;
         int bclcounter = 0;
-        GraphicMaker gm = new GraphicMaker();
+        GraphicMaker gm;
 
         public Simpline()
         {
@@ -126,14 +126,14 @@ namespace Simpline
 
         private void PrintButton_Click(object sender, EventArgs e)
         {
-            //GraphicMaker gm = new GraphicMaker();
+            gm = new GraphicMaker(FileName,panel1);
             gm.Printing(bcldict, PrintersList, 3,(short)Convert.ToInt32(CopiesTbx.Text));
         }
 
         private void SavePictureButton_Click(object sender, EventArgs e)
         {
-            FileMaker fmk = new FileMaker();
-            fmk.SaveTxt(bcldict);
+            FileMaker fmk = new FileMaker(panel1, FileName, bcldict);
+            fmk.SaveTxt();
         }
 
         private void AddTextButton_Click(object sender, EventArgs e)
@@ -163,19 +163,19 @@ namespace Simpline
 
         private void OpenPicButton_Click(object sender, EventArgs e)
         {
-            FileMaker fmk = new FileMaker();
-            fmk.AddPicture(panel1, bcldict);
+            FileMaker fmk = new FileMaker(panel1, FileName, bcldict);
+            fmk.AddPicture();
         }
 
         private void LoadPictureButton_Click(object sender, EventArgs e)
         {
-            FileMaker fmk = new FileMaker();
-            fmk.LoadTxt(panel1, bcldict);
+            FileMaker fmk = new FileMaker(panel1, FileName, bcldict);
+            fmk.LoadTxt();
         }
 
         private void PrintPropLabel_Click(object sender, EventArgs e)
         {
-            //GraphicMaker gm = new GraphicMaker();
+            gm = new GraphicMaker(FileName, panel1);
             gm.PrintDialog();
         }
 
@@ -323,7 +323,10 @@ namespace Simpline
 
         private void Panel1_SizeChanged(object sender, EventArgs e)
         {
-            panel2.Left = panel1.Right + 25;
+            if (panel1.Right > FileName.Right)
+                panel2.Left = panel1.Right + 25;
+            else
+                panel2.Left = FileName.Right + 25;
         }
 
         private void Panel1_MouseMove(object sender, MouseEventArgs e)
@@ -334,13 +337,13 @@ namespace Simpline
 
         private void PrintPreviewLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //GraphicMaker gm = new GraphicMaker();
+            gm = new GraphicMaker(FileName, panel1);
             gm.Printing(bcldict, PrintersList, 1, (short)Convert.ToInt32(CopiesTbx.Text));
         }
 
         private void PageSetupLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //GraphicMaker gm = new GraphicMaker();
+            gm = new GraphicMaker(FileName, panel1);
             gm.Printing(bcldict, PrintersList, 2, (short)Convert.ToInt32(CopiesTbx.Text));
         }
 
@@ -363,6 +366,26 @@ namespace Simpline
                 {
                     bcldict.ElementAt(i).Key.SendToBack();
                 }
+            }
+        }
+
+        private void Panel1_Unsaved(object sender, EventArgs e)
+        {
+            if (FileName.Text.Contains(" (Mentve)"))
+                labFileName.Text.Replace(" (Mentve)", "");
+        }
+
+        private void FileName_TextChanged(object sender, EventArgs e)
+        {
+            if (FileName.Text.Contains("Renault"))
+            {
+                panel1.Height = 272;
+                panel1.Width = 197;
+            }
+            else if (FileName.Text.Contains("Volvo"))
+            {
+                panel1.Height = 107;
+                panel1.Width = 197;
             }
         }
     }
