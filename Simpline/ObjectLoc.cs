@@ -53,18 +53,18 @@ namespace Simpline
             bcw.Options.PureBarcode = true;
             bcw.Options.Height = bcl.getPanHeight();
             bcw.Options.Width = bcl.getPanWidth();
-            if (textBox6.Text == "Free 3 of 9 Extended" || textBox6.Text == "Code 128" || textBox6.Text == "QR Code")
+            if (textBox6.Text == "39 Code" || textBox6.Text == "128 Code" || textBox6.Text == "QR Code")
             {
                 bcl.BackgroundImage = null;
                 switch (textBox6.Text)
                 {
-                    case "Free 3 of 9 Extended":
+                    case "39 Code":
                         {
                             bcw.Format = BarcodeFormat.CODE_39;
                             bcl.BackgroundImage = bcw.Write(textBox5.Text.ToUpper());
                             break;
                         }
-                    case "Code 128":
+                    case "128 Code":
                         {
                             bcw.Format = BarcodeFormat.CODE_128;
                             bcl.BackgroundImage = bcw.Write(textBox5.Text);

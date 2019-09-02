@@ -116,18 +116,18 @@ namespace SimplinePrinter
                             w.Options.Width = bcl.getPanWidth();
                             if (parameters[4] != "")
                             {
-                                if (parameters[4] == "Free 3 of 9 Extended" || parameters[4] == "Code 128" || parameters[4] == "QR Code")
+                                if (parameters[4] == "39 Code" || parameters[4] == "128 Code" || parameters[4] == "QR Code")
                                 {
                                     switch (parameters[4])
                                     {
-                                        case "Free 3 of 9 Extended":
+                                        case "39 Code":
                                             {
                                                 w.Format = BarcodeFormat.CODE_39;
                                                 bcl.BackgroundImage = w.Write(parameters[5]);
                                                 bcldict.Add(bcl, parameters[4]);
                                                 break;
                                             }
-                                        case "Code 128":
+                                        case "128 Code":
                                             {
                                                 w.Format = BarcodeFormat.CODE_128;
                                                 bcl.BackgroundImage = w.Write(parameters[5]);

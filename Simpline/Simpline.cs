@@ -115,8 +115,8 @@ namespace Simpline
                     panel1.Controls.Add(bcl);
                     bcldict.Add(bcl, bcldict[b]);
                     if (b.BackgroundImage != null &&
-                        bcldict[b] != "Free 3 of 9 Extended" &&
-                        bcldict[b] != "Code 128" &&
+                        bcldict[b] != "39 Code" &&
+                        bcldict[b] != "128 Code" &&
                         bcldict[b] != "QR Code")
                         bcl.setPicture(bcldict[b]);
                     else if (b.BackgroundImage != null)
@@ -226,13 +226,13 @@ namespace Simpline
             w.Options.Width = barcodeLabel.getPanWidth();
             switch (FontType.SelectedItem.ToString())
             {
-                case "Free 3 of 9 Extended":
+                case "39 Code":
                     {
                         w.Format = BarcodeFormat.CODE_39;
                         barcodeLabel.BackgroundImage = w.Write(value.Text.ToUpper());
                         break;
                     }
-                case "Code 128":
+                case "128 Code":
                     {
                         w.Format = BarcodeFormat.CODE_128;
                         barcodeLabel.BackgroundImage = w.Write(value.Text);
@@ -253,8 +253,8 @@ namespace Simpline
             barcodeLabel.Name = "Bcl" + bclcounter;
             panel1.Controls.Add(barcodeLabel);
             bcldict.Add(barcodeLabel, FontType.Text);
-            if (FontType.Text == "Free 3 of 9 Extended" ||
-                FontType.Text == "Code 128" ||
+            if (FontType.Text == "39 Code" ||
+                FontType.Text == "128 Code" ||
                 FontType.Text == "QR Code")
                 barcodeLabel.setCodeType(bcldict[barcodeLabel]);
             else
@@ -276,13 +276,13 @@ namespace Simpline
 
                     switch (FontType.SelectedItem.ToString())
                     {
-                        case "Free 3 of 9 Extended":
+                        case "39 Code":
                             {
                                 w.Format = BarcodeFormat.CODE_39;
                                 bcldict.ElementAt(i).Key.BackgroundImage = w.Write(value.Text.ToUpper());
                                 break;
                             }
-                        case "Code 128":
+                        case "128 Code":
                             {
                                 w.Format = BarcodeFormat.CODE_128;
                                 bcldict.ElementAt(i).Key.BackgroundImage = w.Write(value.Text);
@@ -301,8 +301,8 @@ namespace Simpline
                             }
                     }
                     bcldict[bcldict.ElementAt(i).Key] = FontType.Text;
-                    if (FontType.Text == "Free 3 of 9 Extended" ||
-                        FontType.Text == "Code 128" ||
+                    if (FontType.Text == "39 Code" ||
+                        FontType.Text == "128 Code" ||
                         FontType.Text == "QR Code")
                         bcldict.ElementAt(i).Key.setCodeType(bcldict[bcldict.ElementAt(i).Key]);
                     else
