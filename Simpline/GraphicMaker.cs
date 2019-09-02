@@ -15,7 +15,6 @@ namespace SimplinePrinter
         {
             if (l.Text.Contains("Renault") || l.Text.Contains("Volvo"))
             {
-                //PrintDoc.DefaultPageSettings.PaperSize = new PaperSize("Renault", 197, 272);
                 PrintDoc.DefaultPageSettings.PaperSize.Height = p.Height;
                 PrintDoc.DefaultPageSettings.PaperSize.Width = p.Width;
             }
@@ -30,7 +29,6 @@ namespace SimplinePrinter
             {
                 PrintDoc.PrinterSettings = printDiag.PrinterSettings;
             }
-
         }
 
         public void Printing(Dictionary<BarcodeLabel, string> dict, ComboBox box, int sent, int copies)

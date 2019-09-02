@@ -509,7 +509,7 @@
             // labFileName
             // 
             this.labFileName.AutoSize = true;
-            this.labFileName.Location = new System.Drawing.Point(404, 12);
+            this.labFileName.Location = new System.Drawing.Point(401, 12);
             this.labFileName.Name = "labFileName";
             this.labFileName.Size = new System.Drawing.Size(26, 13);
             this.labFileName.TabIndex = 53;
@@ -518,7 +518,7 @@
             // FileName
             // 
             this.FileName.AutoSize = true;
-            this.FileName.Location = new System.Drawing.Point(445, 12);
+            this.FileName.Location = new System.Drawing.Point(433, 12);
             this.FileName.Name = "FileName";
             this.FileName.Size = new System.Drawing.Size(0, 13);
             this.FileName.TabIndex = 54;

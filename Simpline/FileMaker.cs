@@ -54,10 +54,6 @@ namespace SimplinePrinter
                 {
                     using (StreamWriter file = File.CreateText(sfd.FileName))
                     {
-                        /*if (sfd.FileName.Contains("renault"))
-                        {
-                            file.Write("")
-                        }*/
                         foreach (BarcodeLabel b in bcldict.Keys)
                         {
                             file.Write(b.getX() + ";" 
@@ -74,8 +70,7 @@ namespace SimplinePrinter
                             {
                                 file.Write(b.getLabX() + ";"
                                     + b.getLabY() + ";"
-                                    + b.getBarcodeLabelSize() + ";"
-                                    /*+ b.getBarcodeLabelType() + ";"*/);
+                                    + b.getBarcodeLabelSize() + ";");
                             }
                             if (b.BorderStyle == BorderStyle.FixedSingle)
                                 file.Write("1");
@@ -107,11 +102,6 @@ namespace SimplinePrinter
             {
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    /*if (ofd.FileName.Contains("Volvo"))
-                    {
-                        p.Height = 120;
-                        p.Width = 197;
-                    }*/
                     using (StreamReader sr = new StreamReader(ofd.FileName))
                     {
                         while ((line = sr.ReadLine()) != null)
