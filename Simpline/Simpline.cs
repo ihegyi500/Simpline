@@ -15,7 +15,7 @@ namespace Simpline
         Dictionary<BarcodeLabel, string> bcldict = new Dictionary<BarcodeLabel, string>();
         bool resizeOn = false;
         int bclcounter = 0;
-        GraphicMaker gm = new GraphicMaker();
+        GraphicMaker gm;
 
         public Simpline()
         {
@@ -25,8 +25,8 @@ namespace Simpline
         private void BarcodePrinter_Load(object sender, EventArgs e)
         {
             //Vonalkódtípuslista feltöltése
-            BarcodeTypeCbx.Items.Add("Free 3 of 9 Extended");
-            BarcodeTypeCbx.Items.Add("Code 128");
+            BarcodeTypeCbx.Items.Add("39 Code");
+            BarcodeTypeCbx.Items.Add("128 Code");
             BarcodeTypeCbx.Items.Add("QR Code");
             BarcodeTypeCbx.SelectedIndex = 0;
             //Betűtípuslista feltöltése
@@ -54,17 +54,20 @@ namespace Simpline
             PaperSizeList.SelectedIndex = 0;
         }
 
+        //Új vonalkódobjektum hozzáadása
         private void AddButton_Click(object sender, EventArgs e)
         {
             AddFunc(BarcodeTypeCbx, BarcodeTextTbx, "");
-            SendRectToBack();
+            BringToFrontSendToBack();
         }
 
+        //Vonalkód beállítása
         private void SetBarcodeButton_Click(object sender, EventArgs e)
         {
             SetFunc(BarcodeTypeCbx, BarcodeTextTbx, "");
         }
 
+        //Kijelölt objektumok törlése
         private void DeleteButton_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < bcldict.Count; i++)
@@ -79,6 +82,7 @@ namespace Simpline
             }
         }
 
+        //Méretező mód
         private void ResizeButton_Click(object sender, EventArgs e)
         {
             if (ActiveControl.BackColor == Color.LightGray)
@@ -97,6 +101,7 @@ namespace Simpline
             }
         }
 
+        //Kijelölt objektumok klónozása
         private void CopyPasteButton_Click(object sender, EventArgs e)
         {
             foreach (BarcodeLabel b in panel1.Controls)
@@ -124,29 +129,34 @@ namespace Simpline
             }
         }
 
+        //Nyomtatás
         private void PrintButton_Click(object sender, EventArgs e)
         {
-            //GraphicMaker gm = new GraphicMaker();
+            gm = new GraphicMaker(FileName,panel1);
             gm.Printing(bcldict, PrintersList, 3,(short)Convert.ToInt32(CopiesTbx.Text));
         }
 
+        //Fájl mentése
         private void SavePictureButton_Click(object sender, EventArgs e)
         {
-            FileMaker fmk = new FileMaker();
-            fmk.SaveTxt(bcldict);
+            FileMaker fmk = new FileMaker(panel1, FileName, bcldict);
+            fmk.SaveTxt();
         }
 
+        //Szöveges objektum hozzáadása
         private void AddTextButton_Click(object sender, EventArgs e)
         {
             AddFunc(TextFontCbx, TextTbx, TextSizeTbx.Text);
-            SendRectToBack();
+            BringToFrontSendToBack();
         }
 
+        //Szöveges objektum szerkesztése
         private void SetTextButton_Click(object sender, EventArgs e)
         {
             SetFunc(TextFontCbx, TextTbx, TextSizeTbx.Text);
         }
 
+        //Keret ki - bekapcsolása
         private void RectChbx_CheckStateChanged(object sender, EventArgs e)
         {
             for (int i = 0; i < bcldict.Count; i++)
@@ -161,24 +171,28 @@ namespace Simpline
             }
         }
 
+        //Kép betöltése
         private void OpenPicButton_Click(object sender, EventArgs e)
         {
-            FileMaker fmk = new FileMaker();
-            fmk.AddPicture(panel1, bcldict);
+            FileMaker fmk = new FileMaker(panel1, FileName, bcldict);
+            fmk.AddPicture();
         }
 
+        //Fájl megnyitása
         private void LoadPictureButton_Click(object sender, EventArgs e)
         {
-            FileMaker fmk = new FileMaker();
-            fmk.LoadTxt(panel1, bcldict);
+            FileMaker fmk = new FileMaker(panel1, FileName, bcldict);
+            fmk.LoadTxt();
         }
 
+        //Nyomtatótulajdonságok
         private void PrintPropLabel_Click(object sender, EventArgs e)
         {
-            //GraphicMaker gm = new GraphicMaker();
+            gm = new GraphicMaker(FileName, panel1);
             gm.PrintDialog();
         }
 
+        //Új keret hozzáadása
         private void RectButton_Click(object sender, EventArgs e)
         {
             BarcodeLabel bcl = new BarcodeLabel();
@@ -186,10 +200,11 @@ namespace Simpline
             bcl.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(bcl);
             bcldict.Add(bcl, "");
-            SendRectToBack();
+            BringToFrontSendToBack();
         }
 
-        private void SendRectToBack()
+        //Keretobjektumok automatikus hátraküldése
+        private void BringToFrontSendToBack()
         {
             foreach (BarcodeLabel b in panel1.Controls)
             {
@@ -200,6 +215,7 @@ namespace Simpline
             }
         }
 
+        //Általános metódus objektum hozzáadásához
         private void AddFunc(ComboBox FontType, TextBox value, string size)
         {
             bclcounter++;
@@ -245,6 +261,7 @@ namespace Simpline
                 barcodeLabel.setBarcodeLabelType(FontType.Text);
         }
 
+        //Általános metódus objektum szerkesztéséhez
         private void SetFunc(ComboBox FontType, TextBox value, string size)
         {
             BarcodeWriter w = new BarcodeWriter();
@@ -294,6 +311,7 @@ namespace Simpline
             }
         }
 
+        //Nyomtatóváltásnál papírméretlista frissítése
         private void PrintersList_SelectedIndexChanged(object sender, EventArgs e)
         {
             PrinterSettings settings = new PrinterSettings();
@@ -307,6 +325,7 @@ namespace Simpline
             PaperSizeList.SelectedIndex = 0;
         }
 
+        //Papírméret váltásnál panel méretének megváltoztatása
         private void PaperSizeList_SelectedIndexChanged(object sender, EventArgs e)
         {
             PrinterSettings settings = new PrinterSettings();
@@ -321,29 +340,37 @@ namespace Simpline
             }
         }
 
+        //Középső panel méretezése esetén jobboldali gombok mozgatása
         private void Panel1_SizeChanged(object sender, EventArgs e)
         {
-            panel2.Left = panel1.Right + 25;
+            if (panel1.Right > FileName.Right)
+                panel2.Left = panel1.Right + 25;
+            else
+                panel2.Left = FileName.Right + 25;
         }
 
+        //Egérpozicionálás
         private void Panel1_MouseMove(object sender, MouseEventArgs e)
         {
             X.Text = e.X.ToString();
             Y.Text = e.Y.ToString();
         }
 
+        //Nyomtatási előnézet
         private void PrintPreviewLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //GraphicMaker gm = new GraphicMaker();
+            gm = new GraphicMaker(FileName, panel1);
             gm.Printing(bcldict, PrintersList, 1, (short)Convert.ToInt32(CopiesTbx.Text));
         }
 
+        //Oldalbeállítás
         private void PageSetupLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //GraphicMaker gm = new GraphicMaker();
+            gm = new GraphicMaker(FileName, panel1);
             gm.Printing(bcldict, PrintersList, 2, (short)Convert.ToInt32(CopiesTbx.Text));
         }
 
+        //Objektum előrehozása
         private void BringFrontButton_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < bcldict.Count; i++)
@@ -355,6 +382,7 @@ namespace Simpline
             }
         }
 
+        //Objektum hátraküldése
         private void SendBackButton_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < bcldict.Count; i++)
@@ -363,6 +391,28 @@ namespace Simpline
                 {
                     bcldict.ElementAt(i).Key.SendToBack();
                 }
+            }
+        }
+
+        //Ha változás történt, a Mentve státusz tűnjön el
+        private void Panel1_Unsaved()
+        {
+            if (FileName.Text.Contains(" (Mentve)"))
+                labFileName.Text.Replace(" (Mentve)", "");
+        }
+
+        //Renault-os és Volvos címkéknél a panel beállítása
+        private void FileName_TextChanged(object sender, EventArgs e)
+        {
+            if (FileName.Text.ToLower().Contains("renault"))
+            {
+                panel1.Height = 272;
+                panel1.Width = 197;
+            }
+            else if (FileName.Text.ToLower().Contains("volvo"))
+            {
+                panel1.Height = 107;
+                panel1.Width = 197;
             }
         }
     }

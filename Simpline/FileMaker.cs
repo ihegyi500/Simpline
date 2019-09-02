@@ -10,7 +10,17 @@ namespace SimplinePrinter
 {
     class FileMaker
     {
-        public void AddPicture(Panel p, /*List<BarcodeLabel> bclList*/Dictionary<BarcodeLabel, string> bcldict)
+        Panel p;
+        Label l;
+        Dictionary<BarcodeLabel, string> bcldict;
+        public FileMaker(Panel pan, Label lab, Dictionary<BarcodeLabel, string> bclDict)
+        {
+            p = pan;
+            l = lab;
+            bcldict = bclDict;
+        }
+
+        public void AddPicture()
         {
             try
             {
@@ -34,7 +44,7 @@ namespace SimplinePrinter
             }
         }
 
-        public void SaveTxt(/*List<BarcodeLabel> bcl*/Dictionary<BarcodeLabel, string> bcldict)
+        public void SaveTxt()
         {
             BarcodeReader read = new BarcodeReader();
             Bitmap bitmap;
@@ -44,10 +54,6 @@ namespace SimplinePrinter
                 {
                     using (StreamWriter file = File.CreateText(sfd.FileName))
                     {
-                        /*if (sfd.FileName.Contains("renault"))
-                        {
-                            file.Write("")
-                        }*/
                         foreach (BarcodeLabel b in bcldict.Keys)
                         {
                             file.Write(b.getX() + ";" 
@@ -64,21 +70,23 @@ namespace SimplinePrinter
                             {
                                 file.Write(b.getLabX() + ";"
                                     + b.getLabY() + ";"
-                                    + b.getBarcodeLabelSize() + ";"
-                                    /*+ b.getBarcodeLabelType() + ";"*/);
+                                    + b.getBarcodeLabelSize() + ";");
                             }
                             if (b.BorderStyle == BorderStyle.FixedSingle)
                                 file.Write("1");
                             file.Write(Environment.NewLine);
                         }
                     }
+                    if (!l.Text.Contains(" (Mentve)"))
+                        l.Text += " (Mentve)";
                 }
             }
         }
 
-        public void LoadTxt(Panel p, Dictionary<BarcodeLabel, string> bcldict)
+        public void LoadTxt()
         {
             string line;
+            string[] fiNa;
             Bitmap bitmap;
             List<string> fonts = new List<string>();
             BarcodeWriter w = new BarcodeWriter();
@@ -94,11 +102,6 @@ namespace SimplinePrinter
             {
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    /*if (ofd.FileName.Contains("Volvo"))
-                    {
-                        p.Height = 120;
-                        p.Width = 197;
-                    }*/
                     using (StreamReader sr = new StreamReader(ofd.FileName))
                     {
                         while ((line = sr.ReadLine()) != null)
@@ -171,6 +174,8 @@ namespace SimplinePrinter
                             
                         }
                     }
+                    fiNa = ofd.FileName.Split('\\');
+                    l.Text = fiNa[fiNa.Length-1];
                 }
             }
         }
