@@ -22,10 +22,9 @@ namespace SimplinePrinter
 
         public void AddPicture()
         {
-            try
+            using(OpenFileDialog open = new OpenFileDialog() { Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp",
+                                                               ValidateNames = true, Title = "Add a picture" })
             {
-                OpenFileDialog open = new OpenFileDialog(){ ValidateNames = true, Title = "Add a picture" };
-                open.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp";
                 if (open.ShowDialog() == DialogResult.OK)
                 {
                     Bitmap b = new Bitmap(open.FileName);
@@ -37,10 +36,6 @@ namespace SimplinePrinter
                     bcl.setPicture(open.FileName);
                     p.Controls.Add(bcl);
                 }
-            }
-            catch (Exception)
-            {
-                throw new ApplicationException("Failed loading image");
             }
         }
 
@@ -98,7 +93,7 @@ namespace SimplinePrinter
             }
             p.Controls.Clear();
             bcldict.Clear();
-            using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "Txt file|*.txt", ValidateNames = true, Multiselect = false, Title = "Open a txt file" })
+            using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "Txt file|*.txt", ValidateNames = true, Title = "Open a txt file" })
             {
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
