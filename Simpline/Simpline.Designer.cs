@@ -180,6 +180,8 @@
             this.panel1.Size = new System.Drawing.Size(210, 297);
             this.panel1.TabIndex = 23;
             this.panel1.SizeChanged += new System.EventHandler(this.Panel1_SizeChanged);
+            this.panel1.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.Panel1_Unsaved);
+            this.panel1.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.Panel1_Unsaved);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Panel1_MouseMove);
             // 
             // ResizeButton

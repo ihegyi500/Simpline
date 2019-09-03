@@ -9,7 +9,7 @@ namespace SimplinePrinter
     {
         private Point MouseDownLocation;
         private bool resizeOn = false;
-        private string pictureFilePath, codeType;
+        private string pictureFilePath = "", codeType = "";
 
         public BarcodeLabel()
         {
