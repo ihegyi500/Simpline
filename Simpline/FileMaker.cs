@@ -35,6 +35,7 @@ namespace SimplinePrinter
                     bclList.Add(bcl);
                     bcl.setPicture(open.FileName);
                     p.Controls.Add(bcl);
+                    bcl.BackColor = Color.White;
                 }
             }
         }
@@ -151,6 +152,7 @@ namespace SimplinePrinter
                                     }
                                     bcl.BackgroundImageLayout = ImageLayout.Stretch;
                                     bcl.setCodeType(parameters[4]);
+                                    bcl.BackColor = Color.White;
                                 }
                                 else if (fonts.Contains(parameters[4]))
                                 {
@@ -166,6 +168,7 @@ namespace SimplinePrinter
                                     bcl.BackgroundImage = bitmap;
                                     bcl.BackgroundImageLayout = ImageLayout.Stretch;
                                     bcl.setPicture(parameters[4]);
+                                    bcl.BackColor = Color.White;
                                 }
                             }
                             else

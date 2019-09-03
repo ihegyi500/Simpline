@@ -153,21 +153,6 @@ namespace Simpline
             SetFunc(TextFontCbx, TextTbx, TextSizeTbx.Text);
         }
 
-        //Keret ki - bekapcsolása
-        private void RectChbx_CheckStateChanged(object sender, EventArgs e)
-        {
-            for (int i = 0; i < bclList.Count; i++)
-            {
-                if (bclList[i].BackColor == Color.LightGray)
-                {
-                    if (RectChbx.CheckState == CheckState.Checked)
-                        bclList[i].BorderStyle = BorderStyle.FixedSingle;
-                    else
-                        bclList[i].BorderStyle = BorderStyle.None;
-                }
-            }
-        }
-
         //Kép betöltése
         private void OpenPicButton_Click(object sender, EventArgs e)
         {
@@ -250,6 +235,7 @@ namespace Simpline
             barcodeLabel.Name = "Bcl" + bclcounter;
             panel1.Controls.Add(barcodeLabel);
             bclList.Add(barcodeLabel);
+            barcodeLabel.BackColor = Color.White;
             if (FontType.Text == "39 Code" ||
                 FontType.Text == "128 Code" ||
                 FontType.Text == "QR Code")
@@ -303,6 +289,7 @@ namespace Simpline
                         bclList[i].setCodeType(FontType.Text);
                     else
                         bclList[i].setBarcodeLabelType(FontType.Text);
+                    bclList[i].BackColor = Color.White;
                 }
             }
         }
