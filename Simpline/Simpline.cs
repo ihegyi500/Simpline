@@ -12,7 +12,7 @@ namespace Simpline
 {
     public partial class Simpline : Form
     {
-        Dictionary<BarcodeLabel, string> bcldict = new Dictionary<BarcodeLabel, string>();
+        List<BarcodeLabel> bclList = new List<BarcodeLabel>();
         bool resizeOn = false;
         int bclcounter = 0;
         GraphicMaker gm;
@@ -70,12 +70,12 @@ namespace Simpline
         //Kijelölt objektumok törlése
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < bcldict.Count; i++)
+            for (int i = 0; i < bclList.Count; i++)
             {
-                if (bcldict.ElementAt(i).Key.BackColor == Color.LightGray)
+                if (bclList[i].BackColor == Color.LightGray)
                 {
-                    panel1.Controls.Remove(bcldict.ElementAt(i).Key);
-                    bcldict.Remove(bcldict.ElementAt(i).Key);
+                    panel1.Controls.Remove(bclList[i]);
+                    bclList.RemoveAt(i);
                     i -= 1;
                     bclcounter--;
                 }
@@ -95,7 +95,7 @@ namespace Simpline
                 resizeOn = true;
                 ActiveControl.BackColor = Color.LightGray;
             }
-            foreach(BarcodeLabel b in bcldict.Keys)
+            foreach(BarcodeLabel b in bclList)
             {
                 b.setResize(resizeOn);
             }
@@ -113,14 +113,11 @@ namespace Simpline
                     bcl.Height = b.Height;
                     bcl.Width = b.Width;
                     panel1.Controls.Add(bcl);
-                    bcldict.Add(bcl, bcldict[b]);
-                    if (b.BackgroundImage != null &&
-                        bcldict[b] != "39 Code" &&
-                        bcldict[b] != "128 Code" &&
-                        bcldict[b] != "QR Code")
-                        bcl.setPicture(bcldict[b]);
+                    bclList.Add(bcl);
+                    if (b.BackgroundImage != null && b.getCodeType() == "")
+                        bcl.setPicture(b.getPicture());
                     else if (b.BackgroundImage != null)
-                        bcl.setCodeType(bcldict[b]);
+                        bcl.setCodeType(b.getCodeType());
                     else
                     {
                         bcl.setBarcodeLabel(b.getBarcodeLabelString(), b.getBarcodeLabelType(), b.getBarcodeLabelSize());
@@ -133,13 +130,13 @@ namespace Simpline
         private void PrintButton_Click(object sender, EventArgs e)
         {
             gm = new GraphicMaker(FileName,panel1);
-            gm.Printing(bcldict, PrintersList, 3,(short)Convert.ToInt32(CopiesTbx.Text));
+            gm.Printing(bclList, PrintersList, 3,(short)Convert.ToInt32(CopiesTbx.Text));
         }
 
         //Fájl mentése
         private void SavePictureButton_Click(object sender, EventArgs e)
         {
-            FileMaker fmk = new FileMaker(panel1, FileName, bcldict);
+            FileMaker fmk = new FileMaker(panel1, FileName, bclList);
             fmk.SaveTxt();
         }
 
@@ -156,32 +153,17 @@ namespace Simpline
             SetFunc(TextFontCbx, TextTbx, TextSizeTbx.Text);
         }
 
-        //Keret ki - bekapcsolása
-        private void RectChbx_CheckStateChanged(object sender, EventArgs e)
-        {
-            for (int i = 0; i < bcldict.Count; i++)
-            {
-                if (bcldict.ElementAt(i).Key.BackColor == Color.LightGray)
-                {
-                    if (RectChbx.CheckState == CheckState.Checked)
-                        bcldict.ElementAt(i).Key.BorderStyle = BorderStyle.FixedSingle;
-                    else
-                        bcldict.ElementAt(i).Key.BorderStyle = BorderStyle.None;
-                }
-            }
-        }
-
         //Kép betöltése
         private void OpenPicButton_Click(object sender, EventArgs e)
         {
-            FileMaker fmk = new FileMaker(panel1, FileName, bcldict);
+            FileMaker fmk = new FileMaker(panel1, FileName, bclList);
             fmk.AddPicture();
         }
 
         //Fájl megnyitása
         private void LoadPictureButton_Click(object sender, EventArgs e)
         {
-            FileMaker fmk = new FileMaker(panel1, FileName, bcldict);
+            FileMaker fmk = new FileMaker(panel1, FileName, bclList);
             fmk.LoadTxt();
         }
 
@@ -199,7 +181,7 @@ namespace Simpline
             bcl.setBarcodeLabelString("");
             bcl.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(bcl);
-            bcldict.Add(bcl, "");
+            bclList.Add(bcl);
             BringToFrontSendToBack();
         }
 
@@ -252,11 +234,12 @@ namespace Simpline
             }
             barcodeLabel.Name = "Bcl" + bclcounter;
             panel1.Controls.Add(barcodeLabel);
-            bcldict.Add(barcodeLabel, FontType.Text);
+            bclList.Add(barcodeLabel);
+            barcodeLabel.BackColor = Color.White;
             if (FontType.Text == "39 Code" ||
                 FontType.Text == "128 Code" ||
                 FontType.Text == "QR Code")
-                barcodeLabel.setCodeType(bcldict[barcodeLabel]);
+                barcodeLabel.setCodeType(FontType.Text);
             else
                 barcodeLabel.setBarcodeLabelType(FontType.Text);
         }
@@ -265,48 +248,48 @@ namespace Simpline
         private void SetFunc(ComboBox FontType, TextBox value, string size)
         {
             BarcodeWriter w = new BarcodeWriter();
-            for (int i = 0; i < bcldict.Count; i++)
+            for (int i = 0; i < bclList.Count; i++)
             {
-                if (bcldict.ElementAt(i).Key.BackColor == Color.LightGray)
+                if (bclList[i].BackColor == Color.LightGray)
                 {
-                    bcldict.ElementAt(i).Key.BackgroundImage = null;
+                    bclList[i].BackgroundImage = null;
                     w.Options.PureBarcode = true;
-                    w.Options.Height = bcldict.ElementAt(i).Key.getPanHeight();
-                    w.Options.Width = bcldict.ElementAt(i).Key.getPanWidth();
+                    w.Options.Height = bclList[i].getPanHeight();
+                    w.Options.Width = bclList[i].getPanWidth();
 
                     switch (FontType.SelectedItem.ToString())
                     {
                         case "39 Code":
                             {
                                 w.Format = BarcodeFormat.CODE_39;
-                                bcldict.ElementAt(i).Key.BackgroundImage = w.Write(value.Text.ToUpper());
+                                bclList[i].BackgroundImage = w.Write(value.Text.ToUpper());
                                 break;
                             }
                         case "128 Code":
                             {
                                 w.Format = BarcodeFormat.CODE_128;
-                                bcldict.ElementAt(i).Key.BackgroundImage = w.Write(value.Text);
+                                bclList[i].BackgroundImage = w.Write(value.Text);
                                 break;
                             }
                         case "QR Code":
                             {
                                 w.Format = BarcodeFormat.QR_CODE;
-                                bcldict.ElementAt(i).Key.BackgroundImage = w.Write(value.Text);
+                                bclList[i].BackgroundImage = w.Write(value.Text);
                                 break;
                             }
                         default:
                             {
-                                bcldict.ElementAt(i).Key.setBarcodeLabel(value.Text, FontType.Text, Convert.ToInt32(size));
+                                bclList[i].setBarcodeLabel(value.Text, FontType.Text, Convert.ToInt32(size));
                                 break;
                             }
                     }
-                    bcldict[bcldict.ElementAt(i).Key] = FontType.Text;
                     if (FontType.Text == "39 Code" ||
                         FontType.Text == "128 Code" ||
                         FontType.Text == "QR Code")
-                        bcldict.ElementAt(i).Key.setCodeType(bcldict[bcldict.ElementAt(i).Key]);
+                        bclList[i].setCodeType(FontType.Text);
                     else
-                        bcldict.ElementAt(i).Key.setBarcodeLabelType(FontType.Text);
+                        bclList[i].setBarcodeLabelType(FontType.Text);
+                    bclList[i].BackColor = Color.White;
                 }
             }
         }
@@ -360,24 +343,24 @@ namespace Simpline
         private void PrintPreviewLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             gm = new GraphicMaker(FileName, panel1);
-            gm.Printing(bcldict, PrintersList, 1, (short)Convert.ToInt32(CopiesTbx.Text));
+            gm.Printing(bclList, PrintersList, 1, (short)Convert.ToInt32(CopiesTbx.Text));
         }
 
         //Oldalbeállítás
         private void PageSetupLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             gm = new GraphicMaker(FileName, panel1);
-            gm.Printing(bcldict, PrintersList, 2, (short)Convert.ToInt32(CopiesTbx.Text));
+            gm.Printing(bclList, PrintersList, 2, (short)Convert.ToInt32(CopiesTbx.Text));
         }
 
         //Objektum előrehozása
         private void BringFrontButton_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < bcldict.Count; i++)
+            for (int i = 0; i < bclList.Count; i++)
             {
-                if (bcldict.ElementAt(i).Key.BackColor == Color.LightGray)
+                if (bclList[i].BackColor == Color.LightGray)
                 {
-                    bcldict.ElementAt(i).Key.BringToFront();
+                    bclList[i].BringToFront();
                 }
             }
         }
@@ -385,20 +368,13 @@ namespace Simpline
         //Objektum hátraküldése
         private void SendBackButton_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < bcldict.Count; i++)
+            for (int i = 0; i < bclList.Count; i++)
             {
-                if (bcldict.ElementAt(i).Key.BackColor == Color.LightGray)
+                if (bclList[i].BackColor == Color.LightGray)
                 {
-                    bcldict.ElementAt(i).Key.SendToBack();
+                    bclList[i].SendToBack();
                 }
             }
-        }
-
-        //Ha változás történt, a Mentve státusz tűnjön el
-        private void Panel1_Unsaved()
-        {
-            if (FileName.Text.Contains(" (Mentve)"))
-                labFileName.Text.Replace(" (Mentve)", "");
         }
 
         //Renault-os és Volvos címkéknél a panel beállítása
@@ -414,6 +390,13 @@ namespace Simpline
                 panel1.Height = 107;
                 panel1.Width = 197;
             }
+        }
+
+        //Ha változás történt, a Mentve státusz tűnjön el
+        private void Panel1_Unsaved(object sender, ControlEventArgs e)
+        {
+            if (FileName.Text.Contains(" (Mentve)"))
+                FileName.Text.Replace(" (Mentve)", "");
         }
     }
 }

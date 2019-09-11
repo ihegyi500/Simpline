@@ -22,7 +22,7 @@ namespace Simpline
             textBox3.Text = b.getPanHeight().ToString();
             textBox4.Text = b.getPanWidth().ToString();
             textBox5.Text = b.getBarcodeLabelString();
-            if (b.getCodeType() != null)
+            if (b.getCodeType() != "")
             {
                 bitmap = new Bitmap(b.BackgroundImage);
                 textBox5.Text = bcr.Decode(bitmap).Text;
@@ -35,7 +35,7 @@ namespace Simpline
                 textBox5.Text = b.getBarcodeLabelString();
                 textBox6.Text = b.getBarcodeLabelType();
             }
-            else if (b.getPicture() != null)
+            else if (b.getPicture() != "")
             {
                 textBox6.Text = b.getPicture();
                 textBox5.ReadOnly = true;

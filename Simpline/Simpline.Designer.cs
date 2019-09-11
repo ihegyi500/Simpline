@@ -51,7 +51,6 @@
             this.TextFontCbx = new System.Windows.Forms.ComboBox();
             this.TextTbx = new System.Windows.Forms.TextBox();
             this.LoadPictureButton = new System.Windows.Forms.Button();
-            this.RectChbx = new System.Windows.Forms.CheckBox();
             this.OpenPicButton = new System.Windows.Forms.Button();
             this.PaperSizeList = new System.Windows.Forms.ComboBox();
             this.PaperSizeLabel = new System.Windows.Forms.Label();
@@ -180,6 +179,8 @@
             this.panel1.Size = new System.Drawing.Size(210, 297);
             this.panel1.TabIndex = 23;
             this.panel1.SizeChanged += new System.EventHandler(this.Panel1_SizeChanged);
+            this.panel1.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.Panel1_Unsaved);
+            this.panel1.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.Panel1_Unsaved);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Panel1_MouseMove);
             // 
             // ResizeButton
@@ -299,17 +300,6 @@
             this.LoadPictureButton.UseVisualStyleBackColor = false;
             this.LoadPictureButton.Click += new System.EventHandler(this.LoadPictureButton_Click);
             // 
-            // RectChbx
-            // 
-            this.RectChbx.AutoSize = true;
-            this.RectChbx.Location = new System.Drawing.Point(12, 173);
-            this.RectChbx.Name = "RectChbx";
-            this.RectChbx.Size = new System.Drawing.Size(51, 17);
-            this.RectChbx.TabIndex = 41;
-            this.RectChbx.Text = "Keret";
-            this.RectChbx.UseVisualStyleBackColor = true;
-            this.RectChbx.CheckStateChanged += new System.EventHandler(this.RectChbx_CheckStateChanged);
-            // 
             // OpenPicButton
             // 
             this.OpenPicButton.BackColor = System.Drawing.Color.White;
@@ -367,7 +357,6 @@
             this.panel2.Controls.Add(this.BringFrontButton);
             this.panel2.Controls.Add(this.RectButton);
             this.panel2.Controls.Add(this.OpenPicButton);
-            this.panel2.Controls.Add(this.RectChbx);
             this.panel2.Controls.Add(this.LoadPictureButton);
             this.panel2.Controls.Add(this.TextFontLabel);
             this.panel2.Controls.Add(this.TextSizeLabel);
@@ -579,7 +568,6 @@
         private System.Windows.Forms.ComboBox TextFontCbx;
         private System.Windows.Forms.TextBox TextTbx;
         private System.Windows.Forms.Button LoadPictureButton;
-        private System.Windows.Forms.CheckBox RectChbx;
         private System.Windows.Forms.Button OpenPicButton;
         private System.Windows.Forms.ComboBox PaperSizeList;
         private System.Windows.Forms.Label PaperSizeLabel;

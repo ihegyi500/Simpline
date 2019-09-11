@@ -9,7 +9,7 @@ namespace SimplinePrinter
     {
         private Point MouseDownLocation;
         private bool resizeOn = false;
-        private string pictureFilePath, codeType;
+        private string pictureFilePath = "", codeType = "";
 
         public BarcodeLabel()
         {
@@ -156,6 +156,7 @@ namespace SimplinePrinter
             label1.Top = (this.Height - label1.Height) / 2;
         }
 
+        //Egérpozíció elmentése
         public void bcl_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -164,6 +165,7 @@ namespace SimplinePrinter
             }
         }
 
+        //Objektum méretezése/mozgatása
         public void bcl_MouseMove(object sender, MouseEventArgs e)
         {
            if (e.Button == MouseButtons.Left && resizeOn)
@@ -179,12 +181,16 @@ namespace SimplinePrinter
             }
         }
 
+        //Objektum kijelölése
         public void bcl_MouseClick(object sender, MouseEventArgs e)
         {
             if (this.BackColor == Color.LightGray)
             {
-                this.BackColor = Color.Empty;
-                if (this.BackgroundImage != null || this.label1.Text != "")
+                if (this.BackgroundImage != null)
+                    this.BackColor = Color.White;
+                else
+                    this.BackColor = Color.Empty;
+                if (this.label1.Text != "" || this.BackgroundImage != null)
                     this.BorderStyle = BorderStyle.None;
             }
             else
@@ -194,6 +200,7 @@ namespace SimplinePrinter
                     this.BorderStyle = BorderStyle.FixedSingle;
             }
         }
+
          public void setResize(bool resOn)
         {
             resizeOn = resOn;
