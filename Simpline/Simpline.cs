@@ -24,12 +24,8 @@ namespace Simpline
 
         private void BarcodePrinter_Load(object sender, EventArgs e)
         {
-            string[] CbxArray;
-            //Címkelista feltöltése
-            LabelList.Items.AddRange(CbxArray = new string[] { "Volvo", "Renault", "Alapértelmezett" });
-            LabelList.SelectedIndex = 0;
-            //Vonalkódtípuslista feltöltése
-            BarcodeTypeCbx.Items.AddRange(CbxArray = new string[] { "39 Code", "128 Code", "QR Code" });
+            //Vonalkódlista feltöltése
+            BarcodeTypeCbx.Items.AddRange(new string[] { "39 Code", "128 Code", "QR Code" });
             BarcodeTypeCbx.SelectedIndex = 0;
             //Betűtípuslista feltöltése
             using (InstalledFontCollection fontsCollection = new InstalledFontCollection())
@@ -54,6 +50,10 @@ namespace Simpline
                  PaperSizeList.Items.Add(ps.Kind.ToString());
             }
             PaperSizeList.SelectedIndex = 0;
+            //Címkelista feltöltése
+            LabelList.Items.AddRange(new string[] { "Volvo", "Renault", "Alapértelmezett" });
+            LabelList.SelectedIndex = 0;
+
         }
 
         //Új vonalkódobjektum hozzáadása
