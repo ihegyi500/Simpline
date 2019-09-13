@@ -24,10 +24,12 @@ namespace Simpline
 
         private void BarcodePrinter_Load(object sender, EventArgs e)
         {
+            string[] CbxArray;
+            //Címkelista feltöltése
+            LabelList.Items.AddRange(CbxArray = new string[] { "Volvo", "Renault", "Alapértelmezett" });
+            LabelList.SelectedIndex = 0;
             //Vonalkódtípuslista feltöltése
-            BarcodeTypeCbx.Items.Add("39 Code");
-            BarcodeTypeCbx.Items.Add("128 Code");
-            BarcodeTypeCbx.Items.Add("QR Code");
+            BarcodeTypeCbx.Items.AddRange(CbxArray = new string[] { "39 Code", "128 Code", "QR Code" });
             BarcodeTypeCbx.SelectedIndex = 0;
             //Betűtípuslista feltöltése
             using (InstalledFontCollection fontsCollection = new InstalledFontCollection())
@@ -377,26 +379,46 @@ namespace Simpline
             }
         }
 
-        //Renault-os és Volvos címkéknél a panel beállítása
-        private void FileName_TextChanged(object sender, EventArgs e)
-        {
-            if (FileName.Text.ToLower().Contains("renault"))
-            {
-                panel1.Height = 272;
-                panel1.Width = 197;
-            }
-            else if (FileName.Text.ToLower().Contains("volvo"))
-            {
-                panel1.Height = 107;
-                panel1.Width = 197;
-            }
-        }
-
         //Ha változás történt, a Mentve státusz tűnjön el
         private void Panel1_Unsaved(object sender, ControlEventArgs e)
         {
             if (FileName.Text.Contains(" (Mentve)"))
                 FileName.Text.Replace(" (Mentve)", "");
+        }
+
+        //Renault-os és Volvos címkéknél a panel beállítása
+        private void LabelList_TextChanged(object sender, EventArgs e)
+        {
+            switch (LabelList.SelectedItem.ToString())
+            {
+                case "Volvo":
+                    {
+                        panel1.Height = 107;
+                        panel1.Width = 197;
+                        break;
+                    }
+                case "Renault":
+                    {
+                        panel1.Height = 272;
+                        panel1.Width = 197;
+                        break;
+                    }
+                default:
+                    {
+                        PaperSizeList_SelectedIndexChanged(sender, e);
+                        PrinterSettings settings = new PrinterSettings();
+                        settings.PrinterName = PrintersList.SelectedItem.ToString();
+                        foreach (PaperSize ps in settings.PaperSizes)
+                        {
+                            if (ps.Kind.ToString() == PaperSizeList.SelectedItem.ToString())
+                            {
+                                panel1.Height = ps.Height;
+                                panel1.Width = ps.Width;
+                            }
+                        }
+                        break;
+                    }
+            }
         }
     }
 }

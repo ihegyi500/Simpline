@@ -70,6 +70,8 @@
             this.laby = new System.Windows.Forms.Label();
             this.labFileName = new System.Windows.Forms.Label();
             this.FileName = new System.Windows.Forms.Label();
+            this.LabLabel = new System.Windows.Forms.Label();
+            this.LabelList = new System.Windows.Forms.ComboBox();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -106,7 +108,7 @@
             // AddBarcodeButton
             // 
             this.AddBarcodeButton.BackColor = System.Drawing.Color.White;
-            this.AddBarcodeButton.Location = new System.Drawing.Point(64, 101);
+            this.AddBarcodeButton.Location = new System.Drawing.Point(63, 62);
             this.AddBarcodeButton.Name = "AddBarcodeButton";
             this.AddBarcodeButton.Size = new System.Drawing.Size(75, 40);
             this.AddBarcodeButton.TabIndex = 5;
@@ -117,7 +119,7 @@
             // SetBarcodeButton
             // 
             this.SetBarcodeButton.BackColor = System.Drawing.Color.White;
-            this.SetBarcodeButton.Location = new System.Drawing.Point(145, 101);
+            this.SetBarcodeButton.Location = new System.Drawing.Point(144, 62);
             this.SetBarcodeButton.Name = "SetBarcodeButton";
             this.SetBarcodeButton.Size = new System.Drawing.Size(75, 40);
             this.SetBarcodeButton.TabIndex = 4;
@@ -399,6 +401,8 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.LabelList);
+            this.panel3.Controls.Add(this.LabLabel);
             this.panel3.Controls.Add(this.CopiesTbx);
             this.panel3.Controls.Add(this.CopiesLabel);
             this.panel3.Controls.Add(this.linkLabel1);
@@ -511,7 +515,24 @@
             this.FileName.Name = "FileName";
             this.FileName.Size = new System.Drawing.Size(0, 13);
             this.FileName.TabIndex = 54;
-            this.FileName.TextChanged += new System.EventHandler(this.FileName_TextChanged);
+            // 
+            // LabLabel
+            // 
+            this.LabLabel.AutoSize = true;
+            this.LabLabel.Location = new System.Drawing.Point(13, 115);
+            this.LabLabel.Name = "LabLabel";
+            this.LabLabel.Size = new System.Drawing.Size(41, 13);
+            this.LabLabel.TabIndex = 50;
+            this.LabLabel.Text = "Címke:";
+            // 
+            // LabelList
+            // 
+            this.LabelList.FormattingEnabled = true;
+            this.LabelList.Location = new System.Drawing.Point(16, 131);
+            this.LabelList.Name = "LabelList";
+            this.LabelList.Size = new System.Drawing.Size(240, 21);
+            this.LabelList.TabIndex = 51;
+            this.LabelList.TextChanged += new System.EventHandler(this.LabelList_TextChanged);
             // 
             // Simpline
             // 
@@ -587,6 +608,8 @@
         private System.Windows.Forms.Button BringFrontButton;
         private System.Windows.Forms.Label labFileName;
         private System.Windows.Forms.Label FileName;
+        private System.Windows.Forms.ComboBox LabelList;
+        private System.Windows.Forms.Label LabLabel;
     }
 }
 
