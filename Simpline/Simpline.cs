@@ -313,14 +313,17 @@ namespace Simpline
         //Papírméret váltásnál panel méretének megváltoztatása
         private void PaperSizeList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PrinterSettings settings = new PrinterSettings();
-            settings.PrinterName = PrintersList.SelectedItem.ToString();
-            foreach (PaperSize ps in settings.PaperSizes)
+            if (LabelList.Text == "Alapértelmezett")
             {
-                if(ps.Kind.ToString() == PaperSizeList.SelectedItem.ToString())
+                PrinterSettings settings = new PrinterSettings();
+                settings.PrinterName = PrintersList.SelectedItem.ToString();
+                foreach (PaperSize ps in settings.PaperSizes)
                 {
-                    panel1.Height = ps.Height;
-                    panel1.Width = ps.Width;
+                    if (ps.Kind.ToString() == PaperSizeList.SelectedItem.ToString())
+                    {
+                        panel1.Height = ps.Height;
+                        panel1.Width = ps.Width;
+                    }
                 }
             }
         }
@@ -379,13 +382,6 @@ namespace Simpline
             }
         }
 
-        //Ha változás történt, a Mentve státusz tűnjön el
-        private void Panel1_Unsaved(object sender, ControlEventArgs e)
-        {
-            if (FileName.Text.Contains(" (Mentve)"))
-                FileName.Text.Replace(" (Mentve)", "");
-        }
-
         //Renault-os és Volvos címkéknél a panel beállítása
         private void LabelList_TextChanged(object sender, EventArgs e)
         {
@@ -393,18 +389,21 @@ namespace Simpline
             {
                 case "Volvo":
                     {
-                        panel1.Height = 107;
+                        PaperSizeList.Enabled = false;
+                        panel1.Height = 158;
                         panel1.Width = 197;
                         break;
                     }
                 case "Renault":
                     {
+                        PaperSizeList.Enabled = false;
                         panel1.Height = 272;
                         panel1.Width = 197;
                         break;
                     }
                 default:
                     {
+                        PaperSizeList.Enabled = true;
                         PaperSizeList_SelectedIndexChanged(sender, e);
                         PrinterSettings settings = new PrinterSettings();
                         settings.PrinterName = PrintersList.SelectedItem.ToString();
