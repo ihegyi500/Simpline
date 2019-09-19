@@ -11,14 +11,6 @@ namespace SimplinePrinter
         List<BarcodeLabel> bclList = new List<BarcodeLabel>();
         ComboBox PrintersList;
         PrintDocument PrintDoc = new PrintDocument();
-        public GraphicMaker(Label l, Panel p)
-        {
-            if (l.Text.Contains("Renault") || l.Text.Contains("Volvo"))
-            {
-                PrintDoc.DefaultPageSettings.PaperSize.Height = p.Height;
-                PrintDoc.DefaultPageSettings.PaperSize.Width = p.Width;
-            }
-        }
 
         public void PrintDialog()
         {

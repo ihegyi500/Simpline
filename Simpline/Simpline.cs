@@ -131,7 +131,7 @@ namespace Simpline
         //Nyomtatás
         private void PrintButton_Click(object sender, EventArgs e)
         {
-            gm = new GraphicMaker(FileName,panel1);
+            gm = new GraphicMaker();
             gm.Printing(bclList, PrintersList, 3,(short)Convert.ToInt32(CopiesTbx.Text));
         }
 
@@ -172,7 +172,7 @@ namespace Simpline
         //Nyomtatótulajdonságok
         private void PrintPropLabel_Click(object sender, EventArgs e)
         {
-            gm = new GraphicMaker(FileName, panel1);
+            gm = new GraphicMaker();
             gm.PrintDialog();
         }
 
@@ -347,14 +347,14 @@ namespace Simpline
         //Nyomtatási előnézet
         private void PrintPreviewLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            gm = new GraphicMaker(FileName, panel1);
+            gm = new GraphicMaker();
             gm.Printing(bclList, PrintersList, 1, (short)Convert.ToInt32(CopiesTbx.Text));
         }
 
         //Oldalbeállítás
         private void PageSetupLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            gm = new GraphicMaker(FileName, panel1);
+            gm = new GraphicMaker();
             gm.Printing(bclList, PrintersList, 2, (short)Convert.ToInt32(CopiesTbx.Text));
         }
 
