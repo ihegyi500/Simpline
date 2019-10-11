@@ -1,6 +1,6 @@
 ﻿namespace SimplinePrinter
 {
-    partial class BarcodeLabel
+    partial class SimplineObject
     {
         /// <summary> 
         /// Required designer variable.
@@ -38,23 +38,23 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 0;
-            this.label1.SizeChanged += new System.EventHandler(this.BarcodeLabel_SizeChanged);
+            this.label1.SizeChanged += new System.EventHandler(this.SimplineObject_SizeChanged);
             this.label1.DoubleClick += new System.EventHandler(this.Label1_DoubleClick);
             this.label1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.bcl_MouseClick);
             this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.bcl_MouseDown);
             this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.bcl_MouseMove);
             // 
-            // BarcodeLabel
+            // SimplineObject
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.label1);
-            this.Name = "BarcodeLabel";
+            this.Name = "SimplineObject";
             this.Size = new System.Drawing.Size(146, 54);
-            this.Load += new System.EventHandler(this.BarcodeLabel_Load);
-            this.SizeChanged += new System.EventHandler(this.BarcodeLabel_SizeChanged);
-            this.DoubleClick += new System.EventHandler(this.BarcodeLabel_DoubleClick);
+            this.Load += new System.EventHandler(this.SimplineObject_Load);
+            this.SizeChanged += new System.EventHandler(this.SimplineObject_SizeChanged);
+            this.DoubleClick += new System.EventHandler(this.SimplineObject_DoubleClick);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.bcl_MouseClick);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.bcl_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.bcl_MouseMove);

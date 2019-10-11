@@ -21,11 +21,11 @@
       <FileName>ObjectLoc.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SimplinePrinter.BarcodeLabel">
+  <Class Name="SimplinePrinter.SimplineObject">
     <Position X="0.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAAAATAAoCMgATAAQACGAgASAACBgAABAAACAGCCAQE=</HashCode>
-      <FileName>BarcodeLabel.cs</FileName>
+      <FileName>SimplineObject.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Simpline.Simpline">

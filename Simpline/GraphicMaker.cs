@@ -8,7 +8,7 @@ namespace SimplinePrinter
     class GraphicMaker
     {
         Graphics g;
-        List<BarcodeLabel> bclList = new List<BarcodeLabel>();
+        List<SimplineObject> bclList = new List<SimplineObject>();
         ComboBox PrintersList;
         PrintDocument PrintDoc = new PrintDocument();
 
@@ -22,7 +22,7 @@ namespace SimplinePrinter
             }
         }
 
-        public void Printing(List<BarcodeLabel> listParam, ComboBox box, int sent, int copies)
+        public void Printing(List<SimplineObject> listParam, ComboBox box, int sent, int copies)
         {
             bclList = listParam;
             PrintersList = box;
@@ -74,7 +74,7 @@ namespace SimplinePrinter
             Pen pen;
             Font font;
             SolidBrush brush = new SolidBrush(Color.Black);
-            foreach (BarcodeLabel l in bclList)
+            foreach (SimplineObject l in bclList)
             {
                 if (l.BorderStyle == BorderStyle.FixedSingle)
                     pen = new Pen(Color.Black);
@@ -82,8 +82,8 @@ namespace SimplinePrinter
                     pen = new Pen(Color.Transparent);
                 Rectangle rec = new Rectangle(l.getX(), l.getY(), l.Width, l.Height);
                 g.DrawRectangle(pen, rec);
-                font = new Font(l.getBarcodeLabelType(), l.getBarcodeLabelSize());
-                g.DrawString(l.getBarcodeLabelString(), font, brush, l.getLabX(), l.getLabY());
+                font = new Font(l.getSimplineObjectType(), l.getSimplineObjectSize());
+                g.DrawString(l.getSimplineObjectString(), font, brush, l.getLabX(), l.getLabY());
                 if (l.BackgroundImage != null)
                     g.DrawImage(l.BackgroundImage, l.getX(), l.getY(), l.Width, l.Height);
             }

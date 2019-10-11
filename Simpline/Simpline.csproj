@@ -70,11 +70,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BarcodeLabel.cs">
+    <Compile Include="SimplineObject.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="BarcodeLabel.Designer.cs">
-      <DependentUpon>BarcodeLabel.cs</DependentUpon>
+    <Compile Include="SimplineObject.Designer.cs">
+      <DependentUpon>SimplineObject.cs</DependentUpon>
     </Compile>
     <Compile Include="ObjectLoc.cs">
       <SubType>Form</SubType>
@@ -93,8 +93,8 @@
     <Compile Include="GraphicMaker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="BarcodeLabel.resx">
-      <DependentUpon>BarcodeLabel.cs</DependentUpon>
+    <EmbeddedResource Include="SimplineObject.resx">
+      <DependentUpon>SimplineObject.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ObjectLoc.resx">
       <DependentUpon>ObjectLoc.cs</DependentUpon>

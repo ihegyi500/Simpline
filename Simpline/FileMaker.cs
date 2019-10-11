@@ -12,8 +12,8 @@ namespace SimplinePrinter
     {
         Panel p;
         Label l;
-        List<BarcodeLabel> bclList = new List<BarcodeLabel>();
-        public FileMaker(Panel pan, Label lab, List<BarcodeLabel> listParam)
+        List<SimplineObject> bclList = new List<SimplineObject>();
+        public FileMaker(Panel pan, Label lab, List<SimplineObject> listParam)
         {
             bclList = listParam;
             p = pan;
@@ -28,7 +28,7 @@ namespace SimplinePrinter
                 if (open.ShowDialog() == DialogResult.OK)
                 {
                     Bitmap b = new Bitmap(open.FileName);
-                    BarcodeLabel bcl = new BarcodeLabel();
+                    SimplineObject bcl = new SimplineObject();
                     bcl.Height = b.Height;
                     bcl.Width = b.Width;
                     bcl.BackgroundImage = b;
@@ -50,7 +50,7 @@ namespace SimplinePrinter
                 {
                     using (StreamWriter file = File.CreateText(sfd.FileName))
                     {
-                        foreach (BarcodeLabel b in bclList)
+                        foreach (SimplineObject b in bclList)
                         {
                             file.Write(b.getX() + ";" 
                                         + b.getY() + ";"
@@ -72,13 +72,13 @@ namespace SimplinePrinter
                             }
                             else
                             {
-                                if (b.getBarcodeLabelString() != "")
+                                if (b.getSimplineObjectString() != "")
                                 {
-                                    file.Write(b.getBarcodeLabelType() + ";"
-                                    + b.getBarcodeLabelString() + ";"
+                                    file.Write(b.getSimplineObjectType() + ";"
+                                    + b.getSimplineObjectString() + ";"
                                     + b.getLabX() + ";"
                                     + b.getLabY() + ";"
-                                    + b.getBarcodeLabelSize() + ";");
+                                    + b.getSimplineObjectSize() + ";");
                                 }
                                 else
                                     file.Write(";");
@@ -117,7 +117,7 @@ namespace SimplinePrinter
                     {
                         while ((line = sr.ReadLine()) != null)
                         {
-                            BarcodeLabel bcl = new BarcodeLabel();
+                            SimplineObject bcl = new SimplineObject();
                             string[] parameters = line.Split(';');
                             bcl.setX(Convert.ToInt32(parameters[0]));
                             bcl.setY(Convert.ToInt32(parameters[1]));
@@ -156,11 +156,11 @@ namespace SimplinePrinter
                                 }
                                 else if (fonts.Contains(parameters[4]))
                                 {
-                                    bcl.setBarcodeLabelType(parameters[4]);
-                                    bcl.setBarcodeLabelString(parameters[5]);
+                                    bcl.setSimplineObjectType(parameters[4]);
+                                    bcl.setSimplineObjectString(parameters[5]);
                                     bcl.setLabX(Convert.ToInt32(parameters[6]));
                                     bcl.setLabY(Convert.ToInt32(parameters[7]));
-                                    bcl.setBarcodeLabelSize(Convert.ToInt32(parameters[8]));
+                                    bcl.setSimplineObjectSize(Convert.ToInt32(parameters[8]));
                                 }
                                 else
                                 {

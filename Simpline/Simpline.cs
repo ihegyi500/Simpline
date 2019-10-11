@@ -5,14 +5,13 @@ using System.Windows.Forms;
 using System.Drawing.Printing;
 using System.Drawing.Text;
 using SimplinePrinter;
-using System.Linq;
 using ZXing;
 
 namespace Simpline
 {
     public partial class Simpline : Form
     {
-        List<BarcodeLabel> bclList = new List<BarcodeLabel>();
+        List<SimplineObject> bclList = new List<SimplineObject>();
         bool resizeOn = false;
         int bclcounter = 0;
         GraphicMaker gm;
@@ -36,7 +35,7 @@ namespace Simpline
                     TextFontCbx.Items.Add(font.Name);
                 }
             }
-            TextFontCbx.SelectedIndex = 1;
+            TextFontCbx.SelectedIndex = 0;
             //Nyomtatólista feltöltése
             PrinterSettings settings = new PrinterSettings();
             foreach (String printer in PrinterSettings.InstalledPrinters)
@@ -97,7 +96,7 @@ namespace Simpline
                 resizeOn = true;
                 ActiveControl.BackColor = Color.LightGray;
             }
-            foreach(BarcodeLabel b in bclList)
+            foreach(SimplineObject b in bclList)
             {
                 b.setResize(resizeOn);
             }
@@ -106,11 +105,11 @@ namespace Simpline
         //Kijelölt objektumok klónozása
         private void CopyPasteButton_Click(object sender, EventArgs e)
         {
-            foreach (BarcodeLabel b in panel1.Controls)
+            foreach (SimplineObject b in panel1.Controls)
             {
                 if(b.BackColor == Color.LightGray)
                 {
-                    BarcodeLabel bcl = new BarcodeLabel();
+                    SimplineObject bcl = new SimplineObject();
                     bcl.BackgroundImage = b.BackgroundImage;
                     bcl.Height = b.Height;
                     bcl.Width = b.Width;
@@ -122,7 +121,7 @@ namespace Simpline
                         bcl.setCodeType(b.getCodeType());
                     else
                     {
-                        bcl.setBarcodeLabel(b.getBarcodeLabelString(), b.getBarcodeLabelType(), b.getBarcodeLabelSize());
+                        bcl.setSimplineObject(b.getSimplineObjectString(), b.getSimplineObjectType(), b.getSimplineObjectSize());
                     }
                 }
             }
@@ -179,8 +178,8 @@ namespace Simpline
         //Új keret hozzáadása
         private void RectButton_Click(object sender, EventArgs e)
         {
-            BarcodeLabel bcl = new BarcodeLabel();
-            bcl.setBarcodeLabelString("");
+            SimplineObject bcl = new SimplineObject();
+            bcl.setSimplineObjectString("");
             bcl.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(bcl);
             bclList.Add(bcl);
@@ -190,9 +189,9 @@ namespace Simpline
         //Keretobjektumok automatikus hátraküldése
         private void BringToFrontSendToBack()
         {
-            foreach (BarcodeLabel b in panel1.Controls)
+            foreach (SimplineObject b in panel1.Controls)
             {
-                if (b.getBarcodeLabelString() == "" && b.BorderStyle == BorderStyle.FixedSingle && b.BackgroundImage == null)
+                if (b.getSimplineObjectString() == "" && b.BorderStyle == BorderStyle.FixedSingle && b.BackgroundImage == null)
                     b.SendToBack();
                 else
                     b.BringToFront();
@@ -203,47 +202,47 @@ namespace Simpline
         private void AddFunc(ComboBox FontType, TextBox value, string size)
         {
             bclcounter++;
-            BarcodeLabel barcodeLabel = new BarcodeLabel();
+            SimplineObject SimplineObject = new SimplineObject();
             BarcodeWriter w = new BarcodeWriter();
             w.Options.PureBarcode = true;
-            w.Options.Height = barcodeLabel.getPanHeight();
-            w.Options.Width = barcodeLabel.getPanWidth();
+            w.Options.Height = SimplineObject.getPanHeight();
+            w.Options.Width = SimplineObject.getPanWidth();
             switch (FontType.SelectedItem.ToString())
             {
                 case "39 Code":
                     {
                         w.Format = BarcodeFormat.CODE_39;
-                        barcodeLabel.BackgroundImage = w.Write(value.Text.ToUpper());
+                        SimplineObject.BackgroundImage = w.Write(value.Text.ToUpper());
                         break;
                     }
                 case "128 Code":
                     {
                         w.Format = BarcodeFormat.CODE_128;
-                        barcodeLabel.BackgroundImage = w.Write(value.Text);
+                        SimplineObject.BackgroundImage = w.Write(value.Text);
                         break;
                     }
                 case "QR Code":
                     {
                         w.Format = BarcodeFormat.QR_CODE;
-                        barcodeLabel.BackgroundImage = w.Write(value.Text);
+                        SimplineObject.BackgroundImage = w.Write(value.Text);
                         break;
                     }
                 default:
                     {
-                        barcodeLabel.setBarcodeLabel(value.Text, FontType.Text, Convert.ToInt32(size));
+                        SimplineObject.setSimplineObject(value.Text, FontType.Text, Convert.ToInt32(size));
                         break;
                     }
             }
-            barcodeLabel.Name = "Bcl" + bclcounter;
-            panel1.Controls.Add(barcodeLabel);
-            bclList.Add(barcodeLabel);
-            barcodeLabel.BackColor = Color.White;
+            SimplineObject.Name = "Bcl" + bclcounter;
+            panel1.Controls.Add(SimplineObject);
+            bclList.Add(SimplineObject);
+            SimplineObject.BackColor = Color.White;
             if (FontType.Text == "39 Code" ||
                 FontType.Text == "128 Code" ||
                 FontType.Text == "QR Code")
-                barcodeLabel.setCodeType(FontType.Text);
+                SimplineObject.setCodeType(FontType.Text);
             else
-                barcodeLabel.setBarcodeLabelType(FontType.Text);
+                SimplineObject.setSimplineObjectType(FontType.Text);
         }
 
         //Általános metódus objektum szerkesztéséhez
@@ -281,7 +280,7 @@ namespace Simpline
                             }
                         default:
                             {
-                                bclList[i].setBarcodeLabel(value.Text, FontType.Text, Convert.ToInt32(size));
+                                bclList[i].setSimplineObject(value.Text, FontType.Text, Convert.ToInt32(size));
                                 break;
                             }
                     }
@@ -290,7 +289,7 @@ namespace Simpline
                         FontType.Text == "QR Code")
                         bclList[i].setCodeType(FontType.Text);
                     else
-                        bclList[i].setBarcodeLabelType(FontType.Text);
+                        bclList[i].setSimplineObjectType(FontType.Text);
                     bclList[i].BackColor = Color.White;
                 }
             }

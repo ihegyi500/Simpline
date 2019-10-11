@@ -3,25 +3,23 @@ using System.Windows.Forms;
 using SimplinePrinter;
 using System.Drawing;
 using ZXing;
-using System.Collections.Generic;
-using System.Drawing.Text;
 
 namespace Simpline
 {
     public partial class ObjectLoc : Form
     {
-        BarcodeLabel bcl;
+        SimplineObject bcl;
         BarcodeReader bcr = new BarcodeReader();
         BarcodeWriter bcw = new BarcodeWriter();
         Bitmap bitmap;
-        public ObjectLoc(BarcodeLabel b)
+        public ObjectLoc(SimplineObject b)
         {
             InitializeComponent();
             textBox1.Text = b.getX().ToString();
             textBox2.Text = b.getY().ToString();
             textBox3.Text = b.getPanHeight().ToString();
             textBox4.Text = b.getPanWidth().ToString();
-            textBox5.Text = b.getBarcodeLabelString();
+            textBox5.Text = b.getSimplineObjectString();
             if (b.getCodeType() != "")
             {
                 bitmap = new Bitmap(b.BackgroundImage);
@@ -30,10 +28,10 @@ namespace Simpline
                 textBox5.ReadOnly = true;
                 textBox6.ReadOnly = true;
             }
-            else if (b.getBarcodeLabelString() != "")
+            else if (b.getSimplineObjectString() != "")
             {
-                textBox5.Text = b.getBarcodeLabelString();
-                textBox6.Text = b.getBarcodeLabelType();
+                textBox5.Text = b.getSimplineObjectString();
+                textBox6.Text = b.getSimplineObjectType();
             }
             else if (b.getPicture() != "")
             {
@@ -81,7 +79,7 @@ namespace Simpline
             }
             //bcldict[bcldict.ElementAt(i).Key] = FontType.Text;
             else if(bcl.BackgroundImage == null)
-                bcl.setBarcodeLabel(textBox5.Text, textBox6.Text, bcl.getBarcodeLabelSize());
+                bcl.setSimplineObject(textBox5.Text, textBox6.Text, bcl.getSimplineObjectSize());
             this.Close();
         }
     }

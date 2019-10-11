@@ -5,13 +5,13 @@ using Simpline;
 
 namespace SimplinePrinter
 {
-    public partial class BarcodeLabel : UserControl
+    public partial class SimplineObject : UserControl
     {
         private Point MouseDownLocation;
         private bool resizeOn = false;
         private string pictureFilePath = "", codeType = "";
 
-        public BarcodeLabel()
+        public SimplineObject()
         {
             InitializeComponent();
         }
@@ -36,39 +36,39 @@ namespace SimplinePrinter
             codeType = str;
         }
 
-        public void setBarcodeLabel(string str, string s, int i)
+        public void setSimplineObject(string str, string s, int i)
         {
             label1.Font = new Font(s, i);
             label1.Text = str;
         }
 
-        public string getBarcodeLabelString()
+        public string getSimplineObjectString()
         {
             return this.label1.Text;
         }
 
-        public void setBarcodeLabelString(string String)
+        public void setSimplineObjectString(string String)
         {
             label1.Text = String;
         }
 
 
-        public int getBarcodeLabelSize()
+        public int getSimplineObjectSize()
         {
             return Convert.ToInt32(this.label1.Font.Size);
         }
 
-        public void setBarcodeLabelSize(int Size)
+        public void setSimplineObjectSize(int Size)
         {
             label1.Font = new Font(label1.Font.FontFamily,Size,label1.Font.Style);
         }
 
-        public string getBarcodeLabelType()
+        public string getSimplineObjectType()
         {
             return this.label1.Font.Name;
         }
 
-        public void setBarcodeLabelType(string String)
+        public void setSimplineObjectType(string String)
         {
             label1.Font = new Font(String, label1.Font.Size);
         }
@@ -134,7 +134,7 @@ namespace SimplinePrinter
 
 
         //Középen tartja a vonalkódot a panel méretezése után is
-        private void BarcodeLabel_SizeChanged(object sender, EventArgs e)
+        private void SimplineObject_SizeChanged(object sender, EventArgs e)
         {
             if (this.BackgroundImage != null)
                 this.BackgroundImageLayout = ImageLayout.Stretch;
@@ -150,7 +150,7 @@ namespace SimplinePrinter
             }
         }
         //Betöltéskor középre rakja a vonalkódot
-        private void BarcodeLabel_Load(object sender, EventArgs e)
+        private void SimplineObject_Load(object sender, EventArgs e)
         {
             label1.Left = (this.Width - label1.Width) / 2;
             label1.Top = (this.Height - label1.Height) / 2;
@@ -212,7 +212,7 @@ namespace SimplinePrinter
             ol.Show();
         }
 
-        private void BarcodeLabel_DoubleClick(object sender, EventArgs e)
+        private void SimplineObject_DoubleClick(object sender, EventArgs e)
         {
             ObjectLoc ol = new ObjectLoc(this);
             ol.Show();
