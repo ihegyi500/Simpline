@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing.Printing;
 using System.Drawing.Text;
-using SimplinePrinter;
 using ZXing;
 
 namespace Simpline

@@ -1,4 +1,4 @@
-﻿namespace SimplinePrinter
+﻿namespace Simpline
 {
     partial class SimplineObject
     {

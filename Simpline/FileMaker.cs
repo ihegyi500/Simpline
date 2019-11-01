@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using System.IO;
 using ZXing;
 
-namespace SimplinePrinter
+namespace Simpline
 {
     class FileMaker
     {

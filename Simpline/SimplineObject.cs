@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Simpline;
 
-namespace SimplinePrinter
+namespace Simpline
 {
     public partial class SimplineObject : UserControl
     {
