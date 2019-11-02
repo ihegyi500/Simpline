@@ -4,20 +4,17 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.Windows.Forms;
 using System.IO;
-using ZXing;
 
 namespace Simpline
 {
     class FileHandler
     {
         Panel p;
-        Label l;
         List<SimplineObject> SOList = new List<SimplineObject>();
-        public FileHandler(Panel pan, Label lab, List<SimplineObject> listParam)
+        public FileHandler(Panel pan, List<SimplineObject> listParam)
         {
             SOList = listParam;
             p = pan;
-            l = lab;
         }
 
         public static void AddPicture(List<SimplineObject> list, Panel pan)
@@ -72,8 +69,6 @@ namespace Simpline
                             file.Write(Environment.NewLine);
                         }
                     }
-                    if (!l.Text.Contains(" (Mentve)"))
-                        l.Text += " (Mentve)";
                 }
             }
         }
@@ -100,7 +95,6 @@ namespace Simpline
                     {
                         while ((line = sr.ReadLine()) != null)
                         {
-                            //SimplineObject SO = new SimplineObject();
                             i = 0;
                             string[] parameters = line.Split(';');
                             switch (parameters[i])
@@ -115,8 +109,8 @@ namespace Simpline
                                     break;
                                 case "LabelObject":
                                     SO = new LabelObject(parameters[i+1], parameters[i+2], parameters[i + 3]);
-                                    ((LabelObject)SO).setLabX(i + 4);
-                                    ((LabelObject)SO).setLabY(i + 5);
+                                    ((LabelObject)SO).setLabX(Convert.ToInt32(parameters[i + 4]));
+                                    ((LabelObject)SO).setLabY(Convert.ToInt32(parameters[i + 5]));
                                     i = i + 6;
                                     break;
                                 default:
@@ -136,7 +130,6 @@ namespace Simpline
                             p.Controls.Add(SO);
                         }
                     }
-                    l.Text = ofd.FileName;
                 }
             }
         }

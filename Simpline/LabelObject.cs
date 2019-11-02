@@ -16,6 +16,8 @@ namespace Simpline
         {
             InitializeComponent();
             setNewLab(font, value, size);
+            Lab.Left = (this.Width - Lab.Width) / 2;
+            Lab.Top = (this.Height - Lab.Height) / 2;
         }
         public string getLabValue() { return Lab.Text; }
         public string getLabFont() { return Lab.Font.Name; }

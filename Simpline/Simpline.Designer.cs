@@ -68,8 +68,6 @@
             this.Y = new System.Windows.Forms.Label();
             this.Labx = new System.Windows.Forms.Label();
             this.laby = new System.Windows.Forms.Label();
-            this.labFileName = new System.Windows.Forms.Label();
-            this.FileName = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -489,23 +487,6 @@
             this.laby.TabIndex = 52;
             this.laby.Text = "Y:";
             // 
-            // labFileName
-            // 
-            this.labFileName.AutoSize = true;
-            this.labFileName.Location = new System.Drawing.Point(401, 12);
-            this.labFileName.Name = "labFileName";
-            this.labFileName.Size = new System.Drawing.Size(26, 13);
-            this.labFileName.TabIndex = 53;
-            this.labFileName.Text = "Fájl:";
-            // 
-            // FileName
-            // 
-            this.FileName.AutoSize = true;
-            this.FileName.Location = new System.Drawing.Point(433, 12);
-            this.FileName.Name = "FileName";
-            this.FileName.Size = new System.Drawing.Size(0, 13);
-            this.FileName.TabIndex = 54;
-            // 
             // Simpline
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -515,8 +496,6 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(851, 369);
-            this.Controls.Add(this.FileName);
-            this.Controls.Add(this.labFileName);
             this.Controls.Add(this.laby);
             this.Controls.Add(this.Labx);
             this.Controls.Add(this.Y);
@@ -576,8 +555,6 @@
         private System.Windows.Forms.Label CopiesLabel;
         private System.Windows.Forms.Button SendBackButton;
         private System.Windows.Forms.Button BringFrontButton;
-        private System.Windows.Forms.Label labFileName;
-        private System.Windows.Forms.Label FileName;
         private System.Windows.Forms.ComboBox LabelList;
         private System.Windows.Forms.Label LabLabel;
     }

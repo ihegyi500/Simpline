@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Simpline
@@ -54,15 +48,15 @@ namespace Simpline
         //Objektum kijelölése
         protected virtual void SimplineObject_MouseClick(object sender, MouseEventArgs e)
         {
-            if (this.BackColor == Color.LightGray)
+            if (this.Name.Contains("*"))
             {
-                this.BackColor = Color.White;
                 this.BorderStyle = BorderStyle.None;
+                this. Name = this.Name.Replace("*", "");
             }
             else
             {
-                this.BackColor = Color.LightGray;
                 this.BorderStyle = BorderStyle.FixedSingle;
+                this.Name = this.Name = this.Name + "*";
             }
         }
         public void setResize(bool resOn)

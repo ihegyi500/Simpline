@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using ZXing;
 
 namespace Simpline
@@ -14,10 +6,11 @@ namespace Simpline
     public partial class BarcodeObject : SimplineObject
     {
         string codeType, value;
-        BarcodeWriter w = new BarcodeWriter();
+        BarcodeWriter w;
         public BarcodeObject(string codeType, string value) : base()
         {
             InitializeComponent();
+            w = new BarcodeWriter();
             this.codeType = codeType;
             this.value = value;
             w.Options.PureBarcode = true;
@@ -45,6 +38,9 @@ namespace Simpline
         }
         private void BarcodeValidator()
         {
+            w.Options.PureBarcode = true;
+            w.Options.Height = this.Height;
+            w.Options.Width = this.Width;
             switch (this.codeType)
             {
                 case "39 Code":

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing.Printing;
 using System.Drawing.Text;
-using ZXing;
 
 namespace Simpline
 {
@@ -65,7 +64,7 @@ namespace Simpline
         {
             for(int i = 0; i < SOList.Count; i++)
             {
-                if (SOList[i].BackColor == Color.LightGray)
+                if (SOList[i].Name.Contains("*"))
                 {
                     panel1.Controls.RemoveAt(i);
                     SOList.Remove(SOList[i]);
@@ -96,7 +95,7 @@ namespace Simpline
         {
             foreach (SimplineObject SO in SOList)
             {
-                if (SO.BackColor == Color.LightGray)
+                if (SO.Name.Contains("*"))
                 {
                     SimplineObject SOclone = new SimplineObject();
                     SOclone.BackgroundImage = SO.BackgroundImage;
@@ -125,7 +124,7 @@ namespace Simpline
         //Fájl mentése
         private void SavePictureButton_Click(object sender, EventArgs e)
         {
-            FileHandler fmk = new FileHandler(panel1, FileName, SOList);
+            FileHandler fmk = new FileHandler(panel1, SOList);
             fmk.SaveTxt();
         }
         //Szöveges objektum hozzáadása
@@ -146,7 +145,7 @@ namespace Simpline
         //Fájl megnyitása
         private void LoadPictureButton_Click(object sender, EventArgs e)
         {
-            FileHandler fmk = new FileHandler(panel1, FileName, SOList);
+            FileHandler fmk = new FileHandler(panel1, SOList);
             fmk.LoadTxt();
         }
         //Új keret hozzáadása
@@ -173,7 +172,7 @@ namespace Simpline
         {
             foreach (SimplineObject SO in SOList)
             {
-                if (SO.BackColor == Color.LightGray)
+                if (SO.Name.Contains("*"))
                 {
                     if (FontType.Text == "39 Code" || FontType.Text == "128 Code" || FontType.Text == "QR Code")
                         ((BarcodeObject)SO).setNewCode(FontType.Text, value.Text);
@@ -215,10 +214,7 @@ namespace Simpline
         //Középső panel méretezése esetén jobboldali gombok mozgatása
         private void Panel1_SizeChanged(object sender, EventArgs e)
         {
-            if (panel1.Right > FileName.Right)
-                panel2.Left = panel1.Right + 25;
-            else
-                panel2.Left = FileName.Right + 25;
+            panel2.Left = panel1.Right + 25;
         }
         //Egérpozicionálás
         private void Panel1_MouseMove(object sender, MouseEventArgs e)
@@ -237,7 +233,7 @@ namespace Simpline
         {
             foreach (SimplineObject SO in SOList)
             {
-                if (SO.BackColor == Color.LightGray)
+                if (SO.Name.Contains("*"))
                     SO.BringToFront();
             }
         }
@@ -246,7 +242,7 @@ namespace Simpline
         {
             foreach (SimplineObject SO in SOList)
             {
-                if (SO.BackColor == Color.LightGray)
+                if (SO.Name.Contains("*"))
                     SO.SendToBack();
             }
         }
