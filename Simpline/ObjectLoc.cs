@@ -1,85 +1,60 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Drawing;
-using ZXing;
 
 namespace Simpline
 {
     public partial class ObjectLoc : Form
     {
-        SimplineObject bcl;
-        BarcodeReader bcr = new BarcodeReader();
-        BarcodeWriter bcw = new BarcodeWriter();
-        Bitmap bitmap;
-        public ObjectLoc(SimplineObject b)
+        SimplineObject SO;
+        public ObjectLoc(SimplineObject SO)
         {
             InitializeComponent();
-            textBox1.Text = b.getX().ToString();
-            textBox2.Text = b.getY().ToString();
-            textBox3.Text = b.getPanHeight().ToString();
-            textBox4.Text = b.getPanWidth().ToString();
-            textBox5.Text = b.getSimplineObjectString();
-            if (b.getCodeType() != "")
+            this.SO = SO;
+            textBox1.Text = SO.getX().ToString();
+            textBox2.Text = SO.getY().ToString();
+            textBox3.Text = SO.Height.ToString();
+            textBox4.Text = SO.Width.ToString();
+            if(SO is PictureObject)
             {
-                bitmap = new Bitmap(b.BackgroundImage);
-                textBox5.Text = bcr.Decode(bitmap).Text;
-                textBox6.Text = b.getCodeType();
+                textBox6.Text = ((PictureObject)SO).getPicture();
                 textBox5.ReadOnly = true;
                 textBox6.ReadOnly = true;
             }
-            else if (b.getSimplineObjectString() != "")
+            else if(SO is BarcodeObject)
             {
-                textBox5.Text = b.getSimplineObjectString();
-                textBox6.Text = b.getSimplineObjectType();
-            }
-            else if (b.getPicture() != "")
-            {
-                textBox6.Text = b.getPicture();
+                textBox5.Text = ((BarcodeObject)SO).getCodeValue();
+                textBox6.Text = ((BarcodeObject)SO).getCodeType();
                 textBox5.ReadOnly = true;
                 textBox6.ReadOnly = true;
             }
-            bcl = b;
+            else if (SO is LabelObject)
+            {
+                textBox5.Text = ((LabelObject)SO).getLabValue();
+                textBox6.Text = ((LabelObject)SO).getLabFont();
+            }
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            bcl.Left = Convert.ToInt32(textBox1.Text);
-            bcl.Top = Convert.ToInt32(textBox2.Text);
-            bcl.Height = Convert.ToInt32(textBox3.Text);
-            bcl.Width = Convert.ToInt32(textBox4.Text);
-            bcw.Options.PureBarcode = true;
-            bcw.Options.Height = bcl.getPanHeight();
-            bcw.Options.Width = bcl.getPanWidth();
-            if (textBox6.Text == "39 Code" || textBox6.Text == "128 Code" || textBox6.Text == "QR Code")
+            try
             {
-                bcl.BackgroundImage = null;
-                switch (textBox6.Text)
+                SO.Left = Convert.ToInt32(textBox1.Text);
+                SO.Top = Convert.ToInt32(textBox2.Text);
+                SO.Height = Convert.ToInt32(textBox3.Text);
+                SO.Width = Convert.ToInt32(textBox4.Text);
+                if (SO is BarcodeObject)
                 {
-                    case "39 Code":
-                        {
-                            bcw.Format = BarcodeFormat.CODE_39;
-                            bcl.BackgroundImage = bcw.Write(textBox5.Text.ToUpper());
-                            break;
-                        }
-                    case "128 Code":
-                        {
-                            bcw.Format = BarcodeFormat.CODE_128;
-                            bcl.BackgroundImage = bcw.Write(textBox5.Text);
-                            break;
-                        }
-                    case "QR Code":
-                        {
-                            bcw.Format = BarcodeFormat.QR_CODE;
-                            bcl.BackgroundImage = bcw.Write(textBox5.Text);
-                            break;
-                        }
+                    ((BarcodeObject)SO).setNewCode(textBox6.Text, textBox5.Text);
                 }
-                bcl.setCodeType(textBox6.Text);
+                else if (SO is LabelObject)
+                    ((LabelObject)SO).setNewLab(textBox6.Text, textBox5.Text, ((LabelObject)SO).getLabSize().ToString());
+                this.Close();
             }
-            //bcldict[bcldict.ElementAt(i).Key] = FontType.Text;
-            else if(bcl.BackgroundImage == null)
-                bcl.setSimplineObject(textBox5.Text, textBox6.Text, bcl.getSimplineObjectSize());
-            this.Close();
+            catch(FormatException ex)
+            {
+                MessageBox.Show("Hiba a beállított paraméterekben: " + ex, "Hibaüzenet", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -70,17 +70,35 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SimplineObject.cs">
+    <Compile Include="BarcodeObject.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SimplineObject.Designer.cs">
-      <DependentUpon>SimplineObject.cs</DependentUpon>
+    <Compile Include="BarcodeObject.Designer.cs">
+      <DependentUpon>BarcodeObject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrameObject.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FrameObject.Designer.cs">
+      <DependentUpon>FrameObject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LabelObject.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LabelObject.Designer.cs">
+      <DependentUpon>LabelObject.cs</DependentUpon>
     </Compile>
     <Compile Include="ObjectLoc.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ObjectLoc.Designer.cs">
       <DependentUpon>ObjectLoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PictureObject.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PictureObject.Designer.cs">
+      <DependentUpon>PictureObject.cs</DependentUpon>
     </Compile>
     <Compile Include="Simpline.cs">
       <SubType>Form</SubType>
@@ -89,12 +107,21 @@
       <DependentUpon>Simpline.cs</DependentUpon>
     </Compile>
     <Compile Include="Exceptions\DefaultException.cs" />
-    <Compile Include="FileMaker.cs" />
-    <Compile Include="GraphicMaker.cs" />
+    <Compile Include="FileHandler.cs" />
+    <Compile Include="PrintHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="SimplineObject.resx">
+    <Compile Include="SimplineObject.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SimplineObject.Designer.cs">
       <DependentUpon>SimplineObject.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="FrameObject.resx">
+      <DependentUpon>FrameObject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LabelObject.resx">
+      <DependentUpon>LabelObject.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ObjectLoc.resx">
       <DependentUpon>ObjectLoc.cs</DependentUpon>
@@ -112,6 +139,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SimplineObject.resx">
+      <DependentUpon>SimplineObject.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

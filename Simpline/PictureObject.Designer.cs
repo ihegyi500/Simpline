@@ -1,6 +1,6 @@
 ﻿namespace Simpline
 {
-    partial class SimplineObject
+    partial class PictureObject
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,22 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // SimplineObject
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Transparent;
-            this.Name = "SimplineObject";
-            this.Size = new System.Drawing.Size(159, 72);
-            this.SizeChanged += new System.EventHandler(this.SimplineObject_SizeChanged);
-            this.DoubleClick += new System.EventHandler(this.SimplineObject_DoubleClick);
-            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SimplineObject_MouseClick);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SimplineObject_MouseDown);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SimplineObject_MouseMove);
-            this.ResumeLayout(false);
-
         }
 
         #endregion

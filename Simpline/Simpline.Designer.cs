@@ -54,15 +54,15 @@
             this.OpenPicButton = new System.Windows.Forms.Button();
             this.PaperSizeList = new System.Windows.Forms.ComboBox();
             this.PaperSizeLabel = new System.Windows.Forms.Label();
-            this.PrintPropLabel = new System.Windows.Forms.LinkLabel();
             this.RectButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.SendBackButton = new System.Windows.Forms.Button();
             this.BringFrontButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.LabelList = new System.Windows.Forms.ComboBox();
+            this.LabLabel = new System.Windows.Forms.Label();
             this.CopiesTbx = new System.Windows.Forms.TextBox();
             this.CopiesLabel = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.PrintPreviewLabel = new System.Windows.Forms.LinkLabel();
             this.X = new System.Windows.Forms.Label();
             this.Y = new System.Windows.Forms.Label();
@@ -70,8 +70,6 @@
             this.laby = new System.Windows.Forms.Label();
             this.labFileName = new System.Windows.Forms.Label();
             this.FileName = new System.Windows.Forms.Label();
-            this.LabLabel = new System.Windows.Forms.Label();
-            this.LabelList = new System.Windows.Forms.ComboBox();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -108,7 +106,7 @@
             // AddBarcodeButton
             // 
             this.AddBarcodeButton.BackColor = System.Drawing.Color.White;
-            this.AddBarcodeButton.Location = new System.Drawing.Point(63, 62);
+            this.AddBarcodeButton.Location = new System.Drawing.Point(16, 61);
             this.AddBarcodeButton.Name = "AddBarcodeButton";
             this.AddBarcodeButton.Size = new System.Drawing.Size(75, 40);
             this.AddBarcodeButton.TabIndex = 5;
@@ -119,7 +117,7 @@
             // SetBarcodeButton
             // 
             this.SetBarcodeButton.BackColor = System.Drawing.Color.White;
-            this.SetBarcodeButton.Location = new System.Drawing.Point(144, 62);
+            this.SetBarcodeButton.Location = new System.Drawing.Point(97, 61);
             this.SetBarcodeButton.Name = "SetBarcodeButton";
             this.SetBarcodeButton.Size = new System.Drawing.Size(75, 40);
             this.SetBarcodeButton.TabIndex = 4;
@@ -254,7 +252,7 @@
             // SetTextButton
             // 
             this.SetTextButton.BackColor = System.Drawing.Color.White;
-            this.SetTextButton.Location = new System.Drawing.Point(147, 101);
+            this.SetTextButton.Location = new System.Drawing.Point(126, 88);
             this.SetTextButton.Name = "SetTextButton";
             this.SetTextButton.Size = new System.Drawing.Size(75, 40);
             this.SetTextButton.TabIndex = 30;
@@ -265,7 +263,7 @@
             // AddTextButton
             // 
             this.AddTextButton.BackColor = System.Drawing.Color.White;
-            this.AddTextButton.Location = new System.Drawing.Point(66, 101);
+            this.AddTextButton.Location = new System.Drawing.Point(45, 88);
             this.AddTextButton.Name = "AddTextButton";
             this.AddTextButton.Size = new System.Drawing.Size(75, 40);
             this.AddTextButton.TabIndex = 32;
@@ -303,7 +301,7 @@
             // OpenPicButton
             // 
             this.OpenPicButton.BackColor = System.Drawing.Color.White;
-            this.OpenPicButton.Location = new System.Drawing.Point(174, 160);
+            this.OpenPicButton.Location = new System.Drawing.Point(93, 160);
             this.OpenPicButton.Name = "OpenPicButton";
             this.OpenPicButton.Size = new System.Drawing.Size(75, 40);
             this.OpenPicButton.TabIndex = 42;
@@ -329,21 +327,10 @@
             this.PaperSizeLabel.TabIndex = 43;
             this.PaperSizeLabel.Text = "Papírméret:";
             // 
-            // PrintPropLabel
-            // 
-            this.PrintPropLabel.AutoSize = true;
-            this.PrintPropLabel.Location = new System.Drawing.Point(13, 251);
-            this.PrintPropLabel.Name = "PrintPropLabel";
-            this.PrintPropLabel.Size = new System.Drawing.Size(92, 13);
-            this.PrintPropLabel.TabIndex = 45;
-            this.PrintPropLabel.TabStop = true;
-            this.PrintPropLabel.Text = "Nyomtatóbeállítás";
-            this.PrintPropLabel.Click += new System.EventHandler(this.PrintPropLabel_Click);
-            // 
             // RectButton
             // 
             this.RectButton.BackColor = System.Drawing.Color.White;
-            this.RectButton.Location = new System.Drawing.Point(93, 160);
+            this.RectButton.Location = new System.Drawing.Point(12, 160);
             this.RectButton.Name = "RectButton";
             this.RectButton.Size = new System.Drawing.Size(75, 40);
             this.RectButton.TabIndex = 46;
@@ -403,9 +390,7 @@
             this.panel3.Controls.Add(this.LabLabel);
             this.panel3.Controls.Add(this.CopiesTbx);
             this.panel3.Controls.Add(this.CopiesLabel);
-            this.panel3.Controls.Add(this.linkLabel1);
             this.panel3.Controls.Add(this.PrintPreviewLabel);
-            this.panel3.Controls.Add(this.PrintPropLabel);
             this.panel3.Controls.Add(this.PrintersList);
             this.panel3.Controls.Add(this.printersLabel);
             this.panel3.Controls.Add(this.PaperSizeList);
@@ -422,9 +407,27 @@
             this.panel3.Size = new System.Drawing.Size(271, 331);
             this.panel3.TabIndex = 48;
             // 
+            // LabelList
+            // 
+            this.LabelList.FormattingEnabled = true;
+            this.LabelList.Location = new System.Drawing.Point(16, 131);
+            this.LabelList.Name = "LabelList";
+            this.LabelList.Size = new System.Drawing.Size(240, 21);
+            this.LabelList.TabIndex = 51;
+            this.LabelList.TextChanged += new System.EventHandler(this.LabelList_TextChanged);
+            // 
+            // LabLabel
+            // 
+            this.LabLabel.AutoSize = true;
+            this.LabLabel.Location = new System.Drawing.Point(14, 115);
+            this.LabLabel.Name = "LabLabel";
+            this.LabLabel.Size = new System.Drawing.Size(41, 13);
+            this.LabLabel.TabIndex = 50;
+            this.LabLabel.Text = "Címke:";
+            // 
             // CopiesTbx
             // 
-            this.CopiesTbx.Location = new System.Drawing.Point(195, 286);
+            this.CopiesTbx.Location = new System.Drawing.Point(193, 272);
             this.CopiesTbx.Name = "CopiesTbx";
             this.CopiesTbx.Size = new System.Drawing.Size(61, 20);
             this.CopiesTbx.TabIndex = 49;
@@ -433,27 +436,16 @@
             // CopiesLabel
             // 
             this.CopiesLabel.AutoSize = true;
-            this.CopiesLabel.Location = new System.Drawing.Point(121, 289);
+            this.CopiesLabel.Location = new System.Drawing.Point(119, 275);
             this.CopiesLabel.Name = "CopiesLabel";
             this.CopiesLabel.Size = new System.Drawing.Size(60, 13);
             this.CopiesLabel.TabIndex = 48;
             this.CopiesLabel.Text = "Példányok:";
             // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(185, 251);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(71, 13);
-            this.linkLabel1.TabIndex = 47;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Oldalbeállítás";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.PageSetupLabel_LinkClicked);
-            // 
             // PrintPreviewLabel
             // 
             this.PrintPreviewLabel.AutoSize = true;
-            this.PrintPreviewLabel.Location = new System.Drawing.Point(121, 251);
+            this.PrintPreviewLabel.Location = new System.Drawing.Point(14, 251);
             this.PrintPreviewLabel.Name = "PrintPreviewLabel";
             this.PrintPreviewLabel.Size = new System.Drawing.Size(48, 13);
             this.PrintPreviewLabel.TabIndex = 46;
@@ -514,24 +506,6 @@
             this.FileName.Size = new System.Drawing.Size(0, 13);
             this.FileName.TabIndex = 54;
             // 
-            // LabLabel
-            // 
-            this.LabLabel.AutoSize = true;
-            this.LabLabel.Location = new System.Drawing.Point(13, 115);
-            this.LabLabel.Name = "LabLabel";
-            this.LabLabel.Size = new System.Drawing.Size(41, 13);
-            this.LabLabel.TabIndex = 50;
-            this.LabLabel.Text = "Címke:";
-            // 
-            // LabelList
-            // 
-            this.LabelList.FormattingEnabled = true;
-            this.LabelList.Location = new System.Drawing.Point(16, 131);
-            this.LabelList.Name = "LabelList";
-            this.LabelList.Size = new System.Drawing.Size(240, 21);
-            this.LabelList.TabIndex = 51;
-            this.LabelList.TextChanged += new System.EventHandler(this.LabelList_TextChanged);
-            // 
             // Simpline
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -590,7 +564,6 @@
         private System.Windows.Forms.Button OpenPicButton;
         private System.Windows.Forms.ComboBox PaperSizeList;
         private System.Windows.Forms.Label PaperSizeLabel;
-        private System.Windows.Forms.LinkLabel PrintPropLabel;
         private System.Windows.Forms.Button RectButton;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
@@ -599,7 +572,6 @@
         private System.Windows.Forms.Label Labx;
         private System.Windows.Forms.Label laby;
         private System.Windows.Forms.LinkLabel PrintPreviewLabel;
-        private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.TextBox CopiesTbx;
         private System.Windows.Forms.Label CopiesLabel;
         private System.Windows.Forms.Button SendBackButton;

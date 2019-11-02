@@ -1,6 +1,6 @@
 ﻿namespace Simpline
 {
-    partial class SimplineObject
+    partial class FrameObject
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,19 +30,15 @@
         {
             this.SuspendLayout();
             // 
-            // SimplineObject
+            // FrameObject
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Transparent;
-            this.Name = "SimplineObject";
-            this.Size = new System.Drawing.Size(159, 72);
-            this.SizeChanged += new System.EventHandler(this.SimplineObject_SizeChanged);
-            this.DoubleClick += new System.EventHandler(this.SimplineObject_DoubleClick);
-            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SimplineObject_MouseClick);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SimplineObject_MouseDown);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SimplineObject_MouseMove);
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Name = "FrameObject";
+            this.Size = new System.Drawing.Size(144, 52);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
