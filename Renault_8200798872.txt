@@ -1,0 +1,4 @@
+LabelObject;Arial;82 00 798 872;20;1;0;5;165;32;192;
+BarcodeObject;128 Code;8200798872;0;110;47;202;
+LabelObject;Arial;X1;8;12;1;39;250;17;44;
+LabelObject;Arial;Made in Hungary;6;15;4;109;250;18;94;

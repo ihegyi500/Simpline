@@ -11,9 +11,7 @@ namespace Simpline
         public PictureObject(string filePath) : base()
         {
             InitializeComponent();
-            pictureFilePath = filePath;
-            b = new Bitmap(pictureFilePath);
-            this.BackgroundImage = b;
+            setPicture(filePath);
             this.Height = b.Height;
             this.Width = b.Width;
         }

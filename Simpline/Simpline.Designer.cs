@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Simpline));
             this.PrintButton = new System.Windows.Forms.Button();
             this.PrintersList = new System.Windows.Forms.ComboBox();
             this.printersLabel = new System.Windows.Forms.Label();
@@ -503,6 +504,7 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Simpline";
             this.Text = "Simpline";
             this.Load += new System.EventHandler(this.BarcodePrinter_Load);

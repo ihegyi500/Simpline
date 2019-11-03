@@ -95,41 +95,39 @@ namespace Simpline
                     {
                         while ((line = sr.ReadLine()) != null)
                         {
-                            i = 0;
-                            string[] parameters = line.Split(';');
-                            switch (parameters[i])
-                            {
-                                case "PictureObject":
-                                    SO = new PictureObject(parameters[i+1]);
-                                    i = i + 2;
-                                    break;
-                                case "BarcodeObject":
-                                    SO = new BarcodeObject(parameters[i+1], parameters[i+2]);
-                                    i = i + 3;
-                                    break;
-                                case "LabelObject":
-                                    SO = new LabelObject(parameters[i+1], parameters[i+2], parameters[i + 3]);
-                                    ((LabelObject)SO).setLabX(Convert.ToInt32(parameters[i + 4]));
-                                    ((LabelObject)SO).setLabY(Convert.ToInt32(parameters[i + 5]));
-                                    i = i + 6;
-                                    break;
-                                default:
-                                    SO = new FrameObject();
-                                    i++;
-                                    break;
-                            }
-                            SO.setX(Convert.ToInt32(parameters[i]));
-                            SO.setY(Convert.ToInt32(parameters[i + 1]));
-                            SO.Height = Convert.ToInt32(parameters[i + 2]);
-                            SO.Width = Convert.ToInt32(parameters[i + 3]);
-                            if (SO is BarcodeObject)
-                                ((BarcodeObject)SO).setNewCode(parameters[1],parameters[2]);
-                            if (SO is FrameObject || parameters[parameters.Length - 1] == "1")
-                            {
-                                SO.BorderStyle = BorderStyle.FixedSingle;
-                            }
-                            SOList.Add(SO);
-                            p.Controls.Add(SO);
+                                i = 0;
+                                string[] parameters = line.Split(';');
+                                switch (parameters[i])
+                                {
+                                    case "PictureObject":
+                                        SO = new PictureObject(parameters[1]);
+                                        i = i + 2;
+                                        break;
+                                    case "BarcodeObject":
+                                        SO = new BarcodeObject(parameters[1], parameters[2]);
+                                        i = i + 3;
+                                        break;
+                                    case "LabelObject":
+                                        SO = new LabelObject(parameters[1], parameters[2], parameters[3]);
+                                        ((LabelObject)SO).setLabX(Convert.ToInt32(parameters[4]));
+                                        ((LabelObject)SO).setLabY(Convert.ToInt32(parameters[5]));
+                                        i = i + 6;
+                                        break;
+                                    default:
+                                        SO = new FrameObject();
+                                        i++;
+                                        break;
+                                }
+                                SO.setX(Convert.ToInt32(parameters[i]));
+                                SO.setY(Convert.ToInt32(parameters[i + 1]));
+                                SO.Height = Convert.ToInt32(parameters[i + 2]);
+                                SO.Width = Convert.ToInt32(parameters[i + 3]);
+                                if (SO is BarcodeObject)
+                                    ((BarcodeObject)SO).setNewCode(parameters[1], parameters[2]);
+                                if (SO is FrameObject || parameters[parameters.Length - 1] == "1")
+                                    SO.BorderStyle = BorderStyle.FixedSingle;
+                                SOList.Add(SO);
+                                p.Controls.Add(SO);
                         }
                     }
                 }
