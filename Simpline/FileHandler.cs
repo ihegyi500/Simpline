@@ -16,21 +16,6 @@ namespace Simpline
             SOList = listParam;
             p = pan;
         }
-
-        public static void AddPicture(List<SimplineObject> list, Panel pan)
-        {
-            using(OpenFileDialog open = new OpenFileDialog() { Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp",                                                 ValidateNames = true, Title = "Add a picture" })
-            {
-                if (open.ShowDialog() == DialogResult.OK)
-                {
-                    Bitmap b = new Bitmap(open.FileName);
-                    SimplineObject SO = new PictureObject(open.FileName);
-                    list.Add(SO);
-                    pan.Controls.Add(SO);
-                }
-            }
-        }
-
         public void SaveTxt()
         {
             using (SaveFileDialog sfd = new SaveFileDialog() { Filter = "Txt file|*.txt", ValidateNames = true, Title = "Save a Txt file" })
@@ -72,7 +57,6 @@ namespace Simpline
                 }
             }
         }
-
         public void LoadTxt()
         {
             SimplineObject SO;
