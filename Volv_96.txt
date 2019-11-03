@@ -1,5 +1,5 @@
-PictureObject;C:\Simpline\eac.jpg;128;51;25;25;
-PictureObject;C:\Simpline\ic.jpg;156;50;25;13;
+PictureObject;C:\Simpline\eac.jpg;125;51;25;25;
+PictureObject;C:\Simpline\ic.jpg;153;50;25;13;
 LabelObject;Arial Black;31339798;12;1;0;18;50;24;100;
 LabelObject;Arial;MADE IN HUNGARY;10;19;6;2;71;29;171;
 BarcodeObject;128 Code;V0;9;95;21;144;
