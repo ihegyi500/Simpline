@@ -122,7 +122,9 @@ namespace Simpline
                             SO.setY(Convert.ToInt32(parameters[i + 1]));
                             SO.Height = Convert.ToInt32(parameters[i + 2]);
                             SO.Width = Convert.ToInt32(parameters[i + 3]);
-                            if(SO is FrameObject || parameters[parameters.Length - 1] == "1")
+                            if (SO is BarcodeObject)
+                                ((BarcodeObject)SO).setNewCode(parameters[1],parameters[2]);
+                            if (SO is FrameObject || parameters[parameters.Length - 1] == "1")
                             {
                                 SO.BorderStyle = BorderStyle.FixedSingle;
                             }

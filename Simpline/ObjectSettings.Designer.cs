@@ -1,6 +1,6 @@
 ﻿namespace Simpline
 {
-    partial class ObjectLoc
+    partial class ObjectSettings
     {
         /// <summary>
         /// Required designer variable.
@@ -41,6 +41,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBox7 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -77,9 +79,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(162, 18);
+            this.button1.Location = new System.Drawing.Point(167, 19);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(122, 151);
+            this.button1.Size = new System.Drawing.Size(122, 172);
             this.button1.TabIndex = 4;
             this.button1.Text = "Mentés";
             this.button1.UseVisualStyleBackColor = true;
@@ -149,11 +151,29 @@
             this.label6.TabIndex = 9;
             this.label6.Text = "Szöveg:";
             // 
-            // ObjectLoc
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(11, 178);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(58, 13);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "Betűméret:";
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(74, 175);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(63, 20);
+            this.textBox7.TabIndex = 13;
+            // 
+            // ObjectSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(296, 194);
+            this.ClientSize = new System.Drawing.Size(314, 215);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.textBox7);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox6);
@@ -168,7 +188,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "ObjectLoc";
+            this.Name = "ObjectSettings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Objektum beállítás";
             this.ResumeLayout(false);
@@ -191,5 +211,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBox7;
     }
 }

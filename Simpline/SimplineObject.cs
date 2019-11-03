@@ -65,7 +65,7 @@ namespace Simpline
         }
         private void SimplineObject_DoubleClick(object sender, EventArgs e)
         {
-            ObjectLoc ol = new ObjectLoc(this);
+            ObjectSettings ol = new ObjectSettings(this);
             ol.Show();
         }
     }

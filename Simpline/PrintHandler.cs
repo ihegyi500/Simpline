@@ -50,7 +50,7 @@ namespace Simpline
                 if (SO is LabelObject)
                 {
                     font = new Font(((LabelObject)SO).getLabFont(), ((LabelObject)SO).getLabSize());
-                    g.DrawString(((LabelObject)SO).getLabValue(),font,brush, ((LabelObject)SO).getLabX(), ((LabelObject)SO).getLabY());
+                    g.DrawString(((LabelObject)SO).getLabValue(),font,brush, SO.getX() + ((LabelObject)SO).getLabX(), SO.getY() + ((LabelObject)SO).getLabY());
                 }
                 else if (SO is PictureObject || SO is BarcodeObject)
                     g.DrawImage(SO.BackgroundImage, SO.getX(), SO.getY(), SO.Width, SO.Height);

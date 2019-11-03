@@ -88,11 +88,11 @@
     <Compile Include="LabelObject.Designer.cs">
       <DependentUpon>LabelObject.cs</DependentUpon>
     </Compile>
-    <Compile Include="ObjectLoc.cs">
+    <Compile Include="ObjectSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ObjectLoc.Designer.cs">
-      <DependentUpon>ObjectLoc.cs</DependentUpon>
+    <Compile Include="ObjectSettings.Designer.cs">
+      <DependentUpon>ObjectSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="PictureObject.cs">
       <SubType>UserControl</SubType>
@@ -123,8 +123,8 @@
     <EmbeddedResource Include="LabelObject.resx">
       <DependentUpon>LabelObject.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ObjectLoc.resx">
-      <DependentUpon>ObjectLoc.cs</DependentUpon>
+    <EmbeddedResource Include="ObjectSettings.resx">
+      <DependentUpon>ObjectSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Simpline.resx">
       <DependentUpon>Simpline.cs</DependentUpon>

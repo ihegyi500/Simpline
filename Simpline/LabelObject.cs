@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Simpline
@@ -56,7 +50,7 @@ namespace Simpline
         public int getLabY() { return Lab.Top; }
         private void Lab_DoubleClick(object sender, EventArgs e)
         {
-            ObjectLoc ol = new ObjectLoc(this);
+            ObjectSettings ol = new ObjectSettings(this);
             ol.Show();
         }
         protected override void SimplineObject_SizeChanged(object sender, EventArgs e)
@@ -69,12 +63,10 @@ namespace Simpline
                 this.Height = Lab.Height;
             }
         }
-
         private void Lab_MouseMove(object sender, MouseEventArgs e)
         {
             base.SimplineObject_MouseMove(sender, e);
         }
-
         private void Lab_MouseClick(object sender, MouseEventArgs e)
         {
             base.SimplineObject_MouseClick(sender, e);

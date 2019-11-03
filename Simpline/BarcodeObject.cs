@@ -17,12 +17,16 @@ namespace Simpline
             w.Options.Height = this.Height;
             w.Options.Width = this.Width;
             BarcodeValidator();
+            this.BackgroundImageLayout = ImageLayout.Stretch;
         }
         public string getCodeType(){ return codeType; }
         public string getCodeValue() { return value; }
         public void setCodeType(string codeType)
         {
-            this.codeType = codeType;
+            if (codeType == "39 Code" || codeType == "128 Code" || codeType == "QR Code")
+                this.codeType = codeType;
+            else
+                throw new System.ArgumentException("Hibás vonalkód/QR kód típus!", "codeType");
             BarcodeValidator();
         }
         public void setCodeValue(string value)
@@ -32,7 +36,10 @@ namespace Simpline
         }
         public void setNewCode(string codeType, string value)
         {
-            this.codeType = codeType;
+            if (codeType == "39 Code" || codeType == "128 Code" || codeType == "QR Code")
+                this.codeType = codeType;
+            else
+                throw new System.ArgumentException("Hibás vonalkód/QR kód típus!", "codeType");
             this.value = value;
             BarcodeValidator();
         }

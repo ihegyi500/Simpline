@@ -1,6 +1,6 @@
-131;51;25;25;C:\Simpline\eac.jpg;;;
-158;50;25;13;C:\Simpline\ic.jpg;;;
-18;50;24;100;Arial Black;31339798;19;50;12;
-2;71;29;171;Arial;MADE IN HUNGARY;21;77;10;
-10;95;21;144;128 Code;V0;;
-1;120;20;128;128 Code;31339798;;
+PictureObject;C:\Simpline\eac.jpg;128;51;25;25;
+PictureObject;C:\Simpline\ic.jpg;156;50;25;13;
+LabelObject;Arial Black;31339798;12;1;0;18;50;24;100;
+LabelObject;Arial;MADE IN HUNGARY;10;19;6;2;71;29;171;
+BarcodeObject;128 Code;V0;9;95;21;144;
+BarcodeObject;128 Code;31339798;1;120;20;128;

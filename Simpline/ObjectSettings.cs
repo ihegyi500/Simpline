@@ -4,10 +4,10 @@ using System.Drawing;
 
 namespace Simpline
 {
-    public partial class ObjectLoc : Form
+    public partial class ObjectSettings : Form
     {
         SimplineObject SO;
-        public ObjectLoc(SimplineObject SO)
+        public ObjectSettings(SimplineObject SO)
         {
             InitializeComponent();
             this.SO = SO;
@@ -19,19 +19,25 @@ namespace Simpline
             {
                 textBox6.Text = ((PictureObject)SO).getPicture();
                 textBox5.ReadOnly = true;
-                textBox6.ReadOnly = true;
+                textBox7.ReadOnly = true;
             }
             else if(SO is BarcodeObject)
             {
                 textBox5.Text = ((BarcodeObject)SO).getCodeValue();
                 textBox6.Text = ((BarcodeObject)SO).getCodeType();
-                textBox5.ReadOnly = true;
-                textBox6.ReadOnly = true;
+                textBox7.ReadOnly = true;
             }
             else if (SO is LabelObject)
             {
                 textBox5.Text = ((LabelObject)SO).getLabValue();
                 textBox6.Text = ((LabelObject)SO).getLabFont();
+                textBox7.Text = ((LabelObject)SO).getLabSize().ToString();
+            }
+            else
+            {
+                textBox5.ReadOnly = true;
+                textBox6.ReadOnly = true;
+                textBox7.ReadOnly = true;
             }
         }
 
@@ -39,21 +45,26 @@ namespace Simpline
         {
             try
             {
-                SO.Left = Convert.ToInt32(textBox1.Text);
-                SO.Top = Convert.ToInt32(textBox2.Text);
-                SO.Height = Convert.ToInt32(textBox3.Text);
-                SO.Width = Convert.ToInt32(textBox4.Text);
+                SO.setX(Convert.ToInt32(textBox1.Text));
+                SO.setY(Convert.ToInt32(textBox2.Text));
                 if (SO is BarcodeObject)
                 {
                     ((BarcodeObject)SO).setNewCode(textBox6.Text, textBox5.Text);
                 }
                 else if (SO is LabelObject)
-                    ((LabelObject)SO).setNewLab(textBox6.Text, textBox5.Text, ((LabelObject)SO).getLabSize().ToString());
-                this.Close();
+                    ((LabelObject)SO).setNewLab(textBox6.Text, textBox5.Text, textBox7.Text);
+                else if(SO is PictureObject)
+                    ((PictureObject)SO).setPicture(textBox6.Text);
+                SO.Height = Convert.ToInt32(textBox3.Text);
+                SO.Width = Convert.ToInt32(textBox4.Text);
             }
-            catch(FormatException ex)
+            catch (FormatException ex)
             {
                 MessageBox.Show("Hiba a beállított paraméterekben: " + ex, "Hibaüzenet", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                this.Close();
             }
         }
     }

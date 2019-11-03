@@ -20,11 +20,11 @@ namespace Simpline
         public string getPicture(){ return pictureFilePath; }
         public void setPicture(string str)
         {
-            pictureFilePath = str;
             try
             {
-                b = new Bitmap(pictureFilePath);
+                b = new Bitmap(str);
                 this.BackgroundImage = b;
+                pictureFilePath = str;
             }
             catch(FileNotFoundException e)
             {
