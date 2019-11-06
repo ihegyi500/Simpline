@@ -181,6 +181,8 @@ namespace Simpline
                 }
             }
         }
+
+       
         //Nyomtatóváltásnál papírméretlista frissítése
         private void PrintersList_SelectedIndexChanged(object sender, EventArgs e)
         {

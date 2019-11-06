@@ -49,7 +49,15 @@ namespace Simpline
                 SO.setY(Convert.ToInt32(textBox2.Text));
                 if (SO is BarcodeObject)
                 {
-                    ((BarcodeObject)SO).setNewCode(textBox6.Text, textBox5.Text);
+                    try
+                    {
+                        ((BarcodeObject)SO).setNewCode(textBox6.Text, textBox5.Text);
+                    }
+                    catch(ArgumentException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                       
                 }
                 else if (SO is LabelObject)
                     ((LabelObject)SO).setNewLab(textBox6.Text, textBox5.Text, textBox7.Text);

@@ -4,7 +4,7 @@ using ZXing;
 namespace Simpline
 {
     public partial class BarcodeObject : SimplineObject
-    {
+    {   
         string codeType, value;
         BarcodeWriter w;
         public BarcodeObject(string codeType, string value) : base()
