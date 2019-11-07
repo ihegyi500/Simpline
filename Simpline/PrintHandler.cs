@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
@@ -23,10 +24,17 @@ namespace Simpline
             this.SOList = SOList;
             PrintersList = box;
             this.copies = copies;
-            PrintDoc = new PrintDocument();
-            PrintDoc.PrinterSettings.PrinterName =
-            PrintersList.SelectedItem.ToString();
-            PrintDoc.PrintPage += new PrintPageEventHandler(PrintPageMethod);
+            /*try
+            {*/
+                PrintDoc = new PrintDocument();
+                PrintDoc.PrinterSettings.PrinterName =
+                PrintersList.SelectedItem.ToString();
+                PrintDoc.PrintPage += new PrintPageEventHandler(PrintPageMethod);
+            /*}
+            catch(Exception e)
+            {
+                throw new Exception()
+            }*/
         }
         public void Printing()
         {

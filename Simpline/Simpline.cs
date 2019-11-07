@@ -11,21 +11,18 @@ namespace Simpline
     {
         List<SimplineObject> SOList = new List<SimplineObject>();
         bool resizeOn = false;
-        PrintHandler ph;
         public Simpline()
         {
             InitializeComponent();
         }
         private void BarcodePrinter_Load(object sender, EventArgs e)
         {
-            //Vonalkódlista feltöltése
-            BarcodeTypeCbx.Items.AddRange(new string[] { "39 Code", "128 Code", "QR Code" });
+            //Vonalkódlista inicializálása
             BarcodeTypeCbx.SelectedIndex = 0;
             //Betűtípuslista feltöltése
             using (InstalledFontCollection fontsCollection = new InstalledFontCollection())
             {
-                //FontFamily[] fontFamilies = fontsCollection.Families;
-                foreach (FontFamily font in /*fontFamilies*/ fontsCollection.Families)
+                foreach (FontFamily font in fontsCollection.Families)
                 {
                     TextFontCbx.Items.Add(font.Name);
                 }
@@ -44,8 +41,7 @@ namespace Simpline
                  PaperSizeList.Items.Add(ps.Kind.ToString());
             }
             PaperSizeList.SelectedIndex = 0;
-            //Címkelista feltöltése
-            LabelList.Items.AddRange(new string[] { "Volvo", "Renault", "Alapértelmezett" });
+            //Címkelista inicializálása
             LabelList.SelectedIndex = 0;
 
         }
@@ -93,32 +89,36 @@ namespace Simpline
         //Kijelölt objektumok klónozása
         private void CopyPasteButton_Click(object sender, EventArgs e)
         {
+            List<SimplineObject> temp = new List<SimplineObject>();
             foreach (SimplineObject SO in SOList)
+            {
+                temp.Add(SO);
+            }
+            foreach (SimplineObject SO in temp)
             {
                 if (SO.Name.Contains("*"))
                 {
-                    SimplineObject SOclone = new SimplineObject();
+                    SimplineObject SOclone;
+                    if (SO is PictureObject)
+                        SOclone = new PictureObject(((PictureObject)SO).getPicture());
+                    else if (SO is BarcodeObject)
+                        SOclone = new BarcodeObject(((BarcodeObject)SO).getCodeType(), ((BarcodeObject)SO).getCodeValue());
+                    else if(SO is LabelObject)
+                        SOclone = new LabelObject(((LabelObject)SO).getLabFont(), ((LabelObject)SO).getLabValue(), ((LabelObject)SO).getLabSize().ToString());
+                    else
+                        SOclone = new FrameObject();
                     SOclone.BackgroundImage = SO.BackgroundImage;
                     SOclone.Height = SO.Height;
                     SOclone.Width = SO.Width;
                     panel1.Controls.Add(SOclone);
                     SOList.Add(SOclone);
-                    if (SO is PictureObject)
-                        ((PictureObject)SOclone).setPicture(((PictureObject)SO).getPicture());
-                    else if (SO is BarcodeObject)
-                        ((BarcodeObject)SOclone).setCodeType(((BarcodeObject)SO).getCodeType());
-                    else if(SO is LabelObject)
-                    {
-                        ((LabelObject)SOclone).setNewLab(
-                            ((LabelObject)SO).getLabFont(), ((LabelObject)SO).getLabValue(), ((LabelObject)SO).getLabSize().ToString());
-                    }
                 }
             }
         }
         //Nyomtatás
         private void PrintButton_Click(object sender, EventArgs e)
         {
-            ph = new PrintHandler(SOList,PrintersList, (short)Convert.ToInt32(CopiesTbx.Text));
+            PrintHandler ph = new PrintHandler(SOList,PrintersList, (short)Convert.ToInt32(CopiesTbx.Text));
             ph.Printing();
         }
         //Fájl mentése
@@ -130,6 +130,7 @@ namespace Simpline
         //Szöveges objektum hozzáadása
         private void AddTextButton_Click(object sender, EventArgs e)
         {
+
             AddFunc(TextFontCbx, TextTbx, TextSizeTbx.Text);
         }
         //Szöveges objektum szerkesztése
@@ -146,7 +147,14 @@ namespace Simpline
         private void LoadPictureButton_Click(object sender, EventArgs e)
         {
             FileHandler fmk = new FileHandler(panel1, SOList);
-            fmk.LoadTxt();
+            try
+            {
+                fmk.LoadTxt();
+            }
+            catch(IndexOutOfRangeException ex)
+            {
+                MessageBox.Show(ex.Message,"Hibaüzenet",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
         }
         //Új keret hozzáadása
         private void RectButton_Click(object sender, EventArgs e)
@@ -159,30 +167,46 @@ namespace Simpline
         //Általános metódus objektum hozzáadásához
         private void AddFunc(ComboBox FontType, TextBox value, string size)
         {
-            SimplineObject SO;
-            if(FontType.Text == "39 Code" || FontType.Text == "128 Code" || FontType.Text == "QR Code")
-                SO = new BarcodeObject(FontType.Text, value.Text);
-            else
-                SO = new LabelObject(FontType.Text, value.Text, size);
-            panel1.Controls.Add(SO);
-            SOList.Add(SO);
+            try
+            {
+                SimplineObject SO;
+                if (FontType.Text == "39 Code" || FontType.Text == "128 Code" || FontType.Text == "QR Code")
+                    SO = new BarcodeObject(FontType.Text, value.Text);
+                else
+                    SO = new LabelObject(FontType.Text, value.Text, size);
+                panel1.Controls.Add(SO);
+                SOList.Add(SO);
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message,"Hibaüzenet",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+
         }
         //Általános metódus objektum szerkesztéséhez
         private void SetFunc(ComboBox FontType, TextBox value, string size)
         {
-            foreach (SimplineObject SO in SOList)
+            try
             {
-                if (SO.Name.Contains("*"))
+                foreach (SimplineObject SO in SOList)
                 {
-                    if (FontType.Text == "39 Code" || FontType.Text == "128 Code" || FontType.Text == "QR Code")
-                        ((BarcodeObject)SO).setNewCode(FontType.Text, value.Text);
-                    else
-                        ((LabelObject)SO).setNewLab(FontType.Text, value.Text, size);
+                    if (SO.Name.Contains("*"))
+                    {
+                        if (FontType.Text == "39 Code" || FontType.Text == "128 Code" || FontType.Text == "QR Code")
+                            ((BarcodeObject)SO).setNewCode(FontType.Text, value.Text);
+                        else
+                            ((LabelObject)SO).setNewLab(FontType.Text, value.Text, size);
+                    }
                 }
             }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "Hibaüzenet", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
-       
+
         //Nyomtatóváltásnál papírméretlista frissítése
         private void PrintersList_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -227,7 +251,7 @@ namespace Simpline
         //Nyomtatási előnézet
         private void PrintPreviewLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            ph = new PrintHandler(SOList, PrintersList, (short)Convert.ToInt32(CopiesTbx.Text));
+            PrintHandler ph = new PrintHandler(SOList, PrintersList, (short)Convert.ToInt32(CopiesTbx.Text));
             ph.preview();
         }
         //Objektum előrehozása
@@ -283,6 +307,14 @@ namespace Simpline
                         }
                         break;
                     }
+            }
+        }
+        private void Simpline_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                DeleteButton_Click(sender, (EventArgs)e);
+                e.Handled = true;
             }
         }
     }

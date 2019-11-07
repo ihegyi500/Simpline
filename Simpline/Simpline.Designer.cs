@@ -86,6 +86,7 @@
             // 
             // PrintersList
             // 
+            this.PrintersList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.PrintersList.FormattingEnabled = true;
             this.PrintersList.Location = new System.Drawing.Point(16, 179);
             this.PrintersList.Name = "PrintersList";
@@ -145,7 +146,12 @@
             // 
             // BarcodeTypeCbx
             // 
+            this.BarcodeTypeCbx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.BarcodeTypeCbx.FormattingEnabled = true;
+            this.BarcodeTypeCbx.Items.AddRange(new object[] {
+            "39 Code",
+            "128 Code",
+            "QR Code"});
             this.BarcodeTypeCbx.Location = new System.Drawing.Point(99, 6);
             this.BarcodeTypeCbx.Name = "BarcodeTypeCbx";
             this.BarcodeTypeCbx.Size = new System.Drawing.Size(121, 21);
@@ -272,6 +278,7 @@
             // 
             // TextFontCbx
             // 
+            this.TextFontCbx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.TextFontCbx.FormattingEnabled = true;
             this.TextFontCbx.Location = new System.Drawing.Point(101, 6);
             this.TextFontCbx.Name = "TextFontCbx";
@@ -310,6 +317,7 @@
             // 
             // PaperSizeList
             // 
+            this.PaperSizeList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.PaperSizeList.FormattingEnabled = true;
             this.PaperSizeList.Location = new System.Drawing.Point(16, 221);
             this.PaperSizeList.Name = "PaperSizeList";
@@ -408,7 +416,12 @@
             // 
             // LabelList
             // 
+            this.LabelList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.LabelList.FormattingEnabled = true;
+            this.LabelList.Items.AddRange(new object[] {
+            "Volvo",
+            "Renault",
+            "Alapértelmezett"});
             this.LabelList.Location = new System.Drawing.Point(16, 131);
             this.LabelList.Name = "LabelList";
             this.LabelList.Size = new System.Drawing.Size(240, 21);
@@ -505,9 +518,11 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "Simpline";
             this.Text = "Simpline";
             this.Load += new System.EventHandler(this.BarcodePrinter_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Simpline_KeyDown);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);

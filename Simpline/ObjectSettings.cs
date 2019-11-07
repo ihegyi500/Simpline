@@ -55,7 +55,7 @@ namespace Simpline
                     }
                     catch(ArgumentException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Hibaüzenet", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                        
                 }
@@ -68,7 +68,7 @@ namespace Simpline
             }
             catch (FormatException ex)
             {
-                MessageBox.Show("Hiba a beállított paraméterekben: " + ex, "Hibaüzenet", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Hiba a beállított paraméterekben: " + ex.Message, "Hibaüzenet", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {

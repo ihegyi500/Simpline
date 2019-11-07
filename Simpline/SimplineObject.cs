@@ -21,7 +21,6 @@ namespace Simpline
         {
             this.BackgroundImageLayout = ImageLayout.Stretch;
         }
-
         //Egérpozíció elmentése
         protected void SimplineObject_MouseDown(object sender, MouseEventArgs e)
         {

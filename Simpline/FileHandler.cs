@@ -93,8 +93,10 @@ namespace Simpline
                 {
                     using (StreamReader sr = new StreamReader(ofd.FileName))
                     {
-                        while ((line = sr.ReadLine()) != null)
+                        try
                         {
+                            while ((line = sr.ReadLine()) != null)
+                            {
                                 i = 0;
                                 string[] parameters = line.Split(';');
                                 switch (parameters[i])
@@ -128,6 +130,11 @@ namespace Simpline
                                     SO.BorderStyle = BorderStyle.FixedSingle;
                                 SOList.Add(SO);
                                 p.Controls.Add(SO);
+                            }
+                        }
+                        catch(IndexOutOfRangeException ex)
+                        {
+                            throw new IndexOutOfRangeException("Hiba a fájl megnyitása során: " + ex.Message + "Ellenőrizze a megnyitni kívánt fájl szerkezetét!");
                         }
                     }
                 }
