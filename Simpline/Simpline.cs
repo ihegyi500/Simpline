@@ -38,7 +38,7 @@ namespace Simpline
             //Papírméretlista feltöltése
             foreach (PaperSize ps in settings.PaperSizes)
             {
-                 PaperSizeList.Items.Add(ps.Kind.ToString());
+                PaperSizeList.Items.Add(ps.Kind.ToString());
             }
             PaperSizeList.SelectedIndex = 0;
             //Címkelista inicializálása
@@ -58,7 +58,7 @@ namespace Simpline
         //Kijelölt objektumok törlése
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            for(int i = 0; i < SOList.Count; i++)
+            for (int i = 0; i < SOList.Count; i++)
             {
                 if (SOList[i].Name.Contains("*"))
                 {
@@ -81,7 +81,7 @@ namespace Simpline
                 resizeOn = true;
                 ActiveControl.BackColor = Color.LightGray;
             }
-            foreach(SimplineObject SO in SOList)
+            foreach (SimplineObject SO in SOList)
             {
                 SO.setResize(resizeOn);
             }
@@ -103,7 +103,7 @@ namespace Simpline
                         SOclone = new PictureObject(((PictureObject)SO).getPicture());
                     else if (SO is BarcodeObject)
                         SOclone = new BarcodeObject(((BarcodeObject)SO).getCodeType(), ((BarcodeObject)SO).getCodeValue());
-                    else if(SO is LabelObject)
+                    else if (SO is LabelObject)
                         SOclone = new LabelObject(((LabelObject)SO).getLabFont(), ((LabelObject)SO).getLabValue(), ((LabelObject)SO).getLabSize().ToString());
                     else
                         SOclone = new FrameObject();
@@ -118,8 +118,15 @@ namespace Simpline
         //Nyomtatás
         private void PrintButton_Click(object sender, EventArgs e)
         {
-            PrintHandler ph = new PrintHandler(SOList,PrintersList, (short)Convert.ToInt32(CopiesTbx.Text));
-            ph.Printing();
+            try
+            {
+                PrintHandler ph = new PrintHandler(SOList, PrintersList, CopiesTbx.Text);
+                ph.Printing();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Hibaüzenet", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         //Fájl mentése
         private void SavePictureButton_Click(object sender, EventArgs e)
@@ -205,8 +212,6 @@ namespace Simpline
             }
 
         }
-
-
         //Nyomtatóváltásnál papírméretlista frissítése
         private void PrintersList_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -251,7 +256,7 @@ namespace Simpline
         //Nyomtatási előnézet
         private void PrintPreviewLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            PrintHandler ph = new PrintHandler(SOList, PrintersList, (short)Convert.ToInt32(CopiesTbx.Text));
+            PrintHandler ph = new PrintHandler(SOList, PrintersList, CopiesTbx.Text);
             ph.preview();
         }
         //Objektum előrehozása
@@ -309,13 +314,33 @@ namespace Simpline
                     }
             }
         }
+        //Billentyűfunkciók
         private void Simpline_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete)
-            {
+            if (e.KeyCode == Keys.Delete) { 
                 DeleteButton_Click(sender, (EventArgs)e);
                 e.Handled = true;
             }
+        }
+        //Objektumok mozgatása nyíllal
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.Up:
+                    SOList.ForEach(SO => { if (SO.Name.Contains("*")) { SO.Top--; } });
+                    return true;
+                case Keys.Down:
+                    SOList.ForEach(SO => { if (SO.Name.Contains("*")) { SO.Top++; } });
+                    return true;
+                case Keys.Left:
+                    SOList.ForEach(SO => { if (SO.Name.Contains("*")) { SO.Left--; } });
+                    return true;
+                case Keys.Right:
+                    SOList.ForEach(SO => { if (SO.Name.Contains("*")) { SO.Left++; } });
+                    return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

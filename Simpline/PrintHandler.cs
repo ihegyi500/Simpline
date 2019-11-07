@@ -19,28 +19,35 @@ namespace Simpline
             if (ppd.ShowDialog() == DialogResult.OK)
                 Printing();
         }
-        public PrintHandler(List<SimplineObject> SOList, ComboBox box, int copies)
+        public PrintHandler(List<SimplineObject> SOList, ComboBox box, string copies)
         {
-            this.SOList = SOList;
-            PrintersList = box;
-            this.copies = copies;
-            /*try
-            {*/
+            try
+            {
+                this.SOList = SOList;
+                PrintersList = box;
+                this.copies = (short)Convert.ToInt32(copies);
                 PrintDoc = new PrintDocument();
                 PrintDoc.PrinterSettings.PrinterName =
                 PrintersList.SelectedItem.ToString();
                 PrintDoc.PrintPage += new PrintPageEventHandler(PrintPageMethod);
-            /*}
-            catch(Exception e)
+            }
+            catch (FormatException e)
             {
-                throw new Exception()
-            }*/
+                throw new FormatException(e.Message);
+            }
         }
         public void Printing()
         {
-            if (copies > 1)
-                PrintDoc.PrinterSettings.Copies = (short)copies;
-            PrintDoc.Print();
+            try
+            {
+                if (copies > 1)
+                    PrintDoc.PrinterSettings.Copies = (short)copies;
+                PrintDoc.Print();
+            }
+            catch (NullReferenceException e)
+            {
+                throw new NullReferenceException(e.Message);
+            }
         }
 
         private void PrintPageMethod(object sender, PrintPageEventArgs e)

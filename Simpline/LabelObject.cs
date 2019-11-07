@@ -41,7 +41,7 @@ namespace Simpline
             }
             catch (FormatException e)
             {
-                MessageBox.Show("Hibás betűméret: " + e, "Hibaüzenet", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Hibás betűméret: " + e.Message, "Hibaüzenet", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public void setLabX(int X) { Lab.Left = X; }
