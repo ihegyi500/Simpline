@@ -57,7 +57,6 @@ namespace Simpline
                     {
                         MessageBox.Show(ex.Message, "Hibaüzenet", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                       
                 }
                 else if (SO is LabelObject)
                     ((LabelObject)SO).setNewLab(textBox6.Text, textBox5.Text, textBox7.Text);

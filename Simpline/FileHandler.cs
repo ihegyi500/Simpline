@@ -132,9 +132,9 @@ namespace Simpline
                                 p.Controls.Add(SO);
                             }
                         }
-                        catch(IndexOutOfRangeException ex)
+                        catch(Exception ex)
                         {
-                            throw new IndexOutOfRangeException("Hiba a fájl megnyitása során: " + ex.Message + "Ellenőrizze a megnyitni kívánt fájl szerkezetét!");
+                            throw new Exception("Hiba a fájl megnyitása során: " + ex.Message + "\nEllenőrizze a megnyitni kívánt fájl szerkezetét!");
                         }
                     }
                 }

@@ -158,7 +158,7 @@ namespace Simpline
             {
                 fmk.LoadTxt();
             }
-            catch(IndexOutOfRangeException ex)
+            catch(Exception ex)
             {
                 MessageBox.Show(ex.Message,"Hibaüzenet",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
@@ -300,16 +300,6 @@ namespace Simpline
                     {
                         PaperSizeList.Enabled = true;
                         PaperSizeList_SelectedIndexChanged(sender, e);
-                        PrinterSettings settings = new PrinterSettings();
-                        settings.PrinterName = PrintersList.SelectedItem.ToString();
-                        foreach (PaperSize ps in settings.PaperSizes)
-                        {
-                            if (ps.Kind.ToString() == PaperSizeList.SelectedItem.ToString())
-                            {
-                                panel1.Height = ps.Height;
-                                panel1.Width = ps.Width;
-                            }
-                        }
                         break;
                     }
             }
