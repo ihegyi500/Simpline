@@ -28,16 +28,22 @@ namespace Simpline
                  PaperSizeList.Items.Add(ps.Kind.ToString());
             }
             PaperSizeList.SelectedIndex = 0;
-            //Címkelista feltöltése
-            LabelList.Items.AddRange(new string[] { "Volvo", "Renault", "Alapértelmezett" });
+            //Címkelista inicializálása
             LabelList.SelectedIndex = 0;
 
         }
         //Nyomtatás
         private void PrintButton_Click(object sender, EventArgs e)
         {
-            ph = new PrintHandler(SOList,PrintersList, (short)Convert.ToInt32(CopiesTbx.Text));
-            ph.Printing();
+            try
+            {
+                ph = new PrintHandler(SOList, PrintersList, (short)Convert.ToInt32(CopiesTbx.Text));
+                ph.Printing();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Hibaüzenet", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         //Fájl mentése
         private void SavePictureButton_Click(object sender, EventArgs e)
@@ -49,7 +55,14 @@ namespace Simpline
         private void LoadPictureButton_Click(object sender, EventArgs e)
         {
             FileHandler fmk = new FileHandler(panel1, SOList);
-            fmk.LoadTxt();
+            try
+            {
+                fmk.LoadTxt();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Hibaüzenet", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         //Nyomtatóváltásnál papírméretlista frissítése
         private void PrintersList_SelectedIndexChanged(object sender, EventArgs e)
@@ -134,19 +147,30 @@ namespace Simpline
                     {
                         PaperSizeList.Enabled = true;
                         PaperSizeList_SelectedIndexChanged(sender, e);
-                        PrinterSettings settings = new PrinterSettings();
-                        settings.PrinterName = PrintersList.SelectedItem.ToString();
-                        foreach (PaperSize ps in settings.PaperSizes)
-                        {
-                            if (ps.Kind.ToString() == PaperSizeList.SelectedItem.ToString())
-                            {
-                                panel1.Height = ps.Height;
-                                panel1.Width = ps.Width;
-                            }
-                        }
                         break;
                     }
             }
+        }
+        //Objektumok mozgat<C3><A1>sa ny<C3><AD>llal
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.Up:
+                    SOList.ForEach(SO => { if (SO.Name.Contains("*")) { SO.Top--; }
+                    });
+                    return true;
+                case Keys.Down:
+                    SOList.ForEach(SO => { if (SO.Name.Contains("*")) { SO.Top++; } });
+                    return true;
+                case Keys.Left:
+                    SOList.ForEach(SO => { if (SO.Name.Contains("*")) { SO.Left--; } });
+                    return true;
+                case Keys.Right:
+                    SOList.ForEach(SO => { if (SO.Name.Contains("*")) { SO.Left++; } });
+                    return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

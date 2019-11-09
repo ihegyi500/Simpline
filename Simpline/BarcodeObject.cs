@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using ZXing;
 
 namespace Simpline
@@ -12,11 +13,8 @@ namespace Simpline
             InitializeComponent();
             w = new BarcodeWriter();
             this.codeType = codeType;
+            BarcodeValidator(value);
             this.value = value;
-            w.Options.PureBarcode = true;
-            w.Options.Height = this.Height;
-            w.Options.Width = this.Width;
-            BarcodeValidator();
             this.BackgroundImageLayout = ImageLayout.Stretch;
         }
         public string getCodeType(){ return codeType; }
@@ -27,12 +25,12 @@ namespace Simpline
                 this.codeType = codeType;
             else
                 throw new System.ArgumentException("Hibás vonalkód/QR kód típus!", "codeType");
-            BarcodeValidator();
+            BarcodeValidator(value);
         }
         public void setCodeValue(string value)
         {
+            BarcodeValidator(value);
             this.value = value;
-            BarcodeValidator();
         }
         public void setNewCode(string codeType, string value)
         {
@@ -40,10 +38,10 @@ namespace Simpline
                 this.codeType = codeType;
             else
                 throw new System.ArgumentException("Hibás vonalkód/QR kód típus!", "codeType");
+            BarcodeValidator(value);
             this.value = value;
-            BarcodeValidator();
         }
-        private void BarcodeValidator()
+        private void BarcodeValidator(string value)
         {
             w.Options.PureBarcode = true;
             w.Options.Height = this.Height;
@@ -52,25 +50,34 @@ namespace Simpline
             {
                 case "39 Code":
                     {
-                        w.Format = BarcodeFormat.CODE_39;
-                        BackgroundImage = w.Write("*" + this.value.ToUpper() + "*");
+                        try
+                        {
+                            w.Format = BarcodeFormat.CODE_39;
+                            BackgroundImage = w.Write(value.ToUpper());
+                        }
+                        catch(ArgumentException e)
+                        {
+                            throw new ArgumentException("Hiba a vonalkód létrehozása során:\n" + e.Message + "\nEllenőrizd a vonalkód tartalmát!");
+                        }
                         break;
                     }
                 case "128 Code":
                     {
-                        w.Format = BarcodeFormat.CODE_128;
-                        BackgroundImage = w.Write(this.value);
+                        try
+                        {
+                            w.Format = BarcodeFormat.CODE_128;
+                            BackgroundImage = w.Write(value);
+                        }
+                        catch (ArgumentException e)
+                        {
+                            throw new ArgumentException("Hiba a vonalkód létrehozása során:\n" + e.Message + "\nEllenőrizd a vonalkód tartalmát!");
+                        }
                         break;
                     }
                 case "QR Code":
                     {
                         w.Format = BarcodeFormat.QR_CODE;
-                        BackgroundImage = w.Write(this.value);
-                        break;
-                    }
-                default:
-                    {
-                        MessageBox.Show("Hiba! Érvénytelen vonalkód/QR-kód típus!", "Hibaüzenet", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        BackgroundImage = w.Write(value);
                         break;
                     }
             }
