@@ -65,6 +65,7 @@
             // 
             // PrintersList
             // 
+            this.PrintersList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.PrintersList.FormattingEnabled = true;
             this.PrintersList.Location = new System.Drawing.Point(16, 179);
             this.PrintersList.Name = "PrintersList";
@@ -115,6 +116,7 @@
             // 
             // PaperSizeList
             // 
+            this.PaperSizeList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.PaperSizeList.FormattingEnabled = true;
             this.PaperSizeList.Location = new System.Drawing.Point(16, 221);
             this.PaperSizeList.Name = "PaperSizeList";
@@ -176,7 +178,12 @@
             // 
             // LabelList
             // 
+            this.LabelList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.LabelList.FormattingEnabled = true;
+            this.LabelList.Items.AddRange(new object[] {
+            "Volvo",
+            "Renault",
+            "Alapértelmezett"});
             this.LabelList.Location = new System.Drawing.Point(16, 131);
             this.LabelList.Name = "LabelList";
             this.LabelList.Size = new System.Drawing.Size(240, 21);

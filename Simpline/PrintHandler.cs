@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
@@ -20,19 +21,33 @@ namespace Simpline
         }
         public PrintHandler(List<SimplineObject> SOList, ComboBox box, int copies)
         {
-            this.SOList = SOList;
-            PrintersList = box;
-            this.copies = copies;
-            PrintDoc = new PrintDocument();
-            PrintDoc.PrinterSettings.PrinterName =
-            PrintersList.SelectedItem.ToString();
-            PrintDoc.PrintPage += new PrintPageEventHandler(PrintPageMethod);
+            try
+            {
+                this.SOList = SOList;
+                PrintersList = box;
+                this.copies = copies;
+                PrintDoc = new PrintDocument();
+                PrintDoc.PrinterSettings.PrinterName =
+                PrintersList.SelectedItem.ToString();
+                PrintDoc.PrintPage += new PrintPageEventHandler(PrintPageMethod);
+            }
+            catch (FormatException e)
+            {
+                throw new FormatException(e.Message);
+            }
         }
         public void Printing()
         {
-            if (copies > 1)
-                PrintDoc.PrinterSettings.Copies = (short)copies;
-            PrintDoc.Print();
+            try
+            {
+                if (copies > 1)
+                    PrintDoc.PrinterSettings.Copies = (short)copies;
+                PrintDoc.Print();
+            }
+            catch (NullReferenceException e)
+            {
+                throw new NullReferenceException(e.Message);
+            }
         }
 
         private void PrintPageMethod(object sender, PrintPageEventArgs e)

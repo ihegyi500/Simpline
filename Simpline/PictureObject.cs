@@ -26,7 +26,7 @@ namespace Simpline
             }
             catch(FileNotFoundException e)
             {
-                MessageBox.Show("Hiba a képfájl megnyitása során: " + e, "Hiányzó vagy hibás fájl!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Hiba a képfájl megnyitása során: " + e.Message, "Hibaüzenet", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
