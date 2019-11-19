@@ -68,7 +68,7 @@ namespace Simpline
         private void PrintersList_SelectedIndexChanged(object sender, EventArgs e)
         {
             PrinterSettings settings = new PrinterSettings();
-            settings.PrinterName = this.PrintersList.SelectedItem.ToString();
+            settings.PrinterName = PrintersList.SelectedItem.ToString();
             //Papírméretlista feltöltése
             PaperSizeList.Items.Clear();
             foreach (PaperSize ps in settings.PaperSizes)
@@ -151,7 +151,7 @@ namespace Simpline
                     }
             }
         }
-        //Objektumok mozgat<C3><A1>sa ny<C3><AD>llal
+        //Objektumok mozgatása nyíllal
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             switch (keyData)
