@@ -78,13 +78,6 @@ namespace Simpline
             SimplineObject SO;
             string line;
             int i;
-            List<string> fonts = new List<string>();
-            InstalledFontCollection ifc = new InstalledFontCollection();
-            foreach(FontFamily ff in ifc.Families)
-            {
-                fonts.Add(ff.Name);
-            }
-
             p.Controls.Clear();
             SOList.Clear();
             using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "Txt file|*.txt", ValidateNames = true, Title = "Open a txt file" })
